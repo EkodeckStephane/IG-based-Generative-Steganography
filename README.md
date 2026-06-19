@@ -21,10 +21,6 @@ data/                   Generated numerical outputs
   s5_vae_results.csv
   s5_vae_summary.json
   s5_vae_mnist.pt       trained VAE checkpoint for Simulation S5
-cas-dc.cls              Elsevier CAS double-column class file
-cas-common.sty          Elsevier CAS common style file
-cas-model1-num-names.bst  Elsevier bibliography style
-cas-refs.bib            Bibliography database
 ```
 
 ## Prerequisites
