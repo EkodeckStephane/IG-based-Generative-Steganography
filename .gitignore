@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.abs
+*.synctex.gz
+
+# MNIST raw data (downloaded automatically by scripts)
+data/MNIST/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor backups
+*~
+*.bak

@@ -1,0 +1,9 @@
+{
+  "per_pair": [
+    {
+      "src": 0,
+      "tgt": 1,
+      "E_euclid": 8320.28125,
+      "E_geodesic": 7888.1708984375,
+      "E_reduction": 0.05193458473083467,
+      "acc_euclid": 

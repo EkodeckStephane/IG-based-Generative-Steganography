@@ -1,0 +1,112 @@
+%% Cover Letter -- New Submission to Digital Signal Processing
+%% Fisher--Rao-Guided Generative Steganography:
+%% Geodesic Embedding and Detection Analysis
+%% Ekodeck et al.
+
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{microtype}
+\usepackage{parskip}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\hypersetup{colorlinks=true, urlcolor=blue, linkcolor=blue}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\raggedright
+
+\textbf{St\'ephane Ga\"el R. Ekodeck}\\
+University of Yaounde I -- LIRIMA/GRIMCAPE\\
+UMMISCO, Sorbonne Universites, Paris\\
+\href{mailto:stephane-gael.ekodeck@facsciences-uy1.cm}
+     {stephane-gael.ekodeck@facsciences-uy1.cm}
+
+\bigskip
+\today
+
+\bigskip
+
+\textit{Digital Signal Processing}\\
+Elsevier
+
+\bigskip
+
+\textbf{Re: Submission of manuscript --
+``Fisher--Rao-Guided Generative Steganography: Geodesic Embedding and Detection Analysis''}
+
+\bigskip
+
+Dear Editor,
+
+We are pleased to submit the manuscript entitled
+``Fisher--Rao-Guided Generative Steganography: Geodesic Embedding and
+Detection Analysis'' for consideration in \textit{Digital Signal Processing}.
+
+The manuscript treats generative and coverless steganography as a statistical
+signal-generation and detection problem. Its central question is whether a
+message-bearing generator should be analyzed only through the endpoint
+divergence between cover and stego distributions, or whether the embedding
+trajectory through the generator parameter space also matters for accumulated
+detectability. We show that the trajectory does matter: in the small-step
+regime, the sequential Kullback--Leibler cost of an embedding path is governed
+by Fisher path energy, and Fisher--Rao geodesics provide locally optimal
+embedding trajectories.
+
+We believe the paper fits the scope of \textit{Digital Signal Processing}
+because it contributes to statistical signal processing, detection theory,
+information security, and mathematical methods with direct application to
+signal-processing models. Fisher--Rao geometry is not presented as an end in
+itself; it is used as the intrinsic sensitivity metric for controlling and
+analyzing low-detectability generative steganographic embedding.
+
+The main contributions are:
+
+\begin{itemize}
+  \item a detection-aware model of generative steganographic embedding as
+        controlled motion on a statistical signal manifold;
+  \item a sequential-KL path-cost formulation showing why endpoint divergence
+        alone can miss accumulated embedding detectability;
+  \item a geodesic embedding result proving local optimality of Fisher--Rao
+        paths in the small-step regime;
+  \item a Natural-Gradient Steganography algorithm with convergence analysis
+        under geodesic smoothness and strong-convexity assumptions;
+  \item curvature-based robustness diagnostics for embedding-path sensitivity;
+  \item a Neyman--Pearson detection interpretation connecting the steganalyzer's
+        statistic to the cover-to-stego displacement in exponential-family
+        signal models.
+\end{itemize}
+
+The manuscript is methodological and theoretical. It is not submitted as a
+complete operational image-steganography pipeline; rather, it provides a
+signal-processing framework for designing and analyzing embedding paths in
+generative statistical models. Numerical experiments on Gaussian and
+Gaussian-mixture signal models illustrate the predicted KL reduction,
+natural-gradient speedups, and curvature-driven sensitivity effects.
+
+The manuscript has not been published elsewhere and is not under consideration
+by any other journal. All authors have approved this submission. The authors
+declare no competing interests. AI-assisted language tools were used to improve
+readability; all scientific content was reviewed and edited by the authors, who
+take full responsibility for the manuscript.
+
+\bigskip
+Respectfully yours,
+
+\medskip
+\textbf{St\'ephane Ga\"el R. Ekodeck}\\
+Corresponding author\\
+\textit{on behalf of all co-authors:}
+P.R. Mama Assandje,
+S.A. Eb\'el\'e,
+S.W. Mossebo Tcheunteu,
+A.U. Ewane,
+D.B.M. Fotso,
+R. Ndoundam.
+
+\end{document}
