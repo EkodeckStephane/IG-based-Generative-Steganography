@@ -2,7 +2,7 @@
 
 This repository contains the source code, data, and manuscripts for the paper
 **"Fisher–Rao-Guided Generative Steganography: Geodesic Embedding and Detection
-Analysis"** submitted to *Digital Signal Processing*.
+Analysis"**.
 
 ## Repository structure
 
