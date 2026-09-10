@@ -1,0 +1,54 @@
+{
+  "status": "PARTIAL",
+  "blocks": [
+    "results_0000_0250.json",
+    "results_0250_0500.json",
+    "results_0500_0750.json",
+    "results_0750_1000.json",
+    "results_1000_1250.json",
+    "results_1250_1500.json"
+  ],
+  "n_records": 6000,
+  "n_images_equivalent": 1500.0,
+  "conditions": {
+    "0.0002|IG_matched": {
+      "n": 1500,
+      "successes": 1500,
+      "success_rate": 1.0,
+      "total_bit_errors": 0,
+      "mean_message_bits": 13680.598,
+      "mean_change_frac": 0.10602369142624332,
+      "mean_psnr_db": 67.52069476204022
+    },
+    "0.0002|uniform_shrink": {
+      "n": 1500,
+      "successes": 1500,
+      "success_rate": 1.0,
+      "total_bit_errors": 0,
+      "mean_message_bits": 13680.598,
+      "mean_change_frac": 0.10189229626673417,
+      "mean_psnr_db": 67.69070350067334
+    },
+    "0.0008|IG_matched": {
+      "n": 1500,
+      "successes": 1500,
+      "success_rate": 1.0,
+      "total_bit_errors": 0,
+      "mean_message_bits": 18513.412,
+      "mean_change_frac": 0.15363717574033617,
+      "mean_psnr_db": 65.90840868088239
+    },
+    "0.0008|uniform_shrink": {
+      "n": 1500,
+      "successes": 1499,
+      "success_rate": 0.9993333333333333,
+      "total_bit_errors": 3419,
+      "mean_message_bits": 18513.412,
+      "mean_change_frac": 0.14657080512674905,
+      "mean_psnr_db": 66.10893019050555
+    }
+  },
+  "overall_successes": 5999,
+  "overall_success_rate": 0.9998333333333334,
+  "overall_bit_errors": 3419
+}
