@@ -18,3 +18,9 @@ jobs:
           find /tmp/srnet -maxdepth 4 -type f -printf '%p %s bytes\n' | sort | head -200
           echo '=== Python imports / config ==='
           grep -RniE 'tensorflow|tf\.|max_iter|train|batch|learning|epoch|model' /tmp/srnet --include='*.py' | head -250 || true
+
+      - name: Upload official SRNet reference package
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-dde-srnet-reference
+          path: /tmp/SRNet.zip
