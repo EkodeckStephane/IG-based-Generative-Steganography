@@ -1,0 +1,86 @@
+{
+  "external_prereg_sha256": "246acdfc0ddd89f27023d8b4feedd5b2e56cda4b3357af3e265944f098f184d2",
+  "base_v6_prereg_sha256": "ea9469a401feffc20cf5d45118b9a7fcfa2b2ccd439cae1f38465046515df6d0",
+  "corpus": {
+    "n_pgm": 10000,
+    "native_size": [256, 256],
+    "format": "P5",
+    "maxval": 255,
+    "duplicate_sha256_count": 0,
+    "eligible_counts": [6448853,8920342,6703715,6470532,7907884,9748767,11521641,13782892],
+    "stratum_weights": [0.09018791315683547,0.12475195660767459,0.09375218604737545,0.09049109633829845,0.11059262095853771,0.1363375706629107,0.1611314070784735,0.19275524914989417],
+    "reunified_zip_sha256": "5e017969c09e8e1ed98205ce2155e96ffa56dbfe056693075726c3b0b0f3b316"
+  },
+  "geometry_transfer": {
+    "delta": [0.07577053009925439,0.06812213485669455,0.0016780827037185485],
+    "projected_norm": 0.10190492848982434,
+    "full_score_norm": 0.11036794316015738,
+    "normalized_orthogonal_residual": 0.38403149714330853,
+    "inside_r_shape": true,
+    "residual_diag_pass": true,
+    "stratum_mass_tv": 0.11506505512120901,
+    "r_shape": 0.2375032471006036
+  },
+  "candidate_results": {
+    "0.0002": {
+      "uniform_shrink": {
+        "beta": [0.0011952210705766233,0.003305406417698247,0.01065329963630439,0.028277541436414637,0.07090897449256232,0.10697649787381064,0.10697649787381064,0.10697649787381064],
+        "frozen_bossbase_rate": 0.5321122536000753,
+        "bows2_realized_rate": 0.6126926237957414,
+        "empirical_joint_risk": 4.437434585695856e-05,
+        "empirical_joint_ratio": 0.22187172928479276,
+        "empirical_shape_only_w0_risk": 5.379595942152756e-05,
+        "empirical_shape_only_w0_ratio": 0.26897979710763775,
+        "certified_manifold_worst_ratio": 0.999998345503254
+      },
+      "robust": {
+        "beta": [0.0010212651972356557,0.0022024929424667382,0.0058564279817128655,0.01856169709428853,0.0641961439076647,0.12128634858230668,0.11744093127606514,0.15258644629262932],
+        "frozen_bossbase_rate": 0.547463221184876,
+        "bows2_realized_rate": 0.6533988256516953,
+        "empirical_joint_risk": 2.7619910386867063e-05,
+        "empirical_joint_ratio": 0.13809955193433532,
+        "empirical_shape_only_w0_risk": 3.157303505246991e-05,
+        "empirical_shape_only_w0_ratio": 0.15786517526234953,
+        "certified_manifold_worst_ratio": 0.9999984283195329
+      }
+    },
+    "0.0008": {
+      "uniform_shrink": {
+        "beta": [0.004567340656742413,0.011732602827259379,0.03392202536257927,0.07780676557290589,0.12633016287246132,0.12633016287246132,0.12633016287246132,0.12633016287246132],
+        "frozen_bossbase_rate": 0.7200785587145291,
+        "bows2_realized_rate": 0.7827138958168787,
+        "empirical_joint_risk": 0.00029910880041609026,
+        "empirical_joint_ratio": 0.3738860005201128,
+        "empirical_shape_only_w0_risk": 0.000376957274064997,
+        "empirical_shape_only_w0_ratio": 0.47119659258124624,
+        "certified_manifold_worst_ratio": 0.9999980539572833
+      },
+      "robust": {
+        "beta": [0.003810924633028041,0.00913683081319359,0.025043622591296968,0.07042796113281162,0.17993212688146856,0.19974137068863962,0.19974137068863962,0.19974137068863962],
+        "frozen_bossbase_rate": 0.8389092308586027,
+        "bows2_realized_rate": 0.9383214684499374,
+        "empirical_joint_risk": 0.0002686782107175773,
+        "empirical_joint_ratio": 0.3358477633969716,
+        "empirical_shape_only_w0_risk": 0.0003279152764753052,
+        "empirical_shape_only_w0_ratio": 0.4098940955941315,
+        "certified_manifold_worst_ratio": 0.9999982006783151
+      }
+    }
+  },
+  "iso_cachin_external": {
+    "0.0002": {"n":128,"min":0.9243329242170805,"q10":0.9568226928938292,"median":1.1034952734111676,"q90":1.338291954038415,"max":1.4400567081580544,"D80":0.3814692611445859},
+    "0.0008": {"n":128,"min":0.8500183993839661,"q10":0.9093251524320196,"median":1.0642558201660295,"q90":1.317170638875574,"max":1.3631411013187988,"D80":0.40784548644355434}
+  },
+  "checks": {
+    "materiality": true,
+    "geometry_in_manifold": true,
+    "robust_empirical_both_budgets": true
+  },
+  "decision": "IN-MANIFOLD EXTERNAL PASS",
+  "execution": {
+    "date": "2026-09-19",
+    "native_resolution_addendum_commit": "61c68346570c3309b865846c2171f9cd14e62cb7",
+    "runner_sha256": "5156e9b6512a00662f96df10aed72da6aa3cae7e21b6ffb4e719e1f090b10e4b",
+    "full_results_sha256": "45e04f86bebb9a369f7c0ff8b8d5273ff5a065409979a9266cd1e52253737384"
+  }
+}
