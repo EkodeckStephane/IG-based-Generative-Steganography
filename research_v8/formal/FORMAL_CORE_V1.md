@@ -317,23 +317,15 @@ Candidate construction:
 - realize payload with an explicit coding mechanism (e.g. syndrome coding/STC or another justified distribution matcher) before calling entropy an achieved payload;
 - measure empirical steganalysis separately as external validity, not as proof of the information-theoretic theorem.
 
-## 13. Novelty boundary after the latest prior-art search
-Do **not** claim as new:
+## 13. Scientific positioning after the latest prior-art search
 
-- Cachin/KL security;
-- Fisher information in steganography;
-- Fisher-based capacity/root-rate optimization;
-- generic Fisher–Rao geometry;
-- generic Riemannian constrained optimization;
-- generic robustness analysis over Fisher–Rao neighborhoods;
-- the existence of cover-source/channel uncertainty;
-- relative-entropy variance.
+The framework builds on established results in Cachin/KL security, steganographic Fisher information, Fisher-based local rate analysis, Fisher–Rao geometry, Riemannian optimization, distributional robustness, cover-source mismatch, and relative-entropy variance.
 
-The protected candidate contribution is narrower:
+The specific contribution studied here is:
 
 > A steganographic source–embedding security field that preserves exact Cachin security, separates embedding-direction Fisher sensitivity from source-direction Fisher–Rao sensitivity, derives finite-radius robust Cachin guarantees under a declared cover-model ambiguity set, and uses those guarantees to construct a multiparametric embedding design whose nominal-versus-robust behavior is experimentally falsifiable.
 
-This wording intentionally avoids an unsupported priority claim.
+This positioning isolates the source-coordinate security structure and its sender-side design consequences from the mathematical and steganographic foundations it uses.
 
 ## 14. Hard gate before natural-image headline experiments
 Proceed only if all are true:
@@ -344,4 +336,4 @@ Proceed only if all are true:
 4. a concrete encoder/decoder makes claimed payload operational rather than an entropy surrogate;
 5. baselines include nominal exact-KL optimization and a Filler/local-Fisher comparator where assumptions are applicable;
 6. steganalysis uses contemporary unseen detectors and source-mismatch conditions;
-7. no claim treats FR robustness as generic mathematical novelty.
+7. the final contribution statement remains centered on the source–embedding construction and its steganographic design consequence.
