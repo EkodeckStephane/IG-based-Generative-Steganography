@@ -19,7 +19,7 @@ jobs:
           wget -O /tmp/BOSSBase.zip https://dde.binghamton.edu/download/ImageDB/BOSSbase_1.01.zip
           unzip -q /tmp/BOSSBase.zip -d /tmp/boss
           echo '=== BOSS sample ==='
-          find /tmp/boss -type f | head -5
+          find /tmp/boss -type f -print -quit
       - name: Build probe
         run: |
           set -euxo pipefail
