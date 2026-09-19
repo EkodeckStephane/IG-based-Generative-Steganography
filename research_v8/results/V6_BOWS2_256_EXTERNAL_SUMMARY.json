@@ -1,0 +1,76 @@
+{
+  "decision": "IN-MANIFOLD EXTERNAL PASS",
+  "checks": {
+    "materiality": true,
+    "geometry_in_manifold": true,
+    "robust_empirical_both_budgets": true
+  },
+  "corpus": {
+    "n_pgm": 10000,
+    "native_size": [256, 256],
+    "format": "P5",
+    "maxval": 255,
+    "duplicate_sha256_count": 0,
+    "eligible_total": 71504626,
+    "reunified_zip_sha256": "5e017969c09e8e1ed98205ce2155e96ffa56dbfe056693075726c3b0b0f3b316"
+  },
+  "geometry_transfer": {
+    "delta": [0.07577053009925439, 0.06812213485669455, 0.0016780827037185485],
+    "projected_norm": 0.10190492848982434,
+    "full_score_norm": 0.11036794316015738,
+    "normalized_orthogonal_residual": 0.38403149714330853,
+    "inside_r_shape": true,
+    "residual_diag_pass": true,
+    "stratum_mass_tv": 0.11506505512120901,
+    "r_shape": 0.2375032471006036
+  },
+  "candidates": {
+    "0.0002": {
+      "uniform_shrink": {
+        "bows2_realized_rate": 0.6126926237957414,
+        "empirical_joint_ratio": 0.22187172928479276,
+        "empirical_shape_only_w0_ratio": 0.26897979710763775
+      },
+      "robust": {
+        "bows2_realized_rate": 0.6533988256516953,
+        "empirical_joint_ratio": 0.13809955193433532,
+        "empirical_shape_only_w0_ratio": 0.15786517526234953
+      }
+    },
+    "0.0008": {
+      "uniform_shrink": {
+        "bows2_realized_rate": 0.7827138958168787,
+        "empirical_joint_ratio": 0.3738860005201128,
+        "empirical_shape_only_w0_ratio": 0.47119659258124624
+      },
+      "robust": {
+        "bows2_realized_rate": 0.9383214684499374,
+        "empirical_joint_ratio": 0.3358477633969716,
+        "empirical_shape_only_w0_ratio": 0.4098940955941315
+      }
+    }
+  },
+  "iso": {
+    "0.0002": {
+      "min": 0.9243329242170805,
+      "q10": 0.9568226928938292,
+      "median": 1.1034952734111676,
+      "q90": 1.338291954038415,
+      "max": 1.4400567081580544,
+      "D80": 0.3814692611445859
+    },
+    "0.0008": {
+      "min": 0.8500183993839661,
+      "q10": 0.9093251524320196,
+      "median": 1.0642558201660295,
+      "q90": 1.317170638875574,
+      "max": 1.3631411013187988,
+      "D80": 0.40784548644355434
+    }
+  },
+  "artifact_sha256": {
+    "full_results": "45e04f86bebb9a369f7c0ff8b8d5273ff5a065409979a9266cd1e52253737384",
+    "compact_summary": "b0dbbe4f9909b19b152551be49b8fea60049a7e5a74166b8509db345570210c9",
+    "256_runner": "5156e9b6512a00662f96df10aed72da6aa3cae7e21b6ffb4e719e1f090b10e4b"
+  }
+}
