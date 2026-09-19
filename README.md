@@ -217,11 +217,11 @@ The corresponding same-payload dual analysis reduces certified worst-case robust
 
 On 800 frozen BOSSBase development/calibration images, matched-ideal-payload probabilistic stego realizations produced a lightweight SPAM-like detector AUC close to chance for both uniform-shrink and information-geometric allocations. This result is recorded as the lightweight screening layer; the modern detector layer is evaluated separately.
 
-### 6.8 STC campaign status
+### 6.8 Complete actual-message STC realization
 
-Real STC encoding/decoding has been brought into the current environment and tested successfully at the low level with zero BER in synthetic checks. The corrected image campaign uses the appropriate DDE matrix widths for the actual layered payload regime.
+Real STC encoding/decoding is implemented through the source-level C++ path retained in this branch, using the DDE matrix widths required by the actual layered payload regime. The frozen V8 campaign is complete over 5,000 development/calibration images, two security budgets and two matched-payload methods, for **20,000 image-condition encodings**.
 
-At the current repository snapshot, V8 remains **partially executed**. The available block results are retained for provenance; they are recorded as implementation progress, while the final 5,000-image estimate is produced only after complete frozen-campaign aggregation.
+At \(\varepsilon=2\times10^{-4}\), both methods achieve **5,000/5,000 (100%)** exact-recovery success. At \(8\times10^{-4}\), uniform shrinkage achieves **4,998/5,000 (99.96%)** and the information-geometric allocation **4,999/5,000 (99.98%)**. Every successful codeword has zero bit errors. The three coding failures remain in the retained aggregate.
 
 ## 7. Scientific positioning
 
@@ -231,7 +231,7 @@ The work is positioned relative to five established lines:
 2. **Steganographic Fisher information** — Filler–Fridrich and Ker already establish local Fisher-information structure; this work treats that as prior art and a tangent regime to recover.
 3. **Content-adaptive statistical detectability** — MiPOD provides a direct practical/local comparator through its variance-dependent allocation structure.
 4. **Cover-source mismatch** — prior work establishes that model/source mismatch can reverse security rankings and degrade steganalysis; robust-optimization formulations have also been proposed on the detector side.
-5. **General Fisher–Rao robustness** — intrinsic distributional robustness is established outside steganography and is not claimed as new mathematics here.
+5. **General Fisher–Rao robustness** — established intrinsic distributional-robustness theory provides the geometric foundation; the contribution here is its integration with the exact sender-side Cachin source–embedding field and the resulting design constraints.
 
 The protected contribution is therefore narrower:
 
@@ -351,12 +351,12 @@ Current status at this snapshot:
 - BOSSBase source-mismatch geometry: **supported with retained negative and positive pivots**;
 - V6 high-resolution robust-risk certification: **supported**;
 - probabilistic image realization: **screening complete**;
-- real STC encoding/decoding: **implemented, campaign still incomplete in this snapshot**;
-- SRM+ensemble / SRNet / SiaStegNet final campaign: **not yet complete**;
-- BOWS2 primary external validation: **not yet executed**.
+- real STC encoding/decoding: **complete over 20,000 frozen conditions; all four conditions pass the preregistered coding criterion**;
+- SRM+ensemble / repeated-seed deep steganalysis: **next detector-facing validation layer**;
+- BOWS2 primary external validation: **next external-transfer layer**.
 
-Accordingly, this branch is a **research/reproducibility branch**, not a claim that the final Q1 publication gate has already been passed. Final publication readiness requires completion of the frozen STC campaign, reference/contemporary steganalysis, BOWS2 validation, a claim–code–data cross-check, and the final hostile senior-reviewer audit.
+The branch therefore records a completed formal/design/coding-validation core. Final Q1 publication readiness is gated by the two remaining empirical layers—strong steganalysis and BOWS2 transfer—followed by a final claim–code–data cross-check and journal-specific editorial closure.
 
 ## 12. Citation and reuse
 
-This branch currently serves as a reproducibility record for an ongoing research study. Until the final manuscript metadata are frozen, cite the repository and the exact branch/commit used. Do not attribute journal acceptance or final-paper claims to this branch unless such metadata are later added explicitly.
+This branch serves as the reproducibility record for the current research study. Until final manuscript metadata are frozen, cite the repository together with the exact branch/commit used; journal and archival metadata can be added once the target submission package is finalized.
