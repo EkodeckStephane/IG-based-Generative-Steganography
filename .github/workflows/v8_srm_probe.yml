@@ -16,28 +16,20 @@ jobs:
           mkdir -p /tmp/srm && tar -xf /tmp/SRM.tar -C /tmp/srm
           wget -q -O /tmp/BOSSBase.zip https://dde.binghamton.edu/download/ImageDB/BOSSbase_1.01.zip
           unzip -q /tmp/BOSSBase.zip -d /tmp/boss
-          find /tmp/boss -type f -name '*.pgm' -print -quit
-      - name: Build and probe CLI
+      - name: Correct one-image extraction
         run: |
           set -euxo pipefail
-          cd /tmp/srm
-          for d in $(find . -type f \( -iname 'Makefile' -o -iname 'makefile' \) -printf '%h\n' | sort -u); do
-            (cd "$d" && make) || true
-          done
           EXE=/tmp/srm/SRM_linux_make_v1.1/release/SRM
-          echo '=== executable ==='
-          ls -lh "$EXE"
-          echo '=== usage ==='
-          "$EXE" || true
-          echo '=== source usage strings ==='
-          grep -RniE 'usage|argc|argv|program_options' /tmp/srm/SRM_linux_make_v1.1/src | head -80 || true
-          echo '=== one-image probe ==='
           SAMPLE=$(find /tmp/boss -type f -name '*.pgm' -print -quit)
           mkdir -p /tmp/out
-          /usr/bin/time -v "$EXE" "$SAMPLE" /tmp/out/sample.fea || true
-          find /tmp/out -type f -ls || true
-          if [ -f /tmp/out/sample.fea ]; then
-            wc -c /tmp/out/sample.fea
-            head -c 300 /tmp/out/sample.fea
+          /usr/bin/time -v "$EXE" -i "$SAMPLE" -O /tmp/out -V
+          echo '=== output tree ==='
+          find /tmp/out -maxdepth 3 -type f -printf '%p %s bytes\n' | sort | head -130
+          echo '=== file count ==='
+          find /tmp/out -type f | wc -l
+          echo '=== first samples ==='
+          for p in $(find /tmp/out -type f | sort | head -3); do
+            echo "--- $p"
+            head -c 500 "$p" || true
             echo
-          fi
+          done
