@@ -1,26 +1,29 @@
-# Research status — cachin-ig-robust-v8
+# Research status — Cachin-compatible information geometry
 
-This file records the current evidence boundary of the branch.
+## Closed evidence layers
 
-## Supported at this snapshot
+- Exact Cachin orientation and source–embedding security field: **PASS**.
+- Embedding-direction Fisher tangent recovery: **PASS in the declared smooth/local regime**.
+- Central source-mismatch separation theorem: **PASS** under the five strong-theorem criteria.
+- Continuous/discrete numerical QA: **19/19 tests PASS**.
+- Controlled robust-design grid: **PASS**, with the small-gain regime retained as a boundary finding.
+- Independent iso-Cachin V3 confirmation: **PASS**.
+- V4A intra-source materiality test: **boundary result retained** (D80 below 0.05).
+- V6 empirical PMF-shape geometry: **PASS TO EXTERNAL**.
+- 131,072-direction robust-risk certification: **PASS**.
+- V7 matched-payload lightweight screening: **complete**.
+- V8 actual-message STC: **complete — 20,000 encodings**.
+  - low budget: 5000/5000 success for both methods;
+  - high budget: 4998/5000 uniform shrinkage, 4999/5000 information-geometric allocation;
+  - successful-codeword BER: 0 in all four conditions.
 
-- Canonical Cachin orientation: `D_KL(P_C || P_S)`.
-- Exact source–embedding security-field construction.
-- Local embedding Fisher recovery under smooth small-embedding assumptions.
-- Discrete quantized-residual witness and associated QA.
-- Confirmatory iso-Cachin differentiation in the controlled V3 study.
-- BOSSBase V4 negative intra-source materiality result.
-- BOSSBase V5 inter-camera mismatch result.
-- V6 full-PMF Fisher geometry, high-resolution robust-risk certification and same-risk/same-payload dual comparisons.
-- V7 probabilistic operational screening.
-- STC low-level compile + encode/decode path; V8 image campaign partially executed.
+## Current scientific blockers
 
-## Explicitly open
+1. **BOWS2 external transfer.** The protocol is already frozen; execution starts when the raw BOWS2 corpus is supplied.
+2. **Strong detector-facing validation.** Execute SRM+ensemble and at least one repeated-seed deep reference detector (SRNet/SiaStegNet class) under matched actual payload and source-disjoint evaluation.
 
-- Completion and aggregation of the full frozen V8 STC image campaign.
-- Reference SRM + ensemble-classifier evaluation.
-- Contemporary deep steganalysis with at least SRNet and SiaStegNet under the frozen split protocol.
-- Primary external BOWS2 validation when the raw corpus is supplied.
-- Final claim/code/data audit and Gate-10 publication decision.
+## Current editorial decision
 
-No incomplete item above should be reported as completed evidence in a manuscript.
+The formal/design/coding core is closed. Gate 10 remains **NO-GO** until the two empirical blockers above are closed and the final claim–code–data/reference cross-check is rerun.
+
+Branch: `cachin-ig-robust-v8`.
