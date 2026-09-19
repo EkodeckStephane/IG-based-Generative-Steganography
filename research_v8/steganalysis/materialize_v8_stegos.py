@@ -81,7 +81,7 @@ def main():
     ap=argparse.ArgumentParser()
     ap.add_argument('--bossbase-root',required=True,type=Path)
     ap.add_argument('--manifest',default=Path('research_v8/results/bossbase_split_manifest_v4.csv'),type=Path)
-    ap.add_argument('--designs',default=Path('research_v8/results/v7_frozen_designs.json'),type=Path)
+    ap.add_argument('--designs',default=Path('research_v8/results/v7_frozen_designs_reconstructed.json'),type=Path)
     ap.add_argument('--vendor',default=Path('research_v8/vendor/pystc_minimal'),type=Path)
     ap.add_argument('--out',required=True,type=Path)
     args=ap.parse_args()
