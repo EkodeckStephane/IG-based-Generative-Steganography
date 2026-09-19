@@ -64,7 +64,7 @@ D_{\mathrm{KL}}(p\|T_\theta(p))\le\varepsilon.
 
 Thus the framework preserves the exact Cachin criterion. For `epsilon=0`, Gibbs' equality condition gives `p=T_theta(p)` almost everywhere/on all positive-mass symbols.
 
-**Novelty status:** not novel; this is a required compatibility property.
+**Role in the framework:** exact compatibility property anchoring the construction to Cachin security.
 
 ## 4. Filler–Fridrich tangent recovery
 Fix a cover source `p` and a smooth embedding curve `theta(beta)` with no embedding at `beta=0`, so that
@@ -82,7 +82,7 @@ C(p,\theta(\beta))
 
 where the quadratic term is the pullback Fisher information in the embedding direction. Under the mutually-independent embedding assumptions used by Filler–Fridrich, this recovers their steganographic Fisher-information regime.
 
-**Novelty status:** not novel; this is a required recovery theorem and positioning bridge.
+**Role in the framework:** recovery result connecting the construction to the established steganographic Fisher regime.
 
 ## 5. Fisher–Rao source uncertainty
 For nominal cover model `p_hat`, define the exact categorical Fisher–Rao distance using the convention induced by the metric above:
@@ -225,7 +225,7 @@ S_{\mathrm{src}}^2(p,q)
 =V(p\|q),
 \]
 
-the classical relative-entropy variance. The quantity `V(P||Q)` itself is not claimed as new. The proposed use is its role as the source-manifold sensitivity of an exact Cachin risk.
+the classical relative-entropy variance. In this framework it appears as the source-manifold sensitivity of the exact Cachin risk in the replacement-channel special case.
 
 Hence
 
