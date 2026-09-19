@@ -137,7 +137,7 @@ The frozen split is determined from filenames before pixel analysis:
 
 Raw BOSSBase is acquired independently; the repository retains the split manifest, fitted summaries, protocols and numerical results needed for reproduction.
 
-**BOWS2** is reserved as the primary external validation source. The frozen BOWS2 experiment is the primary external-validation layer and will be executed when the raw 10,000-image corpus is supplied to the working environment.
+**BOWS2** is the independent external-validation source. The supplied split archive was qualified before V6 pixel-statistic analysis and contains exactly 10,000 native PGM `P5`, 256×256, 8-bit images. Because the earlier preregistration expected 512×512 images, `research_v8/protocols/V6_BOWS2_256_PREANALYSIS_ADDENDUM.md` freezes the dimensional deviation before analysis. No resizing or V6 retuning is permitted.
 
 ## 6. Main results retained so far
 
@@ -217,11 +217,15 @@ The corresponding same-payload dual analysis reduces certified worst-case robust
 
 On 800 frozen BOSSBase development/calibration images, matched-ideal-payload probabilistic stego realizations produced a lightweight SPAM-like detector AUC close to chance for both uniform-shrink and information-geometric allocations. This result is recorded as the lightweight screening layer; the modern detector layer is evaluated separately.
 
-### 6.8 Complete actual-message STC realization
+### 6.8 Actual-message STC aggregate and provenance status
 
-Real STC encoding/decoding is implemented through the source-level C++ path retained in this branch, using the DDE matrix widths required by the actual layered payload regime. The frozen V8 campaign is complete over 5,000 development/calibration images, two security budgets and two matched-payload methods, for **20,000 image-condition encodings**.
+The retained aggregate V8 summary reports **20,000 image-condition encodings** over 5,000 development/calibration images, two security budgets and two matched-payload methods. At \(\varepsilon=2\times10^{-4}\), both methods report **5,000/5,000 (100%)** exact recovery. At \(8\times10^{-4}\), uniform shrinkage reports **4,998/5,000 (99.96%)** and the information-geometric allocation **4,999/5,000 (99.98%)**. The three coding failures remain in the aggregate.
 
-At \(\varepsilon=2\times10^{-4}\), both methods achieve **5,000/5,000 (100%)** exact-recovery success. At \(8\times10^{-4}\), uniform shrinkage achieves **4,998/5,000 (99.96%)** and the information-geometric allocation **4,999/5,000 (99.98%)**. Every successful codeword has zero bit errors. The three coding failures remain in the retained aggregate.
+This aggregate is not yet the final V8 closure object: the canonical branch currently retains raw block outputs only for indices 0–1500. The missing raw blocks must be recovered or rerun under the frozen STC implementation before the 20,000-condition aggregate is treated as fully traceable.
+
+### 6.9 Independent BOWS2 external validation
+
+The V6 external test was executed on all 10,000 qualified native 256×256 BOWS2 images under the frozen V6 geometry and candidates. The geometry-transfer diagnostics remain inside the preregistered manifold: projected norm **0.10190 < 0.23750** and normalized orthogonal residual **0.3840 < 0.60**. The frozen robust candidates remain below budget with direct empirical risk ratios **0.1381** and **0.3358**. The external iso-Cachin dispersions are **D80=0.3815** and **D80=0.4078**, both above the unchanged 0.05 threshold. The frozen decision is therefore **IN-MANIFOLD EXTERNAL PASS**.
 
 ## 7. Scientific positioning
 
@@ -318,7 +322,7 @@ The retained STC runner records real message bits, exact recovery status, modifi
 
 ### 9.7 External validation
 
-BOWS2 remains the primary external dataset. The exact external protocol is frozen before access to the corpus. When BOWS2 becomes available, use the predeclared validation scripts/protocol rather than recalibrating the BOSSBase-trained geometry on BOWS2.
+BOWS2 is the completed primary external dataset. Reproduction must use the native 256×256 corpus, the frozen pre-analysis addendum, and the retained V6 objects without recalibration. The authoritative compact outputs are `research_v8/results/V6_BOWS2_256_EXTERNAL_SUMMARY.json` and `research_v8/results/V6_BOWS2_256_EXTERNAL_RESULTS.json`.
 
 ## 10. Integrity and provenance
 
@@ -351,11 +355,11 @@ Current status at this snapshot:
 - BOSSBase source-mismatch geometry: **supported with retained negative and positive pivots**;
 - V6 high-resolution robust-risk certification: **supported**;
 - probabilistic image realization: **screening complete**;
-- real STC encoding/decoding: **complete over 20,000 frozen conditions; all four conditions pass the preregistered coding criterion**;
-- SRM+ensemble / repeated-seed deep steganalysis: **next detector-facing validation layer**;
-- BOWS2 primary external validation: **next external-transfer layer**.
+- BOWS2 primary external validation: **PASS on all 10,000 native 256×256 images without retuning**;
+- V8 STC aggregate: **positive over the reported 20,000 conditions, but raw block provenance is incomplete beyond index 1500 and must be rerun or recovered**;
+- SRM+ensemble / repeated-seed deep steganalysis: **still open as the detector-facing validation layer**.
 
-The branch therefore records a completed formal/design/coding-validation core. Final Q1 publication readiness is gated by the two remaining empirical layers—strong steganalysis and BOWS2 transfer—followed by a final claim–code–data cross-check and journal-specific editorial closure.
+The remaining empirical blockers are therefore the V8 raw-evidence closure and strong steganalysis. After they are closed, the manuscript must undergo the final claim–code–data cross-check, theorem/figure/table audit, and Senior Reviewer Q1/Rang A prescreen.
 
 ## 12. Citation and reuse
 
