@@ -1,0 +1,112 @@
+{
+  "n_images": 5000,
+  "n_conditions": 20000,
+  "conditions": {
+    "0.0002|uniform_shrink": {
+      "n": 5000,
+      "successes": 5000,
+      "failures": 0,
+      "success_rate": 1.0,
+      "success_rate_wilson95": [
+        0.9992322698624194,
+        1.0000000000000002
+      ],
+      "message_bits_total": 68380254,
+      "bit_errors_total": 0,
+      "aggregate_ber_all_bits": 0.0,
+      "mean_message_bpp": 0.0521699935913086,
+      "mean_change_frac": 0.10189517363614775,
+      "mean_psnr_db": 67.69177092707082,
+      "mean_distortion_cost": 7321.423651269532
+    },
+    "0.0002|IG_matched": {
+      "n": 5000,
+      "successes": 5000,
+      "failures": 0,
+      "success_rate": 1.0,
+      "success_rate_wilson95": [
+        0.9992322698624194,
+        1.0000000000000002
+      ],
+      "message_bits_total": 68380254,
+      "bit_errors_total": 0,
+      "aggregate_ber_all_bits": 0.0,
+      "mean_message_bpp": 0.0521699935913086,
+      "mean_change_frac": 0.10603631916888155,
+      "mean_psnr_db": 67.52121357988509,
+      "mean_distortion_cost": 7231.608913525391
+    },
+    "0.0008|uniform_shrink": {
+      "n": 5000,
+      "successes": 4998,
+      "failures": 2,
+      "success_rate": 0.9996,
+      "success_rate_wilson95": [
+        0.9985425830322826,
+        0.9998903010142469
+      ],
+      "message_bits_total": 92536216,
+      "bit_errors_total": 8154,
+      "aggregate_ber_all_bits": 8.811685146062165e-05,
+      "mean_message_bpp": 0.07059953002929688,
+      "mean_change_frac": 0.1465449384192813,
+      "mean_psnr_db": 66.1108637272732,
+      "mean_distortion_cost": 9046.587618945312
+    },
+    "0.0008|IG_matched": {
+      "n": 5000,
+      "successes": 4999,
+      "failures": 1,
+      "success_rate": 0.9998,
+      "success_rate_wilson95": [
+        0.998867881829747,
+        0.9999646951247276
+      ],
+      "message_bits_total": 92536216,
+      "bit_errors_total": 4725,
+      "aggregate_ber_all_bits": 5.106108942254565e-05,
+      "mean_message_bpp": 0.07059953002929688,
+      "mean_change_frac": 0.15357365941426437,
+      "mean_psnr_db": 65.91111313511841,
+      "mean_distortion_cost": 8798.830064697266
+    }
+  },
+  "failures": [
+    {
+      "image": "6353.pgm",
+      "split": "calibration",
+      "epsilon": "0.0008",
+      "method": "uniform_shrink",
+      "message_bits": 13696,
+      "bit_errors": 3419
+    },
+    {
+      "image": "9002.pgm",
+      "split": "fit",
+      "epsilon": "0.0008",
+      "method": "IG_matched",
+      "message_bits": 18726,
+      "bit_errors": 4725
+    },
+    {
+      "image": "6606.pgm",
+      "split": "fit",
+      "epsilon": "0.0008",
+      "method": "uniform_shrink",
+      "message_bits": 18727,
+      "bit_errors": 4735
+    }
+  ],
+  "paired_mean_IG_minus_uniform": {
+    "0.0002": {
+      "change_frac": 0.004141145532733802,
+      "psnr_db": -0.1705573471857172,
+      "distortion_cost": -89.81473774414063
+    },
+    "0.0008": {
+      "change_frac": 0.007028720994983087,
+      "psnr_db": -0.19975059215477856,
+      "distortion_cost": -247.7575542480469
+    }
+  }
+}
