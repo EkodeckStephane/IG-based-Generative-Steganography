@@ -1,0 +1,33 @@
+name: V8 SRM DDE probe
+on:
+  push:
+    branches: [cachin-ig-robust-v8]
+    paths:
+      - '.github/workflows/v8_srm_probe.yml'
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch official DDE SRM and BOSSBase
+        run: |
+          set -euxo pipefail
+          wget -O /tmp/SRM.tar https://dde.binghamton.edu/download/feature_extractors/download/SRM_linux_make_v1.1.tar
+          mkdir -p /tmp/srm && tar -xf /tmp/SRM.tar -C /tmp/srm
+          echo '=== SRM files ==='
+          find /tmp/srm -maxdepth 4 -type f -printf '%p %s bytes\n' | sort
+          wget -O /tmp/BOSSBase.zip https://dde.binghamton.edu/download/ImageDB/BOSSbase_1.01.zip
+          unzip -q /tmp/BOSSBase.zip -d /tmp/boss
+          echo '=== BOSS sample ==='
+          find /tmp/boss -type f | head -5
+      - name: Build probe
+        run: |
+          set -euxo pipefail
+          cd /tmp/srm
+          find . -iname 'Makefile' -o -iname 'makefile' -print
+          for d in $(find . -type f \( -iname 'Makefile' -o -iname 'makefile' \) -printf '%h\n' | sort -u); do
+            echo "=== make in $d ==="
+            (cd "$d" && make) || true
+          done
+          echo '=== executables ==='
+          find /tmp/srm -type f -perm -111 -printf '%p\n' | sort
