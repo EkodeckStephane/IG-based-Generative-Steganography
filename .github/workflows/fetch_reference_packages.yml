@@ -1,0 +1,20 @@
+name: Fetch reference stego packages
+on:
+  push:
+    paths:
+      - '.github/workflows/fetch_reference_packages.yml'
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download reference wheels
+        run: |
+          mkdir -p deps
+          python -m pip download --no-deps --only-binary=:all: sealwatch==2025.9 -d deps
+          python -m pip download --no-deps --only-binary=:all: conseal==2025.11 -d deps
+          sha256sum deps/* | tee deps/SHA256SUMS.txt
+      - name: Upload wheels
+        uses: actions/upload-artifact@v4
+        with:
+          name: reference-stego-packages
+          path: deps/
