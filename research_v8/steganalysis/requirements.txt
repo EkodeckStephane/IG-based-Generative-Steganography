@@ -1,0 +1,11 @@
+# External implementations are intentionally pinned by commit.
+git+https://github.com/uibk-uncover/sealwatch.git@90af7175a70f9c7cf48072b011334add499805db
+git+https://github.com/uibk-uncover/conseal.git@dcb24caae710ca60ea8492028b3f6bad2c23afd3
+numpy
+scipy
+scikit-learn
+pillow
+h5py
+pandas
+torch
+torchvision
