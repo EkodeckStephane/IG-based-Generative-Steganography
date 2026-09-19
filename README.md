@@ -97,7 +97,7 @@ gives the local sensitivity of exact Cachin risk to source displacement. For sma
 C(p,\theta)+rS_{\mathrm{src}}(p,\theta)+O(r^2).
 \]
 
-The project does **not** claim that Fisher–Rao geometry, robust optimization, or relative-entropy variance are new mathematical objects. The contribution is their Cachin-compatible **source–embedding construction and its steganographic design consequences**.
+The mathematical ingredients—Fisher–Rao geometry, robust optimization, and relative-entropy variance—are established foundations. The contribution lies in their Cachin-compatible **source–embedding construction and its steganographic design consequences**.
 
 ### 4.2 Quantized residual witness
 
@@ -135,9 +135,9 @@ The frozen split is determined from filenames before pixel analysis:
 - 1,500 images: calibration;
 - 5,000 images: holdout.
 
-The repository does **not** redistribute BOSSBase images. Only manifests, fitted summaries, protocols and numerical results are retained.
+Raw BOSSBase is acquired independently; the repository retains the split manifest, fitted summaries, protocols and numerical results needed for reproduction.
 
-**BOWS2** is reserved as the primary external validation source. That experiment is intentionally still open and will be executed only when the raw 10,000-image corpus is supplied to the working environment. No substitute dataset is silently used in its place.
+**BOWS2** is reserved as the primary external validation source. The frozen BOWS2 experiment is the primary external-validation layer and will be executed when the raw 10,000-image corpus is supplied to the working environment.
 
 ## 6. Main results retained so far
 
@@ -215,13 +215,13 @@ The corresponding same-payload dual analysis reduces certified worst-case robust
 
 ### 6.7 Operational probabilistic screening
 
-On 800 frozen BOSSBase development/calibration images, matched-ideal-payload probabilistic stego realizations produced a lightweight SPAM-like detector AUC close to chance for both uniform-shrink and information-geometric allocations. This is recorded only as a **screening result**, not as modern steganalysis evidence.
+On 800 frozen BOSSBase development/calibration images, matched-ideal-payload probabilistic stego realizations produced a lightweight SPAM-like detector AUC close to chance for both uniform-shrink and information-geometric allocations. This result is recorded as the lightweight screening layer; the modern detector layer is evaluated separately.
 
 ### 6.8 STC campaign status
 
 Real STC encoding/decoding has been brought into the current environment and tested successfully at the low level with zero BER in synthetic checks. The corrected image campaign uses the appropriate DDE matrix widths for the actual layered payload regime.
 
-At the current repository snapshot, V8 remains **partially executed**. The available block results are retained for provenance; they must not be interpreted as the final 5,000-image STC result until the complete frozen campaign is aggregated.
+At the current repository snapshot, V8 remains **partially executed**. The available block results are retained for provenance; they are recorded as implementation progress, while the final 5,000-image estimate is produced only after complete frozen-campaign aggregation.
 
 ## 7. Scientific positioning
 
@@ -237,7 +237,7 @@ The protected contribution is therefore narrower:
 
 > **A steganographic source–embedding security field that preserves exact Cachin security, separates embedding-direction Fisher sensitivity from source-direction Fisher–Rao sensitivity, derives finite-radius robust Cachin guarantees under a declared cover-model ambiguity set, and uses those guarantees to construct a multiparametric embedding design whose nominal-versus-robust behavior is experimentally falsifiable.**
 
-No “first”, “unprecedented”, or generic “new Fisher–Rao theory” claim is made by this repository.
+Priority wording is restricted to the source–embedding construction and its tested design consequences.
 
 ## 8. Repository structure on this branch
 
@@ -252,15 +252,13 @@ IG-based-Generative-Steganography/
 │   ├── tests/                  # Numerical and mathematical QA
 │   ├── results/                # Retained numerical outputs and STC block summaries
 │   ├── operational/            # Closure notes, external-validation and operational docs
-│   └── snapshot/
-│       ├── MANIFEST.sha256
-│       └── research_workspace_snapshot.zip
+│   └── provenance/             # SHA-256 manifests for retained local artifacts
 ├── Supplementary_Data/        # Historical material inherited from main
 ├── data/                      # Historical material inherited from main
 └── figures/                   # Historical material inherited from main
 ```
 
-The `research_v8/snapshot/` archive is an exact compact snapshot of all useful current workspace artifacts included for reproducibility. Raw BOSSBase images and generated stego images are deliberately excluded.
+`research_v8/provenance/LOCAL_WORKSPACE_MANIFEST.sha256` records the SHA-256 identifiers of retained workspace artifacts. Source code, protocols and compact numerical results are versioned directly on this branch; large image outputs remain outside Git history.
 
 ## 9. Reproducibility procedure
 
@@ -335,13 +333,13 @@ The project deliberately distinguishes:
 
 Historical negative results are not deleted merely because later pivots perform better. In particular, V4A remains part of the record because it demonstrates that intra-source sampling variation alone did not meet the predeclared natural-image materiality threshold.
 
-The old rejected manuscripts are not used as a textual base for a future paper. `OLD_VERSION_CRITICAL_AUDIT.md` records the most important reason: previous drafts reversed Cachin's asymmetric KL orientation in places. All current equations, code and evidence are rebuilt under
+The current manuscript is rebuilt from the corrected formal core. `OLD_VERSION_CRITICAL_AUDIT.md` records the key historical defect: previous drafts reversed Cachin's asymmetric KL orientation in places. All current equations, code and evidence are rebuilt under
 
 \[
 \boxed{D_{\mathrm{KL}}(P_C\Vert P_S)}.
 \]
 
-`research_v8/snapshot/MANIFEST.sha256` provides hashes for the browsable research artifacts in this branch.
+`research_v8/provenance/LOCAL_WORKSPACE_MANIFEST.sha256` provides hashes for retained local research artifacts.
 
 ## 11. Current evidence status and open blockers
 
