@@ -25,6 +25,7 @@ jobs:
       - name: Build tracked STC
         run: |
           cd research_v8/vendor/pystc_minimal
+          cp -f common.cpp common.h stc_embed_c.cpp stc_embed_c.h stc_extract_c.cpp stc_extract_c.h stc_interface.cpp stc_interface.h stc_ml_c.cpp stc_ml_c.h pystc/
           python setup.py build_ext --inplace
           ls -lh pystc/stc_extension*.so
       - name: Run one-image seven-variant smoke
