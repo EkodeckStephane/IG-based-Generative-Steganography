@@ -48,7 +48,7 @@ A second problem is experimental. Any apparent gain must survive:
 
 > **Can exact Cachin security be embedded in an information-geometric source–embedding framework that recovers the established local Fisher regime, differentiates nominally iso-Cachin designs under bounded cover-source uncertainty, and turns that additional structure into a certifiably robust embedding allocation?**
 
-The current evidence is deliberately separated into formal, controlled, natural-source, operational-screening, and still-open external/modern-steganalysis layers.
+The current evidence is deliberately separated into formal, controlled, natural-source, operational-coding, independent external-validation, and still-open modern-steganalysis layers.
 
 ## 4. Proposed framework
 
@@ -221,7 +221,7 @@ On 800 frozen BOSSBase development/calibration images, matched-ideal-payload pro
 
 The retained aggregate V8 summary reports **20,000 image-condition encodings** over 5,000 development/calibration images, two security budgets and two matched-payload methods. At \(\varepsilon=2\times10^{-4}\), both methods report **5,000/5,000 (100%)** exact recovery. At \(8\times10^{-4}\), uniform shrinkage reports **4,998/5,000 (99.96%)** and the information-geometric allocation **4,999/5,000 (99.98%)**. The three coding failures remain in the aggregate.
 
-This aggregate is not yet the final V8 closure object: the canonical branch currently retains raw block outputs only for indices 0–1500. The missing raw blocks must be recovered or rerun under the frozen STC implementation before the 20,000-condition aggregate is treated as fully traceable.
+A clean source-level reconstruction from the tracked `research_v8/vendor/pystc_minimal/` implementation was rebuilt and used to rerun all 5,000 non-holdout images under the unchanged frozen V8 protocol. The resulting 20,000 raw image-condition records are persisted under `research_v8/results/V8_STC_RERUN/`. The six historically retained blocks covering indices 0–1500 reproduce exactly on all scientific fields except execution time; the full rerun reproduces the same three failed image-condition cases and the previous aggregate metrics to numerical precision. The historical compiled binary itself is not claimed to have been recovered. The authoritative closure note is `research_v8/operational/V8_STC_RUNTIME_PROVENANCE_AND_RERUN_CLOSURE.md`.
 
 ### 6.9 Independent BOWS2 external validation
 
@@ -318,7 +318,7 @@ The operational protocol is frozen in:
 research_v8/protocols/OPERATIONAL_STC_STEGANALYSIS_PREREG_V8.md
 ```
 
-The retained STC runner records real message bits, exact recovery status, modification counts and method/budget metadata. Failed codewords remain failures; the payload is not reduced post hoc to improve the success rate.
+The retained STC runner records real message bits, exact recovery status, modification counts and method/budget metadata. Failed codewords remain failures; the payload is not reduced post hoc to improve the success rate. The source-level STC implementation used for the reproducibility closure is tracked in `research_v8/vendor/pystc_minimal/`, and the clean raw rerun plus its SHA-256 manifest are under `research_v8/results/V8_STC_RERUN/`.
 
 ### 9.7 External validation
 
@@ -356,10 +356,10 @@ Current status at this snapshot:
 - V6 high-resolution robust-risk certification: **supported**;
 - probabilistic image realization: **screening complete**;
 - BOWS2 primary external validation: **PASS on all 10,000 native 256×256 images without retuning**;
-- V8 STC aggregate: **positive over the reported 20,000 conditions, but raw block provenance is incomplete beyond index 1500 and must be rerun or recovered**;
+- V8 STC actual-message coding and raw provenance: **PASS over a clean 20,000-record rerun; the original 0–1500 raw prefix is reproduced exactly on scientific fields, and all three historical failures recur**;
 - SRM+ensemble / repeated-seed deep steganalysis: **still open as the detector-facing validation layer**.
 
-The remaining empirical blockers are therefore the V8 raw-evidence closure and strong steganalysis. After they are closed, the manuscript must undergo the final claim–code–data cross-check, theorem/figure/table audit, and Senior Reviewer Q1/Rang A prescreen.
+The remaining empirical blocker is therefore the strong detector-facing steganalysis layer. After it is closed, the manuscript must undergo the final claim–code–data cross-check, theorem/figure/table audit, and Senior Reviewer Q1/Rang A prescreen.
 
 ## 12. Citation and reuse
 
