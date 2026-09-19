@@ -1,0 +1,21 @@
+{
+  "decision": "FAIL_MATERIALITY_PIVOT_BEFORE_HOLDOUT",
+  "holdout_opened": false,
+  "rstar": 0.03795283861307521,
+  "pre_registered_pass": false,
+  "failure_reason": "D80_at_rstar_below_0.05_for_both_epsilons",
+  "D80_at_rstar": [
+    0.021756394061917872,
+    0.03869893062474228
+  ],
+  "rate_gain_vs_uniform_shrink_pct": {
+    "0.0002": 1.5860071615265037,
+    "0.0008": 1.9280284628412359
+  },
+  "nonscalar_residual": {
+    "0.0002": 0.018052648495039514,
+    "0.0008": 0.01822579301569172
+  },
+  "robust_budget_pass": true,
+  "note_1p5_rstar_eps8e4_D80": 0.06490017088378708
+}
