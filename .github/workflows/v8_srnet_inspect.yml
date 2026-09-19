@@ -1,0 +1,20 @@
+name: Inspect official DDE SRNet
+on:
+  push:
+    branches: [cachin-ig-robust-v8]
+    paths:
+      - '.github/workflows/v8_srnet_inspect.yml'
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download and inspect official package
+        run: |
+          set -euxo pipefail
+          wget -q -O /tmp/SRNet.zip https://dde.binghamton.edu/download/feature_extractors/download/SRNet.zip
+          sha256sum /tmp/SRNet.zip
+          unzip -q /tmp/SRNet.zip -d /tmp/srnet
+          find /tmp/srnet -maxdepth 4 -type f -printf '%p %s bytes\n' | sort | head -200
+          echo '=== Python imports / config ==='
+          grep -RniE 'tensorflow|tf\.|max_iter|train|batch|learning|epoch|model' /tmp/srnet --include='*.py' | head -250 || true
