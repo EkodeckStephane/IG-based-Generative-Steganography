@@ -80,3 +80,8 @@ C6 can pass only when:
 5. any detector disadvantage of IG relative to uniform is retained and bounds the paper's wording.
 
 Near-chance detector performance is not called perfect security.
+
+
+## Pre-GPU reconciliation
+
+For the final GPU campaign, `../protocols/V8_GPU_RECONCILIATION_ADDENDUM.md` is the authoritative resolution of the earlier seed/checkpoint inconsistencies. It was frozen before any strong-detector outcome and supersedes conflicting execution details in this file without changing the parent V8 scientific decision rule.

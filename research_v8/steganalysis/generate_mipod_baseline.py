@@ -1,25 +1,31 @@
 #!/usr/bin/env python3
-"""Generate mandatory MiPOD matched-rate baselines for the frozen V8 split."""
+"""Generate canonical MiPOD baselines at the exact V8 message length per image.
+
+This supersedes the earlier mean-bpp helper. Payload is read from persisted V8
+raw records and therefore matches actual-message coding image-by-image.
+"""
 import argparse, hashlib, json
 from pathlib import Path
 import numpy as np, pandas as pd
 from PIL import Image
 import conseal as cl
 
-RATES={'0.0002':0.0521699935913086,'0.0008':0.07059953002929688}
+def seed32(tag): return int.from_bytes(hashlib.sha256(tag.encode()).digest()[:4],'big')
 
-def seed32(tag):
-    return int.from_bytes(hashlib.sha256(tag.encode()).digest()[:4],'big')
-
-def cols(df):
-    n=next(c for c in ['image','filename','file','name'] if c in df.columns)
-    s=next(c for c in ['split','partition'] if c in df.columns)
-    return n,s
-
-def failure_union(summary, eps):
-    obj=json.loads(Path(summary).read_text())
-    fs=obj.get('failures',obj.get('failure_cases',[]))
-    return {str(x['image']) for x in fs if str(x.get('epsilon'))==str(eps)}
+def load_v8_raw(root,eps):
+    by={}
+    for p in sorted(Path(root).glob('results_[0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9].json')):
+        for r in json.loads(p.read_text()):
+            if str(r.get('epsilon'))!=str(eps): continue
+            n=str(r['image']); d=by.setdefault(n,{}) ; d[str(r['method'])]=r
+    if len(by)!=5000: raise RuntimeError(f'{eps}: expected 5000 image identities in raw V8 evidence, got {len(by)}')
+    out={}; bad=set()
+    for n,d in by.items():
+        if not {'uniform_shrink','IG_matched'}.issubset(d): raise RuntimeError(f'{n}: missing V8 method record')
+        if int(d['uniform_shrink']['message_bits'])!=int(d['IG_matched']['message_bits']): raise RuntimeError(f'{n}: V8 message lengths differ')
+        out[n]=int(d['uniform_shrink']['message_bits'])
+        if not d['uniform_shrink'].get('success',False) or not d['IG_matched'].get('success',False): bad.add(n)
+    return out,bad
 
 def resolve(root,name):
     p=Path(root)/name
@@ -29,33 +35,13 @@ def resolve(root,name):
     return hits[0]
 
 def main():
-    ap=argparse.ArgumentParser()
-    ap.add_argument('--bossbase-root',required=True)
-    ap.add_argument('--manifest',default='research_v8/results/bossbase_split_manifest_v4.csv')
-    ap.add_argument('--summary',default='research_v8/results/V8_STC_RERUN/V8_STC_RERUN_SUMMARY.json')
-    ap.add_argument('--epsilon',required=True,choices=['0.0002','0.0008'])
-    ap.add_argument('--out',required=True)
-    args=ap.parse_args()
-    df=pd.read_csv(args.manifest); n,s=cols(df)
-    df=df[df[s].isin(['fit','calibration'])].copy()
-    bad=failure_union(args.summary,args.epsilon)
-    if bad: df=df[~df[n].astype(str).isin(bad)]
-    alpha=RATES[args.epsilon]; records=[]
-    for _,row in df.sort_values([s,n]).iterrows():
-        name=str(row[n]); split=str(row[s])
-        src=resolve(args.bossbase_root,name)
-        x=np.array(Image.open(src))
-        seed=seed32(f'MiPOD|{alpha:.15g}|{name}')
-        y=cl.mipod.simulate_single_channel(x0=x,alpha=alpha,seed=seed)
-        dst=Path(args.out)/args.epsilon/'MiPOD'/split/name
-        dst.parent.mkdir(parents=True,exist_ok=True)
-        Image.fromarray(np.asarray(y,dtype=np.uint8)).save(dst)
-        records.append({'image':name,'split':split,'epsilon':args.epsilon,
-                        'method':'MiPOD','alpha_bpp':alpha,'seed':seed,
-                        'changes':int(np.count_nonzero(np.asarray(y)!=x))})
-    out=Path(args.out)/args.epsilon/'MiPOD'/'MIPOD_MATERIALIZATION.json'
-    out.write_text(json.dumps(records,indent=2))
-    print(json.dumps({'epsilon':args.epsilon,'alpha_bpp':alpha,'n':len(records),'excluded_v8_failure_union':sorted(bad)},indent=2))
-
-if __name__=='__main__':
-    main()
+    ap=argparse.ArgumentParser(); ap.add_argument('--bossbase-root',required=True); ap.add_argument('--manifest',required=True); ap.add_argument('--v8-raw-root',required=True)
+    ap.add_argument('--epsilon',required=True,choices=['0.0002','0.0008']); ap.add_argument('--out',required=True); args=ap.parse_args()
+    bits,bad=load_v8_raw(args.v8_raw_root,args.epsilon); df=pd.read_csv(args.manifest); df=df[df['split'].isin(['fit','calibration']) & ~df['image'].astype(str).isin(bad)].copy(); records=[]
+    for row in df.sort_values(['split','rank_hash','image']).itertuples():
+        name=str(row.image); src=resolve(args.bossbase_root,name); x=np.asarray(Image.open(src),dtype=np.uint8); m=bits[name]; alpha=m/(512.0*512.0); seed=seed32(f'V8-MiPOD|{args.epsilon}|{name}')
+        y=cl.mipod.simulate_single_channel(x0=x,alpha=alpha,seed=seed); dst=Path(args.out)/row.split/name; dst.parent.mkdir(parents=True,exist_ok=True); Image.fromarray(np.asarray(y,dtype=np.uint8)).save(dst)
+        records.append({'image':name,'split':row.split,'epsilon':args.epsilon,'method':'MiPOD','message_bits_matched':m,'alpha_bpp':alpha,'seed':seed,'changes':int(np.count_nonzero(y!=x))})
+    meta={'epsilon':args.epsilon,'n':len(records),'excluded_v8_failure_union':sorted(bad),'payload_rule':'message_bits_i/(512*512)','seed_rule':'SHA256(V8-MiPOD|epsilon|filename)[:32 bits]','records':records}
+    p=Path(args.out)/'MIPOD_MATERIALIZATION.json';p.write_text(json.dumps(meta,indent=2));print(json.dumps({k:meta[k] for k in ['epsilon','n','excluded_v8_failure_union','payload_rule','seed_rule']},indent=2))
+if __name__=='__main__':main()
