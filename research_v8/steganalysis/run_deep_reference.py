@@ -156,6 +156,6 @@ def main():
             'checkpoint_rule':'max validation balanced accuracy; tie lower validation loss; tie earlier epoch; calibration test once',
             'selected_epoch':best_epoch,'selected_validation':ck['validation'],'epoch_log':history,'device':str(device),'torch_version':torch.__version__,
             'cuda_device':torch.cuda.get_device_name(0),'training_seconds_this_invocation':time.time()-t0,'checkpoint':str(best),'checkpoint_sha256':sha256(best),**tm}
-    final_json.write_text(json.dumps(result,indent=2)); result['raw_result_sha256']=sha256(final_json); final_json.write_text(json.dumps(result,indent=2))
+    final_json.write_text(json.dumps(result,indent=2))
     print(json.dumps({k:result[k] for k in ['detector','seed','epsilon','method','selected_epoch','n_train_pairs','n_validation_pairs','n_test_pairs','balanced_error','roc_auc','accuracy'] if k in result},indent=2))
 if __name__=='__main__': main()
