@@ -76,3 +76,16 @@ in the paper.
   installing the CUDA version of PyTorch.
 - The raw MNIST dataset is downloaded automatically on first run and stored in
   `../data/MNIST/`; it is excluded from version control by `.gitignore`.
+
+
+## Revised DSP submission: evidence scope (30 October 2026)
+
+The revised manuscript distinguishes three independent tracks: (1) matched-channel MNIST-VAE S5 diagnostics, (2) native upstream iMEC/Discop runs, and (3) controlled complementary Discop and steganalysis runs. These tracks use different generators, datasets, and experimental objectives and must **not** be compared as if they were a single matched-carrier benchmark.
+
+The native/controlled campaign is documented in the Google Drive evidence folder: https://drive.google.com/drive/folders/1xr3gYO8QTm7MoCLRVxFmfAMjzZr4PGhu . Protocol: `v2.1-one-shot-500-20261028` (master seed 20261014). The exported archive manifest records 5,320 files, 270,175,710 bytes, SHA-256 `184c45db08e420bfbfccbd09dc069f015e03481d1e77008c17e90821319d7c45`. This checksum is reported from the provided manifest and has not been reverified against the external archive.
+
+Native iMEC GPT-2/WikiText-103 text: 100/100 decodes. Native Discop Transformer-XL/IMDb text reports 4.14291 bits/token over 100,000 tokens; ImageGPT/CelebA image reports 1.725796875 bits/token over 256,000 tokens. The native Discop statistics path uses nondeterministic `os.urandom` seeds. Controlled Discop text and image tests report 100/100 and 500/500 exact decodes respectively; image context equality is in quantized tokens, not original RGB bytes.
+
+**Important validation limitation:** In the controlled 500-pair five-fold steganalysis study, SRM/FLD macro AUC is 0.46119 and ResNet18 macro AUC is 0.52278, but the mandatory positive-control health check passes for SRM/FLD (AUC 0.98407) and fails for ResNet18 (AUC 0.54156 against a prespecified 0.8 threshold). The campaign records `scientific_ready=false`; those detector results cannot support security conclusions. Native iMEC image evaluation was skipped because the ImageTransformer checkpoint was unavailable.
+
+The full revised manuscript and response to reviewers are supplied as a separate submission package; this README update does not claim the repository already contains all revised code, images or figures.
