@@ -22,3 +22,9 @@
 
 ## Scientific interpretation
 These results do **not** establish NG-Stego superiority or operational undetectability. They demonstrate a concrete local-optimization reliability limitation and meaningful detectability on this endpoint configuration. R2.3 and R2.7 are strengthened experimentally but **still partial**, as independent larger samples, real MNIST endpoints, native baselines and adversarial re-training remain out of scope.
+
+## Additional interpretation: cover-valued codeword and AUC ceiling
+
+Because the fixed four-point codebook **includes z0 as one valid message codepoint**, one quarter of stego examples is sampled from the exact cover distribution. In this balanced two-bit experiment, for any detector and the population AUC metric, the strongest possible separation of the other three codewords implies an upper limit of **AUC <= 1 - 0.25/2 = 0.875**. Sample AUC estimates may fluctuate above it. The measured Algorithm 2 pixel AUC of 0.86694 is near this ceiling; it must NOT be misinterpreted as low detectability. A more informative follow-up must exclude cover as a message codeword and evaluate new codebooks separately.
+
+The three submission documents have NOT been edited with these exploratory numbers, because the experiment uses synthetic endpoints rather than the original MNIST class-mean protocol. The complete five-method runner, raw per-method outputs, and numeric audit are in the associated research ZIP. GitHub presently holds the standalone Algorithm 2 optimizer core and verified aggregate table; full repository-only reproduction of the detector benchmark is not yet certified.
