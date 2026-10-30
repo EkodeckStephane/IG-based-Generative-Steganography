@@ -1,0 +1,698 @@
+\documentclass[preprint,12pt]{elsarticle}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm,booktabs}
+\usepackage{graphicx,hyperref}
+\journal{Digital Signal Processing}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\TV}{\mathrm{TV}}
+\newcommand{\Exp}{\operatorname{Exp}}
+\newcommand{\Vol}{\operatorname{Vol}}
+\newcommand{\R}{\mathbb R}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\cN}{\mathcal N}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\PhiN}{\Phi}
+
+
+\begin{document}
+\begin{frontmatter}
+\title{Fisher--Rao-Guided Generative Steganography:
+Geodesic Embedding and Detection Analysis}
+\author[uy1]{St\'ephane Ga\"el R. EKODECK}
+\author[uy1]{Prosper Rosaire MAMA ASSANDJE}
+\author[uy1]{Serge Alain EB\'EL\'E}
+\author[uy1]{St\'ephane Willy MOSSEBO TCHEUNTEU}
+\author[uy1]{Arthur Ulrich EWANE}
+\author[uy1]{Damaris Belle M. FOTSO}
+\author[uy1]{Ren\'e NDOUNDAM}
+\affiliation[uy1]{organization={University of Yaound\'e I},
+ city={Yaound\'e}, country={Cameroon}}
+\begin{abstract}
+We study the Fisher--Rao geometry of parametric generative
+transport and distinguish geometric path costs from observable
+steganographic security. For regular statistical models,
+the accumulated KL divergence between neighboring distributions
+has a leading term proportional to Fisher path energy; a
+constant-speed minimizing geodesic optimizes this leading term,
+without changing the KL divergence between fixed endpoints.
+We formulate natural-gradient optimization with explicit
+regularity and feasibility requirements, and derive local
+links to likelihood-ratio testing for exponential families.
+To connect geometry to an actual observation model, we analyze a
+keyed Gaussian-location signaling protocol with an encoder,
+a decoder, an innocent-output distribution and an adversary
+without the secret key. We obtain an exact Gaussian decoding
+error and a nonasymptotic KL-security upper bound expressed
+through per-stage squared Fisher displacements.
+A constant-Fisher-speed schedule minimizes a certified
+security upper bound at fixed receiver reliability.
+Importantly, this does not by itself imply that a minimizing
+geodesic outperforms every other constant-speed path.
+Low-dimensional Gaussian simulations and a learned
+VAE--MNIST latent-path experiment illustrate the modeling
+distinctions. Operational distribution-preserving steganography
+based on iMEC and Discop is discussed separately, without claiming
+a matched numerical advantage for our procedure. The results
+provide a precise starting point for observation-aware
+Fisher-geometric steganographic design while leaving open
+high-dimensional matched security and payload benchmarks.
+\end{abstract}
+\begin{keyword}
+Fisher--Rao geometry \sep natural gradient \sep
+generative steganography \sep Gaussian signaling \sep
+relative entropy \sep steganalysis \sep keyed randomization
+\end{keyword}
+\end{frontmatter}
+
+
+\section{Introduction}
+Steganography aims to communicate information while avoiding
+detection of the communication itself.
+Security depends on the probability distribution of what an
+adversary \emph{actually observes}, not on the geometry of an
+unobserved parameter path alone. Distribution-preserving
+generative techniques such as minimum-entropy-coupling methods
+\cite{schroeder2023}, distribution-copy sampling
+\cite{ding2023}, and sparse sampling \cite{wang2025}
+construct operational encoding and decoding mechanisms.
+Their role is distinct from the Fisher--Rao optimization of
+a parametric statistical family.
+
+
+Let $\{P_\theta:\theta\in\Theta\}$ be a regular model.
+Its Fisher information metric provides an invariant local
+notion of statistical displacement. We first describe the
+path-energy limit of accumulated neighboring KL divergences
+and the conditional role of natural gradients. We then
+specify a secret-key signaling model and distinguish
+message recovery from detectability of an \emph{innocent}
+reference law. This separation is necessary: a reduction in
+geodesic energy cannot be equated with a reduction in
+steganographic detection error unless the observation
+distributions are shown to depend on the chosen path.
+
+
+The paper makes the following bounded contributions:
+(i) a careful local KL/geodesic formulation, including its
+endpoint invariance; (ii) a consistent natural-gradient and
+curvature analysis; (iii) an explicit Gaussian secret-key
+communication model with calculable receiver error and
+adversarial KL bound; and (iv) a reproducibility-oriented
+interpretation of synthetic and learned-generator diagnostics.
+The Gaussian coding result is an analytically tractable
+example of an observation-aware model, not an assertion of
+new general-purpose steganographic capacity.
+
+
+\section{Statistical model and Fisher geometry}
+Let $p_\theta(x)>0$ be a smooth identifiable family on a
+common dominating measure space, with regularity permitting
+differentiation under the integral and finite score moments.
+Define
+\begin{equation}
+ g_{ij}(\theta)=\E_\theta[
+ \partial_i\log p_\theta(X)\,
+ \partial_j\log p_\theta(X)].
+ \label{eq:fisher}
+\end{equation}
+Assume $g(\theta)$ is positive definite on the regular
+region of interest. If $\gamma:[0,1]\to\Theta$ is smooth,
+let
+\begin{align}
+ L_g(\gamma)&=\int_0^1\|\dot\gamma(t)\|_{g(\gamma(t))}\,dt,\\
+ E_g(\gamma)&=\int_0^1\|\dot\gamma(t)\|_{g(\gamma(t))}^{2}\,dt.
+ \label{eq:energy}
+\end{align}
+In particular, $E_g(\gamma)\ge
+L_g(\gamma)^2\ge d_g(\gamma(0),\gamma(1))^2$;
+equality holds for constant-speed length-minimizing
+geodesics when they exist.
+
+
+\begin{proposition}[Sequential-KL small-step limit]
+\label{prop:klpath}
+For a $C^3$ path with image contained in a compact regular
+parameter region and sufficiently uniform Taylor bounds,
+let $t_k=k/N$ and
+\[
+S_N(\gamma)=\sum_{k=0}^{N-1}
+ \KL(P_{\gamma(t_{k+1})}\Vert P_{\gamma(t_k)}).
+\]
+Then
+\[
+ S_N(\gamma)=\frac{1}{2N}E_g(\gamma)+O(N^{-2}).
+\]
+\end{proposition}
+\begin{proof}
+By the KL--Fisher local Taylor expansion,
+$\KL(P_{\theta+\delta}\Vert P_\theta)
+=\frac12\delta^\top g(\theta)\delta
++O(\|\delta\|^3)$.
+Since $\delta_k=\dot\gamma(t_k)/N+O(N^{-2})$,
+the $k$th term equals
+$\|\dot\gamma(t_k)\|_g^2/(2N^2)+O(N^{-3})$.
+Summation and Riemann quadrature prove the claim.
+\end{proof}
+
+
+\begin{remark}[Endpoint invariance]
+\label{rem:endpoint}
+For any two paths joining the same $\theta_0,\theta_1$,
+$\KL(P_{\theta_1}\Vert P_{\theta_0})$ is identical.
+Proposition~\ref{prop:klpath} is a result about a
+\emph{sequence of neighboring distributions}; it is not an
+unconditional security statement about a final sample.
+Moreover $S_N(\gamma)\to0$ for fixed $\gamma$ as $N\to\infty$;
+its invariant leading-order quantity is $NS_N$.
+\end{remark}
+
+
+\subsection{Exponential-family expansions}
+For
+$p_\theta(x)=h(x)\exp\{\theta^\top T(x)-\psi(\theta)\}$
+in natural coordinates, let $g_{ij}=\psi_{ij}$ and
+$T_{ijk}=\psi_{ijk}$.
+For a small increment $\delta$,
+\begin{align}
+\KL(P_{\theta+\delta}\Vert P_\theta)
+ &=\frac12g_{ij}\delta^i\delta^j+
+   \frac13T_{ijk}\delta^i\delta^j\delta^k+
+   O(\|\delta\|^4),\\
+\KL(P_\theta\Vert P_{\theta+\delta})
+ &=\frac12g_{ij}\delta^i\delta^j+
+   \frac16T_{ijk}\delta^i\delta^j\delta^k+
+   O(\|\delta\|^4),\\
+\frac12d_g(\theta,\theta+\delta)^2
+ &=\frac12g_{ij}\delta^i\delta^j+
+   \frac14T_{ijk}\delta^i\delta^j\delta^k+
+   O(\|\delta\|^4).
+\end{align}
+Consequently the forward and reverse KL divergences differ
+from $\frac12d_g^2$ by $\pm T_{ijk}\delta^i\delta^j\delta^k/12$
+to third order, respectively. The expansions require the
+specified natural-coordinate and KL-orientation conventions.
+
+
+\subsection{Gaussian reference geometry}
+For the univariate normal $P_{\mu,\sigma}=\cN(\mu,\sigma^2)$,
+\[
+ g=\frac{d\mu^2+2\,d\sigma^2}{\sigma^2}
+   =2\frac{d\mu^2+dy^2}{y^2},\qquad y=\sqrt2\sigma.
+\]
+This particular manifold is a complete hyperbolic plane with
+sectional curvature $-1/2$. General exponential-family or
+mixture manifolds do not inherit this completeness or
+global uniqueness without separate assumptions.
+
+
+\section{Optimization, curvature and statistical testing}
+For a differentiable objective $f$ on a regular Fisher
+manifold, the natural gradient is
+$\operatorname{grad}_g f=g^{-1}\nabla f$.
+An exact exponential-map descent step
+$\theta^+=\Exp_\theta[-L^{-1}\operatorname{grad}_g f]$
+satisfies
+\[
+ f(\theta^+)-f(\theta^\star)\le
+ (1-\mu/L)\bigl(f(\theta)-f(\theta^\star)\bigr)
+\]
+whenever $f$ is $L$-Riemannian smooth and
+$\mu$-geodesically strongly convex on an invariant
+geodesically convex region containing the steps and optimum.
+This guarantee does not automatically extend to an
+additive coordinate step or covariance eigenvalue clipping.
+
+
+For a full Gaussian $\cN(\bm\mu,\Sigma)$ with independent
+coordinates $(\bm\mu,\operatorname{vech}\Sigma)$, the
+covariance Fisher block is
+\[
+ (F_\Sigma)_{ab}=\frac12\operatorname{tr}
+ (\Sigma^{-1}E_a\Sigma^{-1}E_b),
+ \quad E_a=\partial\Sigma/\partial\theta_a,
+\]
+and the coordinate derivative of a scalar function is
+$\partial f/\partial\theta_a=
+\operatorname{tr}[(\nabla_\Sigma f)^\top E_a]$.
+Off-diagonal independent covariance coordinates contribute
+twice to the corresponding matrix derivative.
+For $\Sigma=I_2$ this block is
+$\operatorname{diag}(1/2,1,1/2)$ in the ordering
+$(\sigma_{11},\sigma_{12},\sigma_{22})$.
+
+
+The Jacobi equation
+$J''+R(J,\dot\gamma)\dot\gamma=0$
+describes infinitesimal geodesic sensitivity. In constant
+sectional curvature $K=-a^2$ a unit transverse Jacobi factor
+equals $\sinh(at)/a$; negative scalar curvature in dimension
+greater than two does not determine the sign of every
+sectional curvature. Geometric ball volume, packing, and
+operational communication capacity are distinct notions.
+
+
+Under simple hypotheses $H_0=P_{\theta_c}$ (cover) and
+$H_1=P_{\theta_s}$ (stego) in a regular exponential family,
+the normalized log-likelihood ratio is
+\[
+ \Lambda_n=(\theta_s-\theta_c)^\top
+  (\widehat\eta_n-\eta_c)-
+  \KL(P_{\theta_c}\Vert P_{\theta_s}).
+\]
+At fixed type-I level under $H_0$, the optimal asymptotic
+type-II error exponent is
+$\KL(P_{\theta_c}\Vert P_{\theta_s})$ by the
+Chernoff--Stein lemma. This result does not alone imply
+a finite-sample safe Fisher-radius guarantee.
+
+
+
+
+\section{An observation-aware keyed Gaussian signaling model}
+\label{sec:keyed}
+We now give a concrete communication model in which geometry,
+decoding reliability and adversarial indistinguishability have
+separately identifiable mathematical quantities.
+The model is an illustrative keyed Gaussian channel, not an
+image steganographic system and not a claim that the following
+one-bit spread-spectrum construction is new.
+
+
+\subsection{Alice, Bob, Eve and the innocent distribution}
+Consider a single uniform message bit
+$M\in\{-1,+1\}$ and a secret key
+$K=(K_1,\ldots,K_N)$ of independent uniform
+Rademacher signs, shared by Alice and Bob but not Eve.
+Let $\sigma>0$ and let $a_1,\ldots,a_N$ be public
+nonnegative amplitudes.
+Alice transmits
+\begin{equation}
+Y_k= M K_k a_k+\varepsilon_k,\qquad
+\varepsilon_k\overset{\mathrm{iid}}{\sim}\cN(0,\sigma^2).
+\label{eq:encoder}
+\end{equation}
+In the innocent condition $H_0$, Eve instead observes
+$Y_k=\varepsilon_k$ independently, so
+$Q_0=\bigotimes_{k=1}^N\cN(0,\sigma^2)$.
+In the active condition $H_1$, Eve knows the amplitude
+schedule and protocol but not the secret key or bit.
+Averaging over the key gives
+\begin{equation}
+Q_1=\bigotimes_{k=1}^N
+\left\{\tfrac12\cN(a_k,\sigma^2)+
+       \tfrac12\cN(-a_k,\sigma^2)\right\}.
+\label{eq:cover-stego}
+\end{equation}
+The independent secret signs are essential: a fixed,
+public or reused key need not provide the product mixture
+in Eq.~\eqref{eq:cover-stego}.
+This observer distinguishes innocent noise
+from an active secret-key-modulated Gaussian signal;
+the decoder has an additional secret key. The example
+therefore supplies a fully specified threat model, not
+the distribution preservation of a natural image generator.
+
+
+\subsection{Exact decoding and finite-sample KL control}
+\begin{theorem}[Receiver reliability and Eve's KL bound]
+\label{thm:gaussian_security}
+Under Eqs.~\eqref{eq:encoder}--\eqref{eq:cover-stego},
+assume $M$ and $K$ are independent and uniform and Bob
+receives $Y_1,\ldots,Y_N$ without additional channel
+distortion. Put
+$\rho_k=a_k^2/\sigma^2$ and
+$\rho=\sum_{k=1}^N\rho_k$.
+If $\rho>0$, the optimum equally likely binary-message
+decoder with the key is
+\begin{equation}
+\widehat M=\sgn\left(\sum_{k=1}^N K_k a_kY_k\right),
+\end{equation}
+with exact error probability
+\begin{equation}
+\Pr\{\widehat M\ne M\}=\PhiN(-\sqrt\rho).
+\label{eq:pe}
+\end{equation}
+For an adversary without the key, the active-versus-innocent
+divergence satisfies
+\begin{equation}
+0\le \KL(Q_1\Vert Q_0)
+\le\sum_{k=1}^N\log\cosh(\rho_k)
+\le\tfrac12\sum_{k=1}^N\rho_k^2.
+\label{eq:quartic-security}
+\end{equation}
+The total-variation advantage of every binary
+active-versus-innocent detector is bounded by
+\begin{equation}
+\TV(Q_1,Q_0)
+\le \sqrt{\tfrac12\KL(Q_1\Vert Q_0)}
+\le \tfrac12\sqrt{\sum_k\rho_k^2}.
+\label{eq:pinsker}
+\end{equation}
+\end{theorem}
+\begin{proof}
+Conditionally on $(M,K)$, the weighted correlation
+$Z=\sum_k K_ka_kY_k$ is normal with mean
+$M\sum_ka_k^2$ and variance
+$\sigma^2\sum_ka_k^2$. Its sign is the
+likelihood-ratio decoder and Eq.~\eqref{eq:pe} follows.
+For one coordinate, relative to
+$q_0(y)=\varphi_\sigma(y)$,
+the mixture likelihood ratio is
+\[
+\frac{q_1(y)}{q_0(y)}
+=e^{-\rho_k/2}
+\cosh(a_ky/\sigma^2).
+\]
+A direct Gaussian moment calculation yields
+\[
+\chi^2(q_1,q_0)
+=\E_{q_0}\!\left[
+\left(q_1/q_0-1\right)^2\right]
+=\cosh(\rho_k)-1.
+\]
+Jensen's inequality gives
+$\KL(q_1\Vert q_0)
+=\E_{q_1}\log(q_1/q_0)
+\le\log(1+\chi^2(q_1,q_0))
+=\log\cosh(\rho_k)$.
+The elementary bound
+$\log\cosh x\le x^2/2$ and product additivity
+of KL give Eq.~\eqref{eq:quartic-security}.
+Pinsker's inequality gives Eq.~\eqref{eq:pinsker}.
+\end{proof}
+
+
+\begin{corollary}[Uniform allocation minimizes the certified
+security upper bound]
+\label{cor:uniform}
+For fixed $N$, $\sigma$ and receiver squared
+signal-to-noise ratio $\rho=\sum_k\rho_k$,
+the upper bound $\tfrac12\sum_k\rho_k^2$ is
+minimized over $\rho_k\ge0$ by the uniform
+allocation $\rho_k=\rho/N$, yielding
+\begin{equation}
+\KL(Q_1\Vert Q_0)\le\frac{\rho^2}{2N},
+\qquad
+\TV(Q_1,Q_0)\le\frac{\rho}{2\sqrt N},
+\qquad
+\Pr(\widehat M\ne M)=\PhiN(-\sqrt\rho).
+\label{eq:allocation}
+\end{equation}
+\end{corollary}
+\begin{proof}
+By Cauchy--Schwarz,
+$\sum_k\rho_k^2\ge
+(\sum_k\rho_k)^2/N$, with equality
+at uniform $\rho_k$.
+The conclusion optimizes the stated \emph{certified
+upper bound}. It does not establish that uniform
+allocation uniquely minimizes the \emph{exact} KL,
+and it is not a claim of a universal optimal
+Fisher geodesic.
+\end{proof}
+
+
+\begin{remark}[Where Fisher geometry enters]
+\label{rem:geometrysecurity}
+For the constant-variance Gaussian location family
+$\{\cN(\mu,\sigma^2)\}$, the Fisher line element is
+$d\mu^2/\sigma^2$. Hence each $\rho_k$ is precisely
+the squared Fisher displacement for the elementary
+mean perturbation $0\mapsto a_k$.
+The security certificate in
+Eq.~\eqref{eq:quartic-security} is
+\emph{quartic} in the local Fisher displacement,
+rather than proportional to the quadratic
+neighboring-KL energy
+$S_N$ of Proposition~\ref{prop:klpath}.
+This distinction is structural: averaging over
+secret signs cancels the first-order shift in the
+adversary's observation law.
+Equal Fisher squared displacement per stage
+minimizes the stated bound under a fixed
+receiver reliability. This is a
+\emph{resource-allocation} statement in a
+flat location model, not proof that an arbitrary
+geodesic minimizes security leakage.
+\end{remark}
+
+
+\begin{remark}[Boundaries of the result]
+The adversarial security guarantee concerns the
+\emph{average over fresh uniformly random secret keys}.
+If a key is disclosed, reused across correlated
+transmissions or chosen nonuniformly, the
+observer's law may differ. The theorem concerns
+one recoverable bit and a Gaussian location
+model. Increasing $N$ while allocating
+$\rho_k=\rho/N$ holds Bob's total SNR fixed
+but consumes more channel uses and fresh key bits.
+The result does not constitute constant-rate
+covert communication or a positive asymptotic
+payload rate. It is not a claim of security for
+MNIST, CIFAR-10, iMEC or Discop.
+\end{remark}
+
+
+\subsection{Consequence for geometric transport claims}
+For a fixed pair of terminal distributions, neither
+the exact decoder error nor the observation
+divergence of an actual channel follows from the
+endpoint-independent quantity $S_N$ without
+a channel/observation construction.
+The keyed model proves a different, appropriately
+specified implication: a secret-key mixture makes
+the relative entropy of Eve's observation law
+bounded by fourth-order Fisher displacements
+at fixed receiver reliability.
+In general statistical manifolds a comparable
+result would require analyzing the
+key-marginalized observation density and
+its higher-order score tensors, not merely
+invoking a minimizing geodesic.
+
+
+\section{Numerical illustrations and reproducibility}
+\label{sec:experiments}
+\subsection{Analytic reference experiments}
+Low-dimensional Gaussian and Gaussian-mixture
+illustrations evaluate geodesic integration, the
+coordinate-consistent Fisher metric and curvature
+diagnostics. Numerical convergence claims must
+be evaluated on the corresponding corrected
+script outputs; unverified percentages or
+runtime factors are not used as results here.
+For the Gaussian location model of
+Theorem~\ref{thm:gaussian_security}, the
+testable quantities are (i) decoding error
+$\PhiN(-\sqrt\rho)$, (ii) the active/innocent
+likelihood-ratio distribution, (iii) exact or
+numerically integrated KL versus
+$\frac12\sum_k\rho_k^2$, and (iv) the
+resource-allocation curve $\rho_k=\rho/N$.
+No empirical values are asserted for tests
+not represented by archived outputs.
+
+
+\subsection{Learned-generator latent paths}
+We also consider an exploratory VAE--MNIST
+simulation with a two-dimensional latent
+variable $z$ and Bernoulli decoder
+$p_\phi(x\mid z)$. Its pullback Fisher
+metric can be computed as
+\[
+F(z)=J_\pi(z)^\top\!
+\operatorname{diag}\left(
+\frac1{\pi_i(z)(1-\pi_i(z))}
+\right)J_\pi(z).
+\]
+The available code compares a straight latent
+interpolation with a path obtained by
+Fisher-preconditioned descent toward a
+target code. The latter is not in general a
+Levi--Civita minimizing geodesic.
+The code's detector is trained to distinguish
+samples near source codes from images generated
+along straight interpolations, which differs
+from the innocent/no-message protocol of
+Theorem~\ref{thm:gaussian_security}.
+The repository contains outputs for three
+digit-class pairs, but these results are
+exploratory and do not measure message-decoding
+accuracy or establish a matched Fisher--Rao
+security advantage. An additional matched
+evaluation would be required.
+
+
+\subsection{Operational references}
+Minimum-entropy coupling and
+distribution-copy embedding provide
+operational methods for steganographic
+generation \cite{schroeder2023,ding2023}.
+They are not Euclidean parameter-path
+optimizers. Independent reproduction
+and detector-health experiments can be
+used as protocol references, but their
+detector AUCs are not attributed to the
+Gaussian signaling model or the
+VAE latent-path illustration.
+No additional iMEC/Discop generation
+is necessary to establish the analytic
+statements of Section~\ref{sec:keyed}.
+
+
+\section{Discussion and limitations}
+The main conceptual distinction is between
+optimization geometry and observable
+steganographic security. The geodesic
+energy principle is standard and
+characterizes a leading-order mathematical
+path cost. A fixed terminal law is
+not made harder to distinguish merely
+because it is reached by a geodesic.
+
+
+The explicit keyed Gaussian protocol
+specifies the innocent distribution,
+the secret-key-marginalized active
+distribution, Bob's optimal decoder and
+a finite-sample KL certificate for Eve.
+Its bound captures cancellation due to
+key averaging, not a general capacity
+law for generative media. The
+uniform-energy allocation result is
+limited to a fixed total receiver SNR
+and a fixed number of stages.
+The claimed contribution is therefore
+the clear observation-aware
+specialization and connection to
+Fisher displacement, rather than
+priority over existing spread-spectrum
+or covert-Gaussian-channel constructions.
+
+
+The available learned-generator
+experiment does not operate the
+keyed signaling protocol, lacks an
+explicit message decoder and does not
+prove that the natural-gradient path
+minimizes Fisher energy. Consequently
+the Gaussian theorem is not validated
+as an image-steganography security
+result. A future method that encodes
+a message by a route-dependent generator
+would require an explicit receiver,
+a key and a joint innocent/active
+observation law and must satisfy
+payload-recovery and detection
+criteria on the same data. Likewise,
+high-dimensional exact-Fisher
+computational costs remain outside
+our demonstrated scope.
+
+
+\section{Conclusion}
+Fisher--Rao geometry offers an
+intrinsic framework for analyzing
+parameter transport, but geometric
+optimality alone is not an operational
+steganographic security proof.
+We establish the small-step
+sequential-KL/energy relation
+under regularity conditions and
+preserve the distinctions between
+endpoints, paths and observations.
+For a fully specified keyed Gaussian
+signaling model, we derive exact
+receiver reliability and a nonasymptotic
+upper bound on the relative entropy of
+the adversary's observations.
+A constant-Fisher-energy-per-stage
+schedule minimizes that certificate
+at fixed decoding SNR. The result
+is an analytically transparent
+benchmark for observation-aware
+Fisher-geometric design, rather than
+a demonstrated universal improvement
+over current operational generative
+steganography.
+
+
+\begin{thebibliography}{99}
+\bibitem{cachin2004}
+C. Cachin, An information-theoretic model for steganography,
+Information and Computation 192 (2004) 41--56.
+
+
+\bibitem{schroeder2023}
+C. Schroeder de Witt, S. Sokota, J. Z. Kolter, J. Foerster,
+M. Strohmeier, Perfectly Secure Steganography Using
+Minimum Entropy Coupling, ICLR, 2023.
+
+
+\bibitem{ding2023}
+J. Ding, K. Chen, Y. Wang, N. Zhao, W. Zhang, N. Yu,
+Discop: Provably Secure Steganography in Practice
+Based on Distribution Copies, IEEE Symposium on
+Security and Privacy, 2023.
+doi:10.1109/SP46215.2023.10179287.
+
+
+\bibitem{wang2025}
+Y. Wang et al., SparSamp: Efficient Provably Secure
+Steganography Based on Sparse Sampling,
+USENIX Security Symposium, 2025.
+
+
+\bibitem{amari2000}
+S.-i. Amari, H. Nagaoka,
+Methods of Information Geometry,
+American Mathematical Society, 2000.
+
+
+\bibitem{amari1998}
+S.-i. Amari, Natural gradient works efficiently
+in learning, Neural Computation 10 (1998) 251--276.
+
+
+\bibitem{ollivier2017}
+Y. Ollivier, L. Arnold, A. Auger, N. Hansen,
+Information-Geometric Optimization Algorithms:
+A Unifying Picture via Invariance Principles,
+Journal of Machine Learning Research 18 (2017) 1--65.
+
+
+\bibitem{boumal2019}
+N. Boumal, P.-A. Absil, C. Cartis,
+Global rates of convergence for nonconvex
+optimization on manifolds,
+IMA Journal of Numerical Analysis 39 (2019) 1--33.
+
+
+\bibitem{cover2006}
+T. Cover, J. Thomas, Elements of Information
+Theory, 2nd ed., Wiley, 2006.
+
+
+\bibitem{fridrich2009}
+J. Fridrich, Steganography in Digital Media:
+Principles, Algorithms, and Applications,
+Cambridge University Press, 2009.
+
+
+\bibitem{rygaard2026}
+F. M. Rygaard, S. Hauberg,
+GEORCE: A fast new control algorithm
+for computing geodesics,
+Information Geometry, 2026.
+doi:10.1007/s41884-026-00192-9.
+\end{thebibliography}
+\end{document}
