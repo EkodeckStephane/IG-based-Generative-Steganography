@@ -1,0 +1,101 @@
+{
+  "scope": "Synthetic z0/z1 on checkpoint; NOT original S5; NOT Algorithm 2; NOT native media iMEC/Discop; iMEC excluded due time budget",
+  "seed": 20261031,
+  "train_per_class": 120,
+  "test_per_class": 120,
+  "z0": [
+    0,
+    0
+  ],
+  "z1": [
+    1.5,
+    0.5
+  ],
+  "bootstrap": 300,
+  "methods": {
+    "Euclidean path": {
+      "detector_auc_ci95": {
+        "pixel_logistic": [
+          0.9041666666666666,
+          0.8571354166666667,
+          0.9452118055555555
+        ],
+        "public_encoder_geometry": [
+          0.8919444444444444,
+          0.8433194444444444,
+          0.9371232638888889
+        ],
+        "fusion": [
+          0.902986111111111,
+          0.8598246527777778,
+          0.939078125
+        ],
+        "known_model_oracle": [
+          0.8958333333333333,
+          0.8625,
+          0.9333333333333333
+        ]
+      },
+      "decoded_test": 113,
+      "test_n": 120,
+      "encoding_ms_median": 0.03224050033168169,
+      "decoding_ms_median": 0.09127350040216697,
+      "stego_sample_mse_from_p0": 0.08417999064145035
+    },
+    "Fisher-NG path": {
+      "detector_auc_ci95": {
+        "pixel_logistic": [
+          0.8577083333333334,
+          0.8099236111111111,
+          0.9115954861111112
+        ],
+        "public_encoder_geometry": [
+          0.8627083333333333,
+          0.8074479166666666,
+          0.9134895833333332
+        ],
+        "fusion": [
+          0.8574305555555556,
+          0.8066336805555555,
+          0.9064652777777777
+        ],
+        "known_model_oracle": [
+          0.862013888888889,
+          0.8175659722222222,
+          0.9020902777777777
+        ]
+      },
+      "decoded_test": 117,
+      "test_n": 120,
+      "encoding_ms_median": 0.030710500141140074,
+      "decoding_ms_median": 0.08698600049683591,
+      "stego_sample_mse_from_p0": 0.0813856443905318
+    },
+    "Discop": {
+      "detector_auc_ci95": {
+        "pixel_logistic": [
+          0.5145833333333333,
+          0.43107812500000003,
+          0.5860225694444444
+        ],
+        "public_encoder_geometry": [
+          0.5934027777777778,
+          0.5190503472222222,
+          0.6653715277777777
+        ],
+        "fusion": [
+          0.5179166666666667,
+          0.44710937500000003,
+          0.5903784722222222
+        ]
+      },
+      "decoded_test": 120,
+      "test_n": 120,
+      "encoding_ms_median": 2.4183284995160648,
+      "decoding_ms_median": 2.3715194993201294,
+      "stego_sample_mse_from_p0": 0.06496168579808012
+    }
+  },
+  "checkpoint_sha256": "e94d57b36d960921768ce8ccc889796d5cd4ce69ce794a90ed1b669ed1d1ed61",
+  "positive_control_oracle_auc": 1
+}
