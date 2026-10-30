@@ -1,30 +1,25 @@
 # Fisher–Rao-Guided Generative Steganography — v1.0
 
-## Article
-- Editable manuscript: `paper/main.tex`
-- LaTeX class: `elsarticle`
-- Intended journal: *Digital Signal Processing*
+## Contents
 
-## Compile
-With a standard LaTeX distribution containing `elsarticle`, `amsmath`, `amssymb`, `amsthm`, `mathtools`, `bm`, `booktabs`, `graphicx`, and `hyperref`:
+- `main.tex`: full editable LaTeX source, using Elsevier's `elsarticle` class.
+- `VERSION`: article version identifier.
+
+## Compilation
+
+Install a TeX distribution containing `elsarticle`, `amsmath`, `amssymb`, `amsthm`, `mathtools`, `bm`, `booktabs`, `graphicx`, and `hyperref`. Then run:
 
 ```bash
-cd paper
 pdflatex -interaction=nonstopmode -halt-on-error main.tex
 pdflatex -interaction=nonstopmode -halt-on-error main.tex
 ```
 
-The source was structurally checked for document/environment balance. A PDF compilation was not independently verified in this packaging session.
+**Verification boundary:** LaTeX environment pairing and document delimiters have been checked; successful compilation has not been independently confirmed.
 
-## Supplementary material
-The repository also contains standalone Python scripts for the geometric simulations S1–S4, an exploratory latent-space VAE–MNIST experiment S5, selected output files and figures.
+## Scientific scope
 
-The S5 script uses a Fisher-preconditioned path; that path is not automatically a minimizing Fisher geodesic. The code and recorded results do not establish an operational Fisher–Rao message-decoding/security superiority over iMEC or Discop.
+The manuscript contains a specified one-bit keyed Gaussian signaling example with exact receiver error and a KL-security upper bound under its stated assumptions. It does not claim operational security for a high-dimensional generative image codec. The VAE–MNIST example is described as exploratory, not an end-to-end message-decoding experiment.
 
-## Evidence boundary
-The article contains a mathematically specified one-bit keyed Gaussian signaling example. Its Gaussian observation-law bounds should not be reinterpreted as tested guarantees for deep generative image steganography.
+The original 8.14 MB archive named `manuscript_source.zip` was located in the user's file library but could not be extracted by the available file-processing runtime. Consequently, this package contains the coherent v1.0 LaTeX manuscript assembled from the editable draft, **not a verified in-place edit of that original archive**. Source-to-source equivalence and final journal layout must be checked against the canonical submission.
 
-The presence of supplementary files in this archive does not certify a full numerical rerun or final journal-readiness.
-
-## Archive
-The GitHub `article-v1.0` branch may be downloaded as a ZIP using GitHub's source-code archive feature.
+The independent simulations and image datasets are intentionally kept outside this article-only ZIP; they remain in the project's main GitHub branch and existing Drive evidence folders.
