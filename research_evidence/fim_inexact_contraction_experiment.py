@@ -22,3 +22,13 @@ with p.open('w',newline='') as f:
  writer=csv.writer(f);writer.writerow(['delta','observed_max','observed_mean','theoretical_bound','trials']);writer.writerows(rows)
 for r in rows: print(r)
 assert all(r[1] <= r[3]+1e-9 for r in rows)
+
+# Deterministic sharpness: Fhat=(1-delta)F, yielding exact ratio delta/(1-delta).
+for delta in (0.05, 0.2, 0.4, 0.49, 0.7):
+    Fhat = (1-delta)*F
+    e = np.arange(1,d+1,dtype=float)
+    en = e-np.linalg.solve(Fhat,F@e)
+    observed = float(np.sqrt((en@F@en)/(e@F@e)))
+    bound = delta/(1-delta)
+    assert abs(observed-bound)<1e-10, (delta, observed, bound)
+    print('deterministic sharpness:', delta, observed, bound)
