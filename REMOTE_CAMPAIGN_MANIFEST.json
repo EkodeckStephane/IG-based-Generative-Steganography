@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "native_campaign": {
+    "folder": "https://drive.google.com/drive/folders/1xr3gYO8QTm7MoCLRVxFmfAMjzZr4PGhu",
+    "protocol": "v2.1-one-shot-500-20261028",
+    "export_name": "native_baselines_study_20261029T214827Z.zip",
+    "reported_size_bytes": 270175710,
+    "reported_files": 5320,
+    "reported_sha256": "184c45db08e420bfbfccbd09dc069f015e03481d1e77008c17e90821319d7c45",
+    "checksum_verified_locally": false
+  },
+  "neural_addendum": {
+    "folder": "https://drive.google.com/drive/folders/1_KRB0gml1IfvoW3uKOmGKchYugNYK51C",
+    "protocol": "neural-revalidation-residualcnn-v1",
+    "zip_filename": "supplementary_neural_500.zip",
+    "zip_size_bytes": 4616834,
+    "zip_sha256_verified": "c1f750e950241cf3fa3bd393f5816c79f6945013e0ab9105b9f683d23d0437db",
+    "positive_control_macro_auc": 0.99028,
+    "discop_detection_macro_auc": 0.50477
+  },
+  "note": "The remote 270 MB campaign is referenced externally; checksum is from its manifest, not independently rehashed. Neural study is a distinct pipeline and is not ResNet18."
+}
