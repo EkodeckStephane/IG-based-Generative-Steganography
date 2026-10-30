@@ -1,7 +1,11 @@
 """
-S4: Geodesic vs. Euclidean Straight-Line Paths
+S4: Geodesic vs. Euclidean Straight-Line Paths (corrected Gaussian Fisher metric)
 =========================================================
 Manifold: P_theta = N(mu, sigma^2 I_2), theta = (mu1, mu2, sigma)
+
+IMPORTANT: Correct Fisher sigma component for N(mu,sigma^2 I_2) is 4/sigma^2.
+The prior legacy results require regeneration; do not cite their numerical ratios
+as results of this corrected script.
 
 Outputs:
   data/s4_path_comparison.csv  -- KL ratios, failure flags, curvature at endpoints
@@ -22,7 +26,7 @@ os.makedirs(FIG_DIR,  exist_ok=True)
 def fisher_2d_isotropic(mu1, mu2, sigma):
     """FIM for N((mu1,mu2), sigma^2 I_2) in parameterization (mu1, mu2, sigma)."""
     inv_s2 = 1.0 / (sigma**2)
-    F = np.diag([inv_s2, inv_s2, 2.0 * inv_s2])
+    F = np.diag([inv_s2, inv_s2, 4.0 * inv_s2])
     return F
 
 def christoffel_2d_iso(theta):
@@ -33,8 +37,8 @@ def christoffel_2d_iso(theta):
         (0, 2, 0): -1.0 / s,
         (1, 1, 2): -1.0 / s,
         (1, 2, 1): -1.0 / s,
-        (2, 0, 0):  0.5 / s,
-        (2, 1, 1):  0.5 / s,
+        (2, 0, 0):  0.25 / s,
+        (2, 1, 1):  0.25 / s,
         (2, 2, 2): -1.0 / s,
     }
 
@@ -107,7 +111,7 @@ def path_energy(mus1, mus2, sigmas):
         dm2 = (mus2[i+1] - mus2[i]) / dt
         ds  = (sigmas[i+1] - sigmas[i]) / dt
         s   = 0.5 * (sigmas[i+1] + sigmas[i])
-        E  += (dm1**2 + dm2**2 + 2*ds**2) / (s**2) * dt
+        E  += (dm1**2 + dm2**2 + 4*ds**2) / (s**2) * dt
     return E
 
 # -- experiment --------------------------------------------------------------
