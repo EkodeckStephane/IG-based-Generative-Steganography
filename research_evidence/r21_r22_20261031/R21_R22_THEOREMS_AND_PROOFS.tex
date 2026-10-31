@@ -81,5 +81,4 @@ The bound on error can be loose or vacuous; the TV bound can likewise be vacuous
 \section{Verified numerical scope}
 The associated code uses a single pretrained 2-D-latent Bernoulli VAE. The exact latent Fisher matrix is $F(z)=J_h(z)^\top\mathrm{diag}(p(z)(1-p(z)))J_h(z)$, computed within ReLU activation cells. The sample-Fisher experiments use independent model-generated score samples; they do \emph{not} establish bias/error controls for GAN or diffusion models. The codebooks in the operational experiment consist of circular sets measured with the \emph{fixed local metric} $F(0)$: their reported separations are nominal quadratic distances, not certified globally minimal Fisher--Rao geodesic distances. Data are detailed in the accompanying CSV and JSON results.
 
-\paragraph{Publication guidance.} Neither the local contraction proposition nor the ODE perturbation lemma should be called a universal or novel global convergence theorem. The most important empirical obstruction to an operational capacity claim is that codebook separation can improve decoding while making the cover/stego mixture highly distinguishable.
 \end{document}
