@@ -1,0 +1,879 @@
+{
+  "source": "10k original MNIST fixed test pool",
+  "assumption": "three draws iid with fresh independent uniform OTP masks, conditional on same 2-bit payload",
+  "methods": {
+    "2features": {
+      "matched": {
+        "jpeg_50": {
+          "triple_exact_accuracy": 0.9990317075179093,
+          "effective_bits_per_image": 0.6660211383452729,
+          "xor_error_probabilities": [
+            0.9754554201628335,
+            0.015314223800407005,
+            0.009030939603122123,
+            0.00019941643366306127
+          ]
+        },
+        "blur_0.6": {
+          "triple_exact_accuracy": 0.9985862393111073,
+          "effective_bits_per_image": 0.6657241595407383,
+          "xor_error_probabilities": [
+            0.970248283709478,
+            0.0187650009052922,
+            0.010884840894628954,
+            0.0001018744906275514
+          ]
+        },
+        "resize_14": {
+          "triple_exact_accuracy": 0.9951462473187409,
+          "effective_bits_per_image": 0.6634308315458273,
+          "xor_error_probabilities": [
+            0.943540288740459,
+            0.029806806993113995,
+            0.025775156691763897,
+            0.0008777475746888854
+          ]
+        },
+        "shift_1": {
+          "triple_exact_accuracy": 0.9997917736075919,
+          "effective_bits_per_image": 0.6665278490717279,
+          "xor_error_probabilities": [
+            0.990740697447375,
+            0.008178615491626655,
+            0.00097475485763323,
+            0.00010593220338983494
+          ]
+        },
+        "flip_0.001": {
+          "triple_exact_accuracy": 0.9999684582798635,
+          "effective_bits_per_image": 0.6666456388532424,
+          "xor_error_probabilities": [
+            0.995471753872205,
+            0.002637040611567532,
+            0.0018912055162523802,
+            0.0
+          ]
+        },
+        "flip_0.01": {
+          "triple_exact_accuracy": 0.9988281055632751,
+          "effective_bits_per_image": 0.6658854037088501,
+          "xor_error_probabilities": [
+            0.9726107869304987,
+            0.01652346808633747,
+            0.01075981277979986,
+            0.00010593220338983494
+          ]
+        }
+      },
+      "fisher_TVcap0.03": {
+        "jpeg_50": {
+          "triple_exact_accuracy": 0.9990231178583489,
+          "effective_bits_per_image": 0.6660154119055659,
+          "xor_error_probabilities": [
+            0.9753904963303576,
+            0.015444405071896847,
+            0.008963698763225668,
+            0.0002013998345199674
+          ]
+        },
+        "blur_0.6": {
+          "triple_exact_accuracy": 0.9985037071961345,
+          "effective_bits_per_image": 0.6656691381307563,
+          "xor_error_probabilities": [
+            0.9695612765397633,
+            0.01952097824641163,
+            0.01080348087687281,
+            0.00011426433695229011
+          ]
+        },
+        "resize_14": {
+          "triple_exact_accuracy": 0.9953533475672384,
+          "effective_bits_per_image": 0.6635688983781589,
+          "xor_error_probabilities": [
+            0.9447158308161188,
+            0.02881469844779265,
+            0.02561945687514008,
+            0.0008500138609484086
+          ]
+        },
+        "shift_1": {
+          "triple_exact_accuracy": 0.9998139950771608,
+          "effective_bits_per_image": 0.6665426633847739,
+          "xor_error_probabilities": [
+            0.9912210983328086,
+            0.00772486006412409,
+            0.0009544426166049557,
+            9.959898646225177e-05
+          ]
+        },
+        "flip_0.001": {
+          "triple_exact_accuracy": 0.9999682792826265,
+          "effective_bits_per_image": 0.666645519521751,
+          "xor_error_probabilities": [
+            0.9954683542314218,
+            0.0026674682658213316,
+            0.001864177502756728,
+            0.0
+          ]
+        },
+        "flip_0.01": {
+          "triple_exact_accuracy": 0.9988252503598997,
+          "effective_bits_per_image": 0.6658835002399331,
+          "xor_error_probabilities": [
+            0.9725798122635191,
+            0.016570187020359638,
+            0.01075151817010789,
+            9.848254601314156e-05
+          ]
+        }
+      },
+      "euclidean_TVcap0.03": {
+        "jpeg_50": {
+          "triple_exact_accuracy": 0.9990271982733193,
+          "effective_bits_per_image": 0.6660181321822128,
+          "xor_error_probabilities": [
+            0.9754271152045992,
+            0.015389230287837737,
+            0.008982288999296638,
+            0.00020136550826494284
+          ]
+        },
+        "blur_0.6": {
+          "triple_exact_accuracy": 0.9985047021400281,
+          "effective_bits_per_image": 0.6656698014266854,
+          "xor_error_probabilities": [
+            0.9695417545203022,
+            0.019478509653049435,
+            0.010866550913170682,
+            0.00011318491347631498
+          ]
+        },
+        "resize_14": {
+          "triple_exact_accuracy": 0.9953286064609366,
+          "effective_bits_per_image": 0.663552404307291,
+          "xor_error_probabilities": [
+            0.944549490226311,
+            0.02869238932444186,
+            0.02590205975952911,
+            0.0008560606897168216
+          ]
+        },
+        "shift_1": {
+          "triple_exact_accuracy": 0.9998148447026547,
+          "effective_bits_per_image": 0.6665432298017698,
+          "xor_error_probabilities": [
+            0.9912360842021359,
+            0.007707807273544061,
+            0.0009580200908242496,
+            9.808843349434751e-05
+          ]
+        },
+        "flip_0.001": {
+          "triple_exact_accuracy": 0.9999684612285912,
+          "effective_bits_per_image": 0.6666456408190607,
+          "xor_error_probabilities": [
+            0.9954785933691308,
+            0.002653235764759332,
+            0.001868170866108305,
+            0.0
+          ]
+        },
+        "flip_0.01": {
+          "triple_exact_accuracy": 0.998828419354688,
+          "effective_bits_per_image": 0.6658856129031253,
+          "xor_error_probabilities": [
+            0.9726073120232743,
+            0.016533879556574173,
+            0.01076208462661454,
+            9.672379353536279e-05
+          ]
+        }
+      },
+      "fisher_TVcap0.05": {
+        "jpeg_50": {
+          "triple_exact_accuracy": 0.9990115105685192,
+          "effective_bits_per_image": 0.6660076737123461,
+          "xor_error_probabilities": [
+            0.9752849246742484,
+            0.015590243114033692,
+            0.008920591317535037,
+            0.00020424089418370767
+          ]
+        },
+        "blur_0.6": {
+          "triple_exact_accuracy": 0.9984280525210246,
+          "effective_bits_per_image": 0.665618701680683,
+          "xor_error_probabilities": [
+            0.96894434556531,
+            0.020176480896288783,
+            0.010754623570323325,
+            0.0001245499680786831
+          ]
+        },
+        "resize_14": {
+          "triple_exact_accuracy": 0.9954902012792843,
+          "effective_bits_per_image": 0.6636601341861895,
+          "xor_error_probabilities": [
+            0.9455126001124046,
+            0.0281462974435516,
+            0.025509762898263455,
+            0.0008313395457814545
+          ]
+        },
+        "shift_1": {
+          "triple_exact_accuracy": 0.9998296468520794,
+          "effective_bits_per_image": 0.6665530979013863,
+          "xor_error_probabilities": [
+            0.9915782381449245,
+            0.007389274090487372,
+            0.0009378595421611441,
+            9.462822242773848e-05
+          ]
+        },
+        "flip_0.001": {
+          "triple_exact_accuracy": 0.9999679803571448,
+          "effective_bits_per_image": 0.6666453202380965,
+          "xor_error_probabilities": [
+            0.9954535174292704,
+            0.002694691467331876,
+            0.0018517911033985443,
+            0.0
+          ]
+        },
+        "flip_0.01": {
+          "triple_exact_accuracy": 0.9988192828845083,
+          "effective_bits_per_image": 0.6658795219230055,
+          "xor_error_probabilities": [
+            0.9725130425873914,
+            0.016635344978310353,
+            0.010758859391666802,
+            9.275304263222786e-05
+          ]
+        }
+      },
+      "euclidean_TVcap0.05": {
+        "jpeg_50": {
+          "triple_exact_accuracy": 0.9990191249153633,
+          "effective_bits_per_image": 0.6660127499435755,
+          "xor_error_probabilities": [
+            0.9753529703127491,
+            0.015489812780840119,
+            0.008953383371564679,
+            0.00020383353484655615
+          ]
+        },
+        "blur_0.6": {
+          "triple_exact_accuracy": 0.9984306309233806,
+          "effective_bits_per_image": 0.665620420615587,
+          "xor_error_probabilities": [
+            0.9689135578841941,
+            0.020096582527373792,
+            0.010867394674392962,
+            0.00012246491403968647
+          ]
+        },
+        "resize_14": {
+          "triple_exact_accuracy": 0.9954449078644296,
+          "effective_bits_per_image": 0.6636299385762864,
+          "xor_error_probabilities": [
+            0.9452131168887502,
+            0.027930702586800065,
+            0.026014809613400254,
+            0.0008413709110502914
+          ]
+        },
+        "shift_1": {
+          "triple_exact_accuracy": 0.9998310249831847,
+          "effective_bits_per_image": 0.6665540166554564,
+          "xor_error_probabilities": [
+            0.9916035961851946,
+            0.007360300516851204,
+            0.000944026979545732,
+            9.207631840921278e-05
+          ]
+        },
+        "flip_0.001": {
+          "triple_exact_accuracy": 0.9999683015251962,
+          "effective_bits_per_image": 0.6666455343501309,
+          "xor_error_probabilities": [
+            0.9954710983359453,
+            0.0026692032440489254,
+            0.0018596984200064323,
+            0.0
+          ]
+        },
+        "flip_0.01": {
+          "triple_exact_accuracy": 0.9988244945549941,
+          "effective_bits_per_image": 0.665882996369996,
+          "xor_error_probabilities": [
+            0.9725562110021981,
+            0.016572342339482148,
+            0.010781632542598917,
+            8.981411572158828e-05
+          ]
+        }
+      },
+      "fisher_TVcap0.075": {
+        "jpeg_50": {
+          "triple_exact_accuracy": 0.9990115105685192,
+          "effective_bits_per_image": 0.6660076737123461,
+          "xor_error_probabilities": [
+            0.9752849246742484,
+            0.015590243114033692,
+            0.008920591317535037,
+            0.00020424089418370767
+          ]
+        },
+        "blur_0.6": {
+          "triple_exact_accuracy": 0.9984280525210246,
+          "effective_bits_per_image": 0.665618701680683,
+          "xor_error_probabilities": [
+            0.96894434556531,
+            0.020176480896288783,
+            0.010754623570323325,
+            0.0001245499680786831
+          ]
+        },
+        "resize_14": {
+          "triple_exact_accuracy": 0.9954902012792843,
+          "effective_bits_per_image": 0.6636601341861895,
+          "xor_error_probabilities": [
+            0.9455126001124046,
+            0.0281462974435516,
+            0.025509762898263455,
+            0.0008313395457814545
+          ]
+        },
+        "shift_1": {
+          "triple_exact_accuracy": 0.9998296468520794,
+          "effective_bits_per_image": 0.6665530979013863,
+          "xor_error_probabilities": [
+            0.9915782381449245,
+            0.007389274090487372,
+            0.0009378595421611441,
+            9.462822242773848e-05
+          ]
+        },
+        "flip_0.001": {
+          "triple_exact_accuracy": 0.9999679803571448,
+          "effective_bits_per_image": 0.6666453202380965,
+          "xor_error_probabilities": [
+            0.9954535174292704,
+            0.002694691467331876,
+            0.0018517911033985443,
+            0.0
+          ]
+        },
+        "flip_0.01": {
+          "triple_exact_accuracy": 0.9988192828845083,
+          "effective_bits_per_image": 0.6658795219230055,
+          "xor_error_probabilities": [
+            0.9725130425873914,
+            0.016635344978310353,
+            0.010758859391666802,
+            9.275304263222786e-05
+          ]
+        }
+      },
+      "euclidean_TVcap0.075": {
+        "jpeg_50": {
+          "triple_exact_accuracy": 0.9990191249153633,
+          "effective_bits_per_image": 0.6660127499435755,
+          "xor_error_probabilities": [
+            0.9753529703127491,
+            0.015489812780840119,
+            0.008953383371564679,
+            0.00020383353484655615
+          ]
+        },
+        "blur_0.6": {
+          "triple_exact_accuracy": 0.9984306309233806,
+          "effective_bits_per_image": 0.665620420615587,
+          "xor_error_probabilities": [
+            0.9689135578841941,
+            0.020096582527373792,
+            0.010867394674392962,
+            0.00012246491403968647
+          ]
+        },
+        "resize_14": {
+          "triple_exact_accuracy": 0.9954449078644296,
+          "effective_bits_per_image": 0.6636299385762864,
+          "xor_error_probabilities": [
+            0.9452131168887502,
+            0.027930702586800065,
+            0.026014809613400254,
+            0.0008413709110502914
+          ]
+        },
+        "shift_1": {
+          "triple_exact_accuracy": 0.9998310249831847,
+          "effective_bits_per_image": 0.6665540166554564,
+          "xor_error_probabilities": [
+            0.9916035961851946,
+            0.007360300516851204,
+            0.000944026979545732,
+            9.207631840921278e-05
+          ]
+        },
+        "flip_0.001": {
+          "triple_exact_accuracy": 0.9999683015251962,
+          "effective_bits_per_image": 0.6666455343501309,
+          "xor_error_probabilities": [
+            0.9954710983359453,
+            0.0026692032440489254,
+            0.0018596984200064323,
+            0.0
+          ]
+        },
+        "flip_0.01": {
+          "triple_exact_accuracy": 0.9988244945549941,
+          "effective_bits_per_image": 0.665882996369996,
+          "xor_error_probabilities": [
+            0.9725562110021981,
+            0.016572342339482148,
+            0.010781632542598917,
+            8.981411572158828e-05
+          ]
+        }
+      }
+    },
+    "7features": {
+      "matched": {
+        "jpeg_50": {
+          "triple_exact_accuracy": 0.9990317075179093,
+          "effective_bits_per_image": 0.6660211383452729,
+          "xor_error_probabilities": [
+            0.9754554201628335,
+            0.015314223800407005,
+            0.009030939603122123,
+            0.00019941643366306127
+          ]
+        },
+        "blur_0.6": {
+          "triple_exact_accuracy": 0.9985862393111073,
+          "effective_bits_per_image": 0.6657241595407383,
+          "xor_error_probabilities": [
+            0.970248283709478,
+            0.0187650009052922,
+            0.010884840894628954,
+            0.0001018744906275514
+          ]
+        },
+        "resize_14": {
+          "triple_exact_accuracy": 0.9951462473187409,
+          "effective_bits_per_image": 0.6634308315458273,
+          "xor_error_probabilities": [
+            0.943540288740459,
+            0.029806806993113995,
+            0.025775156691763897,
+            0.0008777475746888854
+          ]
+        },
+        "shift_1": {
+          "triple_exact_accuracy": 0.9997917736075919,
+          "effective_bits_per_image": 0.6665278490717279,
+          "xor_error_probabilities": [
+            0.990740697447375,
+            0.008178615491626655,
+            0.00097475485763323,
+            0.00010593220338983494
+          ]
+        },
+        "flip_0.001": {
+          "triple_exact_accuracy": 0.9999684582798635,
+          "effective_bits_per_image": 0.6666456388532424,
+          "xor_error_probabilities": [
+            0.995471753872205,
+            0.002637040611567532,
+            0.0018912055162523802,
+            0.0
+          ]
+        },
+        "flip_0.01": {
+          "triple_exact_accuracy": 0.9988281055632751,
+          "effective_bits_per_image": 0.6658854037088501,
+          "xor_error_probabilities": [
+            0.9726107869304987,
+            0.01652346808633747,
+            0.01075981277979986,
+            0.00010593220338983494
+          ]
+        }
+      },
+      "fisher_TVcap0.03": {
+        "jpeg_50": {
+          "triple_exact_accuracy": 0.999060014548805,
+          "effective_bits_per_image": 0.6660400096992033,
+          "xor_error_probabilities": [
+            0.9757537924982894,
+            0.014988277853366393,
+            0.009061535681978967,
+            0.0001963939663650225
+          ]
+        },
+        "blur_0.6": {
+          "triple_exact_accuracy": 0.9985894892595344,
+          "effective_bits_per_image": 0.665726326173023,
+          "xor_error_probabilities": [
+            0.9702804936534819,
+            0.018728962837020836,
+            0.010884091819858763,
+            0.00010645168963843237
+          ]
+        },
+        "resize_14": {
+          "triple_exact_accuracy": 0.995283604296256,
+          "effective_bits_per_image": 0.6635224028641706,
+          "xor_error_probabilities": [
+            0.9442915129102967,
+            0.029010476046525666,
+            0.025845573218829698,
+            0.000852437824347934
+          ]
+        },
+        "shift_1": {
+          "triple_exact_accuracy": 0.9998060427038791,
+          "effective_bits_per_image": 0.666537361802586,
+          "xor_error_probabilities": [
+            0.9910579813263896,
+            0.00789050053736149,
+            0.0009482548336830403,
+            0.000103263302565832
+          ]
+        },
+        "flip_0.001": {
+          "triple_exact_accuracy": 0.9999705933655494,
+          "effective_bits_per_image": 0.6666470622436996,
+          "xor_error_probabilities": [
+            0.9956231384882208,
+            0.002533954084020902,
+            0.0018429074277580976,
+            0.0
+          ]
+        },
+        "flip_0.01": {
+          "triple_exact_accuracy": 0.9988470424316258,
+          "effective_bits_per_image": 0.6658980282877506,
+          "xor_error_probabilities": [
+            0.972817113086784,
+            0.01636946886488993,
+            0.010713042922049703,
+            0.00010037512627641356
+          ]
+        }
+      },
+      "euclidean_TVcap0.03": {
+        "jpeg_50": {
+          "triple_exact_accuracy": 0.9990705356757225,
+          "effective_bits_per_image": 0.666047023783815,
+          "xor_error_probabilities": [
+            0.9758701742140113,
+            0.014873758622467204,
+            0.009061772832725478,
+            0.00019429433079598863
+          ]
+        },
+        "blur_0.6": {
+          "triple_exact_accuracy": 0.9986029286267895,
+          "effective_bits_per_image": 0.665735285751193,
+          "xor_error_probabilities": [
+            0.9703519771243317,
+            0.0185536908700773,
+            0.010996154207741552,
+            9.81777978496105e-05
+          ]
+        },
+        "resize_14": {
+          "triple_exact_accuracy": 0.9951639039685658,
+          "effective_bits_per_image": 0.6634426026457105,
+          "xor_error_probabilities": [
+            0.9435578421887224,
+            0.029025379719286693,
+            0.02654190034535871,
+            0.0008748777466323965
+          ]
+        },
+        "shift_1": {
+          "triple_exact_accuracy": 0.9998056958706419,
+          "effective_bits_per_image": 0.666537130580428,
+          "xor_error_probabilities": [
+            0.9910442155567948,
+            0.007902430764369741,
+            0.0009550441995932541,
+            9.83094792423878e-05
+          ]
+        },
+        "flip_0.001": {
+          "triple_exact_accuracy": 0.9999708758711533,
+          "effective_bits_per_image": 0.6666472505807689,
+          "xor_error_probabilities": [
+            0.9956383947606577,
+            0.0025056040870379413,
+            0.0018560011523042616,
+            0.0
+          ]
+        },
+        "flip_0.01": {
+          "triple_exact_accuracy": 0.998851494396162,
+          "effective_bits_per_image": 0.665900996264108,
+          "xor_error_probabilities": [
+            0.9728772786791654,
+            0.016358754557895767,
+            0.010666156936350701,
+            9.780982658815659e-05
+          ]
+        }
+      },
+      "fisher_TVcap0.05": {
+        "jpeg_50": {
+          "triple_exact_accuracy": 0.9990798788686681,
+          "effective_bits_per_image": 0.6660532525791121,
+          "xor_error_probabilities": [
+            0.9759646742648598,
+            0.014751122174721328,
+            0.009090116910634577,
+            0.0001940866497843324
+          ]
+        },
+        "blur_0.6": {
+          "triple_exact_accuracy": 0.9985888873777202,
+          "effective_bits_per_image": 0.6657259249184801,
+          "xor_error_probabilities": [
+            0.970274781282457,
+            0.018725846707100573,
+            0.010889512947352499,
+            0.00010985906309005733
+          ]
+        },
+        "resize_14": {
+          "triple_exact_accuracy": 0.9953832062948391,
+          "effective_bits_per_image": 0.6635888041965594,
+          "xor_error_probabilities": [
+            0.9448493924507759,
+            0.028416891310076225,
+            0.025900267886284235,
+            0.000833448352863936
+          ]
+        },
+        "shift_1": {
+          "triple_exact_accuracy": 0.9998168352899574,
+          "effective_bits_per_image": 0.6665445568599716,
+          "xor_error_probabilities": [
+            0.9913043458701073,
+            0.00766549073194958,
+            0.0009291657401513206,
+            0.00010099765779181549
+          ]
+        },
+        "flip_0.001": {
+          "triple_exact_accuracy": 0.9999721534101274,
+          "effective_bits_per_image": 0.6666481022734182,
+          "xor_error_probabilities": [
+            0.9957371636778259,
+            0.0024555447638145485,
+            0.0018072915583594862,
+            0.0
+          ]
+        },
+        "flip_0.01": {
+          "triple_exact_accuracy": 0.9988606578515313,
+          "effective_bits_per_image": 0.6659071052343543,
+          "xor_error_probabilities": [
+            0.9729672441787128,
+            0.016260146860739025,
+            0.010676572402989734,
+            9.603655755857745e-05
+          ]
+        }
+      },
+      "euclidean_TVcap0.05": {
+        "jpeg_50": {
+          "triple_exact_accuracy": 0.9990989109241135,
+          "effective_bits_per_image": 0.6660659406160757,
+          "xor_error_probabilities": [
+            0.9761812221017867,
+            0.014544597203135381,
+            0.00908435678105684,
+            0.00018982391402003508
+          ]
+        },
+        "blur_0.6": {
+          "triple_exact_accuracy": 0.9986132982705309,
+          "effective_bits_per_image": 0.6657421988470206,
+          "xor_error_probabilities": [
+            0.9704131470540679,
+            0.018415443186815088,
+            0.011076340179055408,
+            9.506958006081776e-05
+          ]
+        },
+        "resize_14": {
+          "triple_exact_accuracy": 0.9951690645708172,
+          "effective_bits_per_image": 0.6634460430472114,
+          "xor_error_probabilities": [
+            0.9435473493825328,
+            0.028435808790226495,
+            0.027145391369393267,
+            0.0008714504578465114
+          ]
+        },
+        "shift_1": {
+          "triple_exact_accuracy": 0.9998164545587738,
+          "effective_bits_per_image": 0.6665443030391826,
+          "xor_error_probabilities": [
+            0.9912860863316484,
+            0.00768192581618539,
+            0.0009395529895006182,
+            9.243486266488355e-05
+          ]
+        },
+        "flip_0.001": {
+          "triple_exact_accuracy": 0.9999726488316877,
+          "effective_bits_per_image": 0.6666484325544585,
+          "xor_error_probabilities": [
+            0.9957661485991492,
+            0.002406465090418609,
+            0.00182738631043127,
+            0.0
+          ]
+        },
+        "flip_0.01": {
+          "triple_exact_accuracy": 0.9988680872146817,
+          "effective_bits_per_image": 0.6659120581431212,
+          "xor_error_probabilities": [
+            0.9730686345415667,
+            0.016243311271015175,
+            0.010596451829209673,
+            9.160235820771025e-05
+          ]
+        }
+      },
+      "fisher_TVcap0.075": {
+        "jpeg_50": {
+          "triple_exact_accuracy": 0.9991018053326558,
+          "effective_bits_per_image": 0.6660678702217705,
+          "xor_error_probabilities": [
+            0.9761983849763655,
+            0.014479168339433697,
+            0.00913115309000186,
+            0.0001912935941978971
+          ]
+        },
+        "blur_0.6": {
+          "triple_exact_accuracy": 0.9985844384819266,
+          "effective_bits_per_image": 0.6657229589879511,
+          "xor_error_probabilities": [
+            0.9702312997356007,
+            0.018751527956376753,
+            0.010903310342521552,
+            0.00011386196550007139
+          ]
+        },
+        "resize_14": {
+          "triple_exact_accuracy": 0.9954978763949313,
+          "effective_bits_per_image": 0.6636652509299542,
+          "xor_error_probabilities": [
+            0.9455063940530176,
+            0.02771574977051776,
+            0.025967227167014974,
+            0.0008106290094485115
+          ]
+        },
+        "shift_1": {
+          "triple_exact_accuracy": 0.9998297495310303,
+          "effective_bits_per_image": 0.6665531663540202,
+          "xor_error_probabilities": [
+            0.9916071488539553,
+            0.00738734256597994,
+            0.0009075116609495899,
+            9.799691911400188e-05
+          ]
+        },
+        "flip_0.001": {
+          "triple_exact_accuracy": 0.9999739606686878,
+          "effective_bits_per_image": 0.6666493071124585,
+          "xor_error_probabilities": [
+            0.9958732591020102,
+            0.0023610500672039325,
+            0.001765690830784817,
+            0.0
+          ]
+        },
+        "flip_0.01": {
+          "triple_exact_accuracy": 0.9988761260742813,
+          "effective_bits_per_image": 0.6659174173828543,
+          "xor_error_probabilities": [
+            0.9731397657526606,
+            0.016137859401343498,
+            0.01063168354703093,
+            9.069129896400813e-05
+          ]
+        }
+      },
+      "euclidean_TVcap0.075": {
+        "jpeg_50": {
+          "triple_exact_accuracy": 0.9991195283373393,
+          "effective_bits_per_image": 0.6660796855582262,
+          "xor_error_probabilities": [
+            0.9764117698198593,
+            0.01430145526890066,
+            0.009100627581240722,
+            0.0001861473299992766
+          ]
+        },
+        "blur_0.6": {
+          "triple_exact_accuracy": 0.9986197194860749,
+          "effective_bits_per_image": 0.6657464796573832,
+          "xor_error_probabilities": [
+            0.9704484502814209,
+            0.018325397787049977,
+            0.011133576358078646,
+            9.257557345054604e-05
+          ]
+        },
+        "resize_14": {
+          "triple_exact_accuracy": 0.995168044030922,
+          "effective_bits_per_image": 0.6634453626872813,
+          "xor_error_probabilities": [
+            0.9435252370691999,
+            0.0279968117859075,
+            0.02760984149411221,
+            0.0008681096507803774
+          ]
+        },
+        "shift_1": {
+          "triple_exact_accuracy": 0.9998245983321693,
+          "effective_bits_per_image": 0.6665497322214462,
+          "xor_error_probabilities": [
+            0.9914738468223302,
+            0.007510544841524689,
+            0.0009276063693512222,
+            8.800196679399657e-05
+          ]
+        },
+        "flip_0.001": {
+          "triple_exact_accuracy": 0.99997394087218,
+          "effective_bits_per_image": 0.6666492939147867,
+          "xor_error_probabilities": [
+            0.9958625020259029,
+            0.0023326736898335674,
+            0.0018048242842635513,
+            0.0
+          ]
+        },
+        "flip_0.01": {
+          "triple_exact_accuracy": 0.9988798016440126,
+          "effective_bits_per_image": 0.6659198677626751,
+          "xor_error_probabilities": [
+            0.9732049995837326,
+            0.01616284437206313,
+            0.010545208606605492,
+            8.694743759874062e-05
+          ]
+        }
+      }
+    }
+  },
+  "seed": 20261031
+}
