@@ -1,0 +1,84 @@
+{
+  "date": "2026-10-31",
+  "scope": "Exploratory conditional-sampling 2-bit robustness utility on MNIST Bernoulli VAE, not original NG-Stego Algorithm 2",
+  "checkpoint_sha256": "e94d57b36d960921768ce8ccc889796d5cd4ce69ce794a90ed1d1ed61",
+  "seed": 20261031,
+  "independent_centers_per_regime": 12,
+  "calibration_samples_per_centre": 1600,
+  "training_samples_per_centre": 4500,
+  "heldout_samples_per_centre": 6500,
+  "kl_budgets": [
+    0.002,
+    0.02
+  ],
+  "channels": [
+    "shift_1",
+    "flip_0.01",
+    "jpeg_50",
+    "resize_14"
+  ],
+  "regimes": {
+    "latent_uniform_-0.55_0.55": {
+      "0.002": {
+        "mean_J_fisher": 0.7932180029876926,
+        "mean_J_euclidean": 0.7932212208196484,
+        "mean_J_matched": 0.7928993130663043,
+        "mean_delta_fisher_minus_euclidean": -0.0000032178319556708246,
+        "center_bootstrap_ci95": [
+          -0.000017747091612681462,
+          0.000013199974603741755
+        ],
+        "wins_fisher": 7,
+        "n": 12
+      },
+      "0.02": {
+        "mean_J_fisher": 0.7938989932490883,
+        "mean_J_euclidean": 0.7939134040548405,
+        "mean_J_matched": 0.7928993130663043,
+        "mean_delta_fisher_minus_euclidean": -0.000014410805752059405,
+        "center_bootstrap_ci95": [
+          -0.00006361323067212595,
+          0.000037764146171777515
+        ],
+        "wins_fisher": 7,
+        "n": 12
+      }
+    },
+    "latent_uniform_-1.5_1.5": {
+      "0.002": {
+        "mean_J_fisher": 0.8056862157195059,
+        "mean_J_euclidean": 0.8056587610362698,
+        "mean_J_matched": 0.8053454195483162,
+        "mean_delta_fisher_minus_euclidean": 0.00002745468323611666,
+        "center_bootstrap_ci95": [
+          -0.000003287352423959657,
+          0.00006121893721040642
+        ],
+        "wins_fisher": 7,
+        "n": 12
+      },
+      "0.02": {
+        "mean_J_fisher": 0.8064112842264204,
+        "mean_J_euclidean": 0.8063362079232719,
+        "mean_J_matched": 0.8053454195483162,
+        "mean_delta_fisher_minus_euclidean": 0.00007507630314864307,
+        "center_bootstrap_ci95": [
+          -0.00002650008446331356,
+          0.00018289365517778372
+        ],
+        "wins_fisher": 7,
+        "n": 12
+      }
+    }
+  },
+  "angular_baseline_addendum": {
+    "scope": "3 centres only, different sample sizes 2400 train / 4000 test, 16 angles, non-comparable to main experiment",
+    "KL_0_02": {
+      "J_Fisher": 0.8003544422226843,
+      "J_Euclidean": 0.8004290346219612,
+      "J_Angular16": 0.8005771890229303
+    }
+  },
+  "inference": "No statistically established mean Fisher advantage on heldout robust decoding; both F and E improve average J vs unchanged at KL=.02, security is not established; cannot claim R2.3/R2.7 fully satisfied.",
+  "limitations": "No formal TV(Q,P0) constraint; only exact Bernoulli KL budget and empirical bin imbalance. Held-out test still synthetic VAE Bernoulli images; same model as earlier pilot. 24 centres across ranges share underlying uniform RNG draws (scaled) and are not two independent samples; do not pool their bootstrap CIs. No attack-specific retraining, no test on natural photographs, no original Algorithm 2."
+}
