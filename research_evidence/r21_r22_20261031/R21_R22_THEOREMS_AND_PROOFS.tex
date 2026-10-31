@@ -1,0 +1,85 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=2.0cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs,microtype,hyperref}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\title{Mathematical Verification Notes for Reviewer 2: Inexact Variable Fisher Information and Operational Geometric Packing}
+\author{Research verification supplement (not integrated into the submission)}
+\date{31 October 2026}
+\begin{document}\maketitle
+\paragraph{Scope.} These statements are precise conditional results, not a claim of universal behavior for a ReLU VAE, GAN, or diffusion generator. The key elements are standard matrix-perturbation, ODE-stability, and packing arguments. Their utility here is to determine what can and cannot be claimed for NG-Stego. The associated benchmark examines a fixed Bernoulli VAE but does not establish full Reviewer-2 compliance.
+
+\section{R2.1: Nonconstant, approximated Fisher preconditioner}
+Let $f$ be a $C^2$ objective with stationary point $z_*$, $F_*:=F(z_*)\succ0$, and $\nabla^2f(z_*)=F_*$ (a property of a correctly specified KL objective at a regular target). Put $e=z-z_*$ and $r=\norm{F_*^{1/2}e}_2$. We assume the \emph{quantitative} remainder
+\begin{equation}\label{eq:remainder}
+\norm{F_*^{-1/2}(\nabla f(z)-F_*e)}_2\le H r^2
+\end{equation}
+within a neighborhood. The Fisher field is positive definite there and satisfies
+$\norm{F_*^{-1/2}(F(z)-F_*)F_*^{-1/2}}_2\le Lr$.
+The sampled/approximated Fisher $\widehat F(z)$ must satisfy the symmetric \emph{relative Loewner} bound
+\begin{equation}\label{eq:relative}
+(1-\delta)F(z)\preceq\widehat F(z)\preceq(1+\delta)F(z),\quad 0\le\delta<1.
+\end{equation}
+Crucially, \eqref{eq:relative} is an assumed event or a controlled estimate, not a universal deterministic property of Monte Carlo samples.
+
+\begin{proposition}[One-step local stability for a variable, inexact Fisher field]\label{prop:local}
+For the update $z^+=z-\widehat F(z)^{-1}(\nabla f(z)+\xi)$ with $\norm{F_*^{-1/2}\xi}_2\le\epsilon$, let $\alpha(r)=\delta+(1+\delta)Lr$. If $\alpha(r)<1$, then
+\begin{equation}\label{eq:mainbound}
+ r^+\le\frac{\alpha(r)}{1-\alpha(r)}r+\frac{Hr^2+\epsilon}{1-\alpha(r)}.
+\end{equation}
+For exact gradients ($\epsilon=0$), $\delta<1/2$ implies strict contraction within a sufficiently small neighborhood. With nonzero bounded gradient error the conclusion is an error neighborhood, not convergence to $z_*$.
+\end{proposition}
+\begin{proof}
+Write $\widetilde F=F_*^{-1/2}\widehat F F_*^{-1/2}=I+E$. The Fisher variation and relative Loewner bound imply $\norm{E}_2\le Lr+\delta(1+Lr)=\alpha(r)$, hence $\norm{(I+E)^{-1}}\le(1-\alpha)^{-1}$.
+With $u=F_*^{1/2}e$, the gradient expansion is $F_*^{-1/2}\nabla f(z)=u+s$, $\norm{s}\le Hr^2$. The update in $u$ coordinates gives
+$u^+=[I-(I+E)^{-1}]u-(I+E)^{-1}(s+F_*^{-1/2}\xi)$.
+By $\norm{I-(I+E)^{-1}}\le\alpha/(1-\alpha)$, the triangle inequality yields \eqref{eq:mainbound}. If $\epsilon=0$, the quotient tends to $\delta/(1-\delta)<1$ as $r\to0$, while $Hr/(1-\alpha)\to0$; thus a contracting neighborhood exists.
+\end{proof}
+\paragraph{Important qualification.} For a general $f$ without $\nabla^2f(z_*)=F_*$, the unit-step contraction factor is \emph{not} $\delta/(1-\delta)$; the spectrum of $F_*^{-1/2}\nabla^2f(z_*)F_*^{-1/2}$ must instead be controlled, including the step size. ReLU decoders are only piecewise smooth and violate the uniform regularity needed across activation boundaries.
+
+\section{R2.1: Stability of initial-value geodesics}
+Let $g,\widehat g$ be $C^{1,1}$ positive-definite metrics in a common compact chart $K$ with uniform lower eigenvalue $m>0$, bounded first derivatives and uniformly Lipschitz first derivatives. Suppose $\norm{g-\widehat g}_{C^1(K)}\le\varepsilon$ and both corresponding geodesic solutions remain in $K$, with speeds at most $V$ until time $T$.
+\begin{proposition}[Conditional stability of geodesic initial-value problems]\label{prop:ivp}
+If $\gamma_g$ and $\gamma_{\widehat g}$ share the same initial position and coordinate velocity, and $y=(\gamma,\dot\gamma)$, then there exist finite constants $C,L$ fixed by the compact-domain metric bounds and $V$ such that
+\begin{equation}
+ \sup_{0\le t\le T}\norm{y_g(t)-y_{\widehat g}(t)}\le C\varepsilon\,\frac{e^{LT}-1}{L},
+\end{equation}
+interpreting the last factor as $T$ when $L=0$.
+\end{proposition}
+\begin{proof}
+The Christoffel formula and the identity $\widehat g^{-1}-g^{-1}=\widehat g^{-1}(g-\widehat g)g^{-1}$ show $\norm{\widehat\Gamma-\Gamma}_{K}\le C_1\varepsilon$ given the uniform spectral and $C^1$ bounds. The first-order geodesic vector fields $A_g(z,v)=(v,-\Gamma_g(z)[v,v])$ are uniformly Lipschitz in the considered compact phase region, by $C^{1,1}$ regularity. Their difference is bounded by $C_1 V^2\varepsilon$. Standard Gronwall comparison for two ODE trajectories with the same initial state gives the bound.
+\end{proof}
+\paragraph{Limit for fixed endpoints.} The proposition concerns \emph{initial-value} geodesics. For a two-point boundary value problem one additionally needs local invertibility of the endpoint/shooting map (no conjugate-point degeneracy), uniform control of that inverse, and appropriate regularity. A pointwise Monte-Carlo estimate of $F(z)$ does not by itself control $\nabla F(z)$ or establish either assertion.
+
+\section{R2.2: Packing, reliability, and statistical security}
+Let $(\Theta,d_g)$ be a metric space and $\mathcal C=\{\theta_1,\dots,\theta_M\}$ a codebook with minimum separation $\min_{i\ne j} d_g(\theta_i,\theta_j)>2\rho$.
+\begin{proposition}[Packing-to-decoding sufficiency]\label{prop:packing}
+If, when message $i$ is sent, a receiver produces a \emph{parameter estimate} $\widehat\theta$ satisfying $\Pr_i\{d_g(\widehat\theta,\theta_i)\ge\rho\}\le\alpha$, then nearest-$d_g$-codeword decoding has error probability at most $\alpha$ for every message (and hence for their mixture).
+\end{proposition}
+\begin{proof}
+When $d_g(\widehat\theta,\theta_i)<\rho$, for each $j\ne i$, the triangle inequality gives $d_g(\widehat\theta,\theta_j)>2\rho-d_g(\widehat\theta,\theta_i)>\rho>d_g(\widehat\theta,\theta_i)$. Thus the receiver must decode $i$ correctly on this event. The complement has probability at most $\alpha$.
+\end{proof}
+\paragraph{Restrictions.} Packing alone implies nothing about the probability that a realistic receiver attains this estimation resolution. It also gives no statistical security: the stego mixture $Q=M^{-1}\sum_iP_{\theta_i}$ may differ visibly from the cover distribution $P_0$, even if the codewords are widely separated.
+
+\begin{lemma}[Reliability and detection diagnostics for a Bernoulli mixture]\label{lem:bc}
+Let $M$ equally likely messages induce distributions $P_i$ with densities/mass functions $p_i$, let $P_0$ be the cover, and put $Q=M^{-1}\sum_iP_i$. The maximum likelihood decoder satisfies
+\begin{equation}
+ P_e^{\mathrm{ML}}\le\min\left\{1,\frac{2}{M}\sum_{i<j}\sum_x\sqrt{p_i(x)p_j(x)}\right\}.
+\end{equation}
+Moreover, whenever the relevant KL divergences exist,
+\begin{equation}
+ \operatorname{TV}(Q,P_0)\le\frac1M\sum_i\sqrt{\frac12D_{\mathrm{KL}}(P_i\Vert P_0)}\le\sqrt{\frac{1}{2M}\sum_iD_{\mathrm{KL}}(P_i\Vert P_0)}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Under message $i$, an ML decoding error is contained in the union of events $\{p_j(X)\ge p_i(X)\}$, $j\ne i$. Since on that event $p_i(x)\le\sqrt{p_i(x)p_j(x)}$, the event probability is at most the Bhattacharyya coefficient $\sum_x\sqrt{p_i(x)p_j(x)}$. Average the union bound over messages. For security, use convexity of TV in its first argument, Pinsker's inequality per codeword, and concavity of the square root.
+\end{proof}
+The bound on error can be loose or vacuous; the TV bound can likewise be vacuous when KL is large. Neither is a new fundamental information-theoretic theorem. Define an operational rate only after specifying the number of image uses $n$, a message/channel model, an available decoder, the error limit $\alpha$, and the security requirement $\operatorname{TV}(Q,P_0)\le\tau$.
+
+\section{Verified numerical scope}
+The associated code uses a single pretrained 2-D-latent Bernoulli VAE. The exact latent Fisher matrix is $F(z)=J_h(z)^\top\mathrm{diag}(p(z)(1-p(z)))J_h(z)$, computed within ReLU activation cells. The sample-Fisher experiments use independent model-generated score samples; they do \emph{not} establish bias/error controls for GAN or diffusion models. The codebooks in the operational experiment consist of circular sets measured with the \emph{fixed local metric} $F(0)$: their reported separations are nominal quadratic distances, not certified globally minimal Fisher--Rao geodesic distances. Data are detailed in the accompanying CSV and JSON results.
+
+\paragraph{Publication guidance.} Neither the local contraction proposition nor the ODE perturbation lemma should be called a universal or novel global convergence theorem. The most important empirical obstruction to an operational capacity claim is that codebook separation can improve decoding while making the cover/stego mixture highly distinguishable.
+\end{document}
