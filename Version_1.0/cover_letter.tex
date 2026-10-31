@@ -1,0 +1,22 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{hyperref}
+\begin{document}
+\noindent 31 October 2026\\[1em]
+\noindent Prof. Hing Cheung So\\ Area Editor, \emph{Digital Signal Processing}\\[1em]
+\noindent\textbf{Re: Revised manuscript DSP-D-26-02810}\\
+\textbf{Fisher--Rao-Guided Generative Steganography: Geodesic Embedding and Detection Analysis}\\[1.5em]
+Dear Prof. So,\\[0.7em]
+We respectfully submit the revised manuscript for further consideration in \emph{Digital Signal Processing}. We thank you and the reviewers for their constructive and detailed assessment. A separate point-by-point response addresses the Handling Editor and both reviewers.\\[0.7em]
+The revision clarifies that our contribution is a Fisher--Rao mathematical methodology for designing, analyzing, and diagnosing generative steganographic embedding trajectories, with explicit conditions for theoretical guarantees rather than a claim of universal state-of-the-art performance. We have improved the organization, removed redundant material, qualified smoothness and Fisher-estimation assumptions, distinguished geometric packing proxies from effective payload, and explicitly delimited the fixed-detector scope of our detection-duality result.\\[0.7em]
+The revision provides a conditional convergence rate for ideal Riemannian gradient descent and a separate, cell-local Fisher--KL identity with an inexact-preconditioner step bound for the Bernoulli VAE. We also retain the bounded-relative-error result for the constant-Fisher quadratic reference and the expected softplus derivative approximation bound under a bounded-density assumption. We explicitly distinguish these guarantees from unproved global deep-generator Fisher and geodesic-error bounds. The detection discussion clarifies the simple-hypothesis Neyman--Pearson upper benchmark without claiming resistance to adaptive geometry-aware steganalysis; adversarial training remains outside the paper's validated scope.\\[0.7em]
+We further corrected an overly broad one-step convergence statement and the local metric-to-KL comparison. We now explicitly credit Pavlichin and Weissman (ISIT 2016) for the established chained-KL/Fisher-geodesic continuum connection, and identify the originality of our contribution in its steganographic formulation and conditional diagnosis. These changes do not alter the experimentally validated numbers. The revised Gaussian S4 experiment uses the dimension-correct Fisher metric, an independently computed reference energy, and a reproducible seven-resolution convergence test. We also limit GMM curvature--volume interpretations to theoretically justified statements, without relying on unverified numerical ball-volume estimates.\\[0.7em]
+We also expanded the experimental discussion. The matched MNIST-VAE channel comparison reports decoding, distortion proxies, runtime and balanced detection diagnostics using iMEC/Discop adaptations and SRM/FLD and ResNet-18. A separate native/controlled campaign is now distinguished from this matched-channel experiment, with its protocols and limitations made explicit. An independent ResidualCNN neural detector passed its predefined positive control (macro AUC 0.99028) and reported a controlled Discop cover--stego AUC of 0.50477 under the same paired-source design. Its scope, separate architecture, and accompanying fold artifacts are specified in the supporting evidence. The native image configuration of iMEC is documented with its checkpoint dependency.\\[0.7em]
+The revised source manuscript, figures, response letter, and reproducibility materials accompany this submission. We have avoided treating results across different generators or threat models as interchangeable.\\[1em]
+Thank you for considering the revised submission.\\[1.4em]
+Sincerely,\\[0.4em]
+Dr St\'ephane Ga\"el R. Ekodeck\\ Corresponding author\\ On behalf of all authors
+
+\end{document}
