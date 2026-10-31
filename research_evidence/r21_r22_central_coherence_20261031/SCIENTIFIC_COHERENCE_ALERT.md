@@ -1,0 +1,23 @@
+# Critical pre-submission coherence audit — R2.1/R2.2 vs central Fisher–Rao claim (31 October 2026)
+
+**Verdict: conditional methodological reinforcement, NOT new general novelty or operational-security proof. Manuscript corrections are needed before submission.** The official three submission documents were not changed by this evidence update.
+
+## Evidence reproduced
+- Fixed MNIST-Bernoulli-VAE checkpoint SHA-256: `e94d57b36d960921768ce8ccc889796d5cd4ce69ce794a90ed1d1ed61`.
+- Local ReLU-cell identity `grad_z KL(P_z || P_target) = F(z)(z-target)`: six independently verified cases, maximum relative residual 1.625e-13, ideal undamped unit-step parameter error 6.48e-17. This statement applies **only when current and target are in the same affine activation cell** and F is invertible.
+- For an approximate Fisher matrix with damping lambda and step eta in (0,1], define delta = ||F^(-1/2)(Fhat-F)F^(-1/2)||, m = lambda_min(F), alpha = delta + lambda/m. If alpha<1, the proved **single-step** bound is `||e_next||_F <= [(1-eta)+eta*alpha/(1-alpha)] ||e||_F`. New numeric checks: 24/24 applicable bounds passed; 21/24 alpha<0.5. No multi-iteration guarantee without cell invariance and uniform controls.
+- Actual Algorithm 2 synthetic codebooks: **0/24** target codewords share the activation cell of cover z0. Thus the exact identity does not govern the full cover-to-target embedding trajectory. 19/24 converged terminal points share a cell with their targets.
+- Held-out Algorithm 2 diagnostics: 251/300 public Fisher-nearest decodes; 9/12 optimized codepoints converged; oracle AUC=1.000. **No positive secure payload rate is established.** A geometric nearest-neighbor certificate is not an operational capacity theorem.
+
+## Three priority-0 scientific corrections in manuscript
+1. **One-step convergence:** Article `thm:ng_convergence` currently infers one-step convergence merely from *constant Fisher* and states nonconstant Fisher prevents it. Both are false in general for KL. Counterexample A: Bernoulli in logit theta has **variable F** yet exact one-step natural-gradient to any target theta*. Counterexample B: Bernoulli parameter p(u)=sin^2(u/2) has **F(u)=1 constant**, yet starting u=1.4 toward u*=pi/3 the unit step ends at 1.027821933 instead of 1.047197551. Require exact structural gradient identity / quadratic objective, not merely constant metric.
+2. **Prior-art overlap:** The paper claims the mathematical chained-sequential-KL-to-Fisher-geodesic argument is new. Pavlichin and Weissman, *Chained Kullback-Leibler Divergences*, IEEE ISIT **2016**, DOI **10.1109/ISIT.2016.7541365**, already establishes the continuum geodesic limit of minimizing sums of KL. Credit the general result, and articulate any novelty specifically as a *steganographic instantiation*, not as a new information-geometric KL-path theorem. See https://pubmed.ncbi.nlm.nih.gov/29130024/ .
+3. **Curvature/KL bound:** Article `lem:kl_fisher_bound` multiplies a Jacobi separation already measured in Fisher norm by `lambda_min(F)` again to claim a local KL lower bound. This mixes Fisher-normalized and Euclidean-coordinate distances. For n i.i.d. Gaussian observations with the negatively curved metric `F=n diag(1/sigma^2, 2/sigma^2)`, local KL for a Fisher-normalized separation d*t is `(d*t)^2/2`, **not n times this**. At n=4, the claimed leading lower bound is approximately 4 times the true KL. Remove/reprove with consistent metric comparison.
+
+## Scientific positioning
+- R2.1 strengthens **local optimizer diagnostics** with exact cell-wise identities and inexact-Fisher perturbation bounds; it does NOT prove Fisher path geodesicity or whole-run convergence.
+- R2.2 establishes a **sufficient geometric decoding certificate**; the public decoder's accuracy and the cover/stego distributions must still be assessed separately.
+- The main contribution may remain the **application-specific formulation, analysis, and honest diagnosis of embedding paths**, conditional on fixing the above issues and distinguishing sequential path surrogate from actual endpoint detectability.
+- Note existing literature: Kunstner, Kumar & Schmidt, AISTATS 2021 (https://proceedings.mlr.press/v130/kunstner21a.html); Datar & Ay, TMLR 2025 (https://openreview.net/forum?id=h6hjjAF5Bj), on natural-gradient/KL optimization.
+
+**Repo scope:** This published warning and standard-library numerical counterexamples are independently readable. Full VAE independent tests, local manuscript sources, and the PDF report are supplied in the accompanying ChatGPT research ZIP, not yet fully synced to GitHub. Do not claim repository-only full reproduction.
