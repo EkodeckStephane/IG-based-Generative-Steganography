@@ -1,0 +1,31 @@
+{
+  "scope": "Smooth synthetic Bernoulli 2-D family, same initial position/velocity, geodesic IVP. Not the ReLU VAE; no BVP result.",
+  "metric": "g=(1+epsilon*(0.5 sin z0+0.25 cos z1)) J^T diag(p(1-p)) J",
+  "rows": [
+    {
+      "epsilon": 0.005,
+      "max_geodesic_coordinate_deviation": 0.00031780000624728944,
+      "deviation_over_eps": 0.06356000124945789
+    },
+    {
+      "epsilon": 0.01,
+      "max_geodesic_coordinate_deviation": 0.0006342179781432957,
+      "deviation_over_eps": 0.06342179781432956
+    },
+    {
+      "epsilon": 0.02,
+      "max_geodesic_coordinate_deviation": 0.001262944457409248,
+      "deviation_over_eps": 0.0631472228704624
+    },
+    {
+      "epsilon": 0.05,
+      "max_geodesic_coordinate_deviation": 0.003116893141505104,
+      "deviation_over_eps": 0.06233786283010208
+    },
+    {
+      "epsilon": 0.1,
+      "max_geodesic_coordinate_deviation": 0.006103495467849698,
+      "deviation_over_eps": 0.061034954678496976
+    }
+  ]
+}
