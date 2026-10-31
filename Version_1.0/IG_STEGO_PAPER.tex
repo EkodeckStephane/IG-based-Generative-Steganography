@@ -1,0 +1,3973 @@
+%% 
+%% Copyright 2019-2024 Elsevier Ltd
+%% 
+%% This file is part of the 'CAS Bundle'.
+%% --------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.3c of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'CAS Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for cas-dc documentclass for 
+%% double column output.
+
+\documentclass[a4paper,fleqn]{cas-dc}
+% \documentclass[a4paper,fleqn,longmktitle]{cas-dc}
+
+% ============================================================
+% Encoding and typography
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage{lmodern}
+\usepackage[expansion=false]{microtype}
+\emergencystretch=3em
+\tolerance=2500
+\hfuzz=0.4pt
+
+% ============================================================
+% Mathematics
+% ============================================================
+\usepackage{amsmath,amssymb,amsfonts,mathtools}
+\usepackage{mathrsfs}
+
+% ============================================================
+% Tables, figures, and floats
+% ============================================================
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage[switch]{lineno}
+\PassOptionsToPackage{compatibility=false}{caption}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{siunitx}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% ============================================================
+% Lists
+% ============================================================
+\usepackage{enumitem}
+
+% ============================================================
+% Algorithms
+% ============================================================
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+
+\SetKw{KwAnd}{and}
+\SetKw{KwOr}{or}
+\SetKw{KwDownTo}{down to}
+\SetKwProg{Fn}{Function}{:}{}
+\SetKw{Ensure}{Ensure}
+\SetKw{KwStep}{step}
+
+% ============================================================
+% ORCID and author metadata
+% ============================================================
+% \usepackage{orcidlink}  % removed for double-anonymized review
+
+% ============================================================
+% Elsevier CAS macros
+% ============================================================
+\usepackage{etoolbox}
+\usepackage{xspace}
+
+\def\tsc#1{\csdef{#1}{\textsc{\lowercase{#1}}\xspace}}
+\tsc{WGM}
+\tsc{QE}
+
+% ============================================================
+% Bibliography and links
+% ============================================================
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue,
+  pdfauthor={Anonymous}
+}
+
+% ============================================================
+% Theorem-like environments
+% ============================================================
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{assumption}{Assumption}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
+
+% ============================================================
+% Custom mathematical operators
+% ============================================================
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Hess}{Hess}
+\DeclareMathOperator{\Exp}{Exp}
+\DeclareMathOperator{\Log}{Log}
+\DeclareMathOperator{\Sec}{Sec}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\diag}{diag}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\inner}{\langle}{\rangle}
+
+% ============================================================
+% Shortcuts
+% ============================================================
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\Ptheta}{P_{\theta}}
+\newcommand{\DKL}{D_{\mathrm{KL}}}
+\newcommand{\Gmat}{\mathbf{G}}
+\newcommand{\gij}{g_{ij}}
+\newcommand{\Gammaijk}{\Gamma_{ij}^{k}}
+\newcommand{\Rijkl}{R_{ijkl}}
+\newcommand{\Rij}{R_{ij}}
+\newcommand{\natgrad}{\widetilde{\nabla}}
+
+\begin{document}
+\linenumbers
+\let\WriteBookmarks\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}
+
+% Short title
+\shorttitle{Fisher--Rao-Guided Steganography}   
+
+% Short author
+\shortauthors{Anonymous}
+
+% Main title of the paper
+\title [mode = title]{Fisher--Rao-Guided Generative Steganography: Geodesic Embedding and Detection Analysis}  
+
+% Title footnote mark
+% eg: \tnotemark[1]
+%\tnotemark[1] 
+
+% Title footnote 1.
+% eg: \tnotetext[1]{Title footnote text}
+%\tnotetext[1]{} 
+
+% First author
+%
+% Options: Use if required
+% eg: \author[1,3]{Author Name}[type=editor,
+%       style=chinese,
+%       auid=000,
+%       bioid=1,
+%       prefix=Sir,
+%       orcid=0000-0000-0000-0000,
+%       facebook=<facebook id>,
+%       twitter=<twitter id>,
+%       linkedin=<linkedin id>,
+%       gplus=<gplus id>]
+
+% Author and affiliation details removed for double-anonymized peer review.
+% They are provided in the separate title-page file.
+\author{Anonymous}
+%\affiliation{}
+%\cortext[1]{Corresponding author}
+\begin{abstract}
+Generative and coverless steganography can be viewed as a statistical
+signal-generation problem: a message is embedded by steering a generator from a
+cover distribution toward a message-bearing distribution while preserving low
+detectability. Existing secure and coverless schemes primarily control the
+endpoint divergence between cover and stego distributions, but they do not model
+the detectability accumulated along the embedding trajectory. We establish a
+Fisher--Rao-guided mathematical framework for designing, analyzing, and
+diagnosing steganographic embedding trajectories, in which the generator parameter space is
+treated as a statistical signal manifold and embedding paths are evaluated by
+their sequential Kullback--Leibler cost. In the small-step regime, the sequential-KL functional reduces at leading
+order to Fisher path energy, whose locally minimizing paths are geodesics;
+we adapt this established information-geometric connection to the
+steganographic trajectory-design problem. We then formulate
+Natural-Gradient Steganography (NG-Stego), distinguish an ideal
+Riemannian convergence guarantee from the sampled-Fisher implementation,
+provide a local ReLU-cell optimizer identity, and relate the optimal
+Neyman--Pearson steganalyzer in exponential families to a dual-affine
+information projection. Scalar and sectional curvature are used as intrinsic diagnostics of embedding
+path instability and local geometric sensitivity. Numerical
+experiments on Gaussian and Gaussian-mixture signal models, together
+with an exploratory learned-MNIST-VAE study, illustrate geodesic sequential-KL
+behavior, natural-gradient optimization, and curvature diagnostics. The principal result is a mathematical methodology for the design, analysis,
+and diagnosis of generative steganographic embedding trajectories, rather than
+an assertion of universal performance dominance over existing coding schemes. The MNIST diagnostics use one fixed Bernoulli
+VAE channel and a limited set of message payloads; they do not establish a
+general effective payload, decoding reliability across channels, or security
+against trained steganalyzers.
+The MNIST-VAE matched-channel diagnostics, native upstream coding runs, and
+independent paired Discop detector evaluation address distinct experimental
+questions; their detection AUCs are interpreted within each respective protocol.
+
+\end{abstract}
+
+\begin{keywords}
+Generative steganography \sep Statistical signal processing \sep Detection theory \sep Fisher--Rao metric \sep Natural-gradient optimization
+\end{keywords}
+
+\maketitle
+
+
+% ============================================================
+\section{Introduction}
+\label{sec:intro}
+% ============================================================
+
+\subsection{Background and Motivation}
+
+The information-theoretic security of a steganographic system was placed on
+firm mathematical foundations by Cachin~\cite{cachin1998information}, who
+proposed measuring the \emph{steganographic detectability} of an embedding
+scheme $\mathcal{E}$ by the Kullback--Leibler (KL) divergence between the
+cover distribution $P_C$ and the stego distribution $P_S$:
+\begin{equation}
+  \varepsilon(\mathcal{E}) \;=\; \DKL\!\left(P_S \,\|\, P_C\right)
+  \;=\; \int P_S(x)\,\log\frac{P_S(x)}{P_C(x)}\,\mathrm{d}x.
+  \label{eq:cachin_security}
+\end{equation}
+A scheme is \emph{perfectly secure} if $\varepsilon(\mathcal{E})=0$ and
+$\varepsilon$-\emph{secure} if $\varepsilon(\mathcal{E})\leq\varepsilon$.
+This elegant criterion has driven two decades of theoretical and empirical
+research in steganography.
+
+In steganography, KL frequently serves as an endpoint-security
+criterion. The broader information-geometry literature also studies
+KL-divergence chains and their Fisher-geodesic continuum limit
+\cite{pavlichin2016chained}. Here we examine the usefulness and limits
+of that geometry for generative embedding trajectories.
+Since the seminal work of Rao~\cite{rao1945information} and
+Fisher~\cite{fisher1925theory}, and the systematic development by
+Amari~\cite{amari1985differential,amari2000methods}, it is known that
+the space of parametric probability distributions is
+\emph{not} a flat Euclidean space: it carries the structure of a
+\emph{Riemannian manifold}, the \emph{statistical manifold}, whose intrinsic
+geometry is encoded by the \emph{Fisher information matrix}.
+
+Crucially, the KL divergence is \emph{not} a distance on this manifold, as it
+fails symmetry and the triangle inequality, but its Hessian at the diagonal
+coincides with the Fisher metric, making information geometry the natural
+language for studying trajectories in distribution space.
+When a coverless generator transforms a source distribution into a
+message-carrying distribution, it traces a \emph{path} in the statistical
+manifold; the accumulated \emph{sequential-KL surrogate} depends on both
+the endpoints and the trajectory. This should be distinguished from
+detectability under the final-object-only observation model, which is
+controlled by the endpoint distributions. Many existing coding schemes
+do not directly optimize this particular path-sensitive surrogate.
+This limitation is especially relevant for modern generative and coverless
+steganography, where embedding is naturally realized as controlled transport
+through a latent or parameter space rather than as isolated pixel-level
+modification.
+From a signal-processing viewpoint, this changes the object of analysis:
+the embedding operation is no longer only a final distributional mismatch, but
+a controlled trajectory in a statistical signal model. The Fisher--Rao metric is
+used here not as an end in itself, but as the intrinsic sensitivity metric that
+connects infinitesimal parameter perturbations to local changes in the generated
+signal distribution.
+
+\subsection{Coverless Steganography and the Role of Generative Models}
+
+Coverless steganography~\cite{luo2023coverless} encodes information by
+selecting or generating cover objects whose statistical properties natively
+encode the message, rather than by modifying an existing cover.
+The embedding process is then parameterized by the generator's parameter
+space $\Theta$: encoding a message $m$ amounts to navigating from a
+``neutral'' parameter configuration $\theta_0$ to a
+``message-encoding'' configuration $\theta_1$.
+
+State-of-the-art coverless methods include SparSamp~\cite{sparsamp2021},
+iMEC~\cite{imec2022}, and Discop~\cite{discop2023}.
+These methods focus on secure distribution matching, coupling, sampling, or
+decoding objectives at the level of the generated object or endpoint
+distribution.
+They do not formulate embedding as a Fisher--Rao path-cost problem and do not
+use (i)~the intrinsic geometry of the generator parameter space, (ii)~preferred
+(geodesic) embedding trajectories, or (iii)~the curvature of the distribution
+manifold as an indicator of intrinsic instability.
+
+\subsection{Fisher--Rao Tools for Steganographic Signal Embedding}
+
+In~\cite{amari2000methods}, information geometry, as systematized by Amari and
+Nagaoka and extended by Ay et al.~\cite{ay2017information}, studies the
+Riemannian geometry of families of probability distributions equipped with the
+\emph{Fisher--Rao metric}
+\begin{equation}
+  g_{ij}(\theta) \;=\; F_{ij}(\theta)
+  \;=\; \E_{P_\theta}\!\left[
+    \frac{\partial \log p_\theta(X)}{\partial\theta^i}\,
+    \frac{\partial \log p_\theta(X)}{\partial\theta^j}
+  \right],
+  \label{eq:fisher_rao_intro}
+\end{equation}
+which endows the parameter space $\Theta$ with a canonical Riemannian structure.
+Its central objects are:
+\begin{enumerate}
+  \item the \emph{Fisher--Rao metric} $g_{ij}(\theta)$, the unique (up to
+        scale) Riemannian metric on the statistical manifold that is invariant
+        under sufficient statistics (Chentsov's theorem~\cite{chentsov1982statistical});
+  \item the one-parameter family of \emph{Amari--Chentsov\\ $\alpha$-connections}
+        $\nabla^{(\alpha)}$, which interpolate between the mixture
+        ($\alpha=-1$) and exponential ($\alpha=1$) connections;
+  \item the \emph{natural gradient}~\cite{amari1998natural}, the
+        Riemannian gradient of any functional on the statistical manifold,
+        which can improve the conditioning of gradient descent by preconditioning
+updates with the inverse Fisher metric; under the conditional assumptions of
+Theorem~\ref{thm:ng_convergence}, ideal exponential-map descent has a
+rate involving geodesic smoothness and strong-convexity constants,
+not an automatic bound for the sampled-Fisher implementation.
+\end{enumerate}
+To the best of our knowledge, the resulting path-cost formulation has not been
+developed for generative steganographic embedding.
+The present paper establishes this connection rigorously.
+
+\subsection{Contributions and Signal-Processing Positioning}
+
+This paper develops a mathematical and signal-processing methodology for
+\emph{designing, analyzing, and diagnosing} generative steganographic
+embedding trajectories. Its objective is to explain how a generator
+can traverse a statistical manifold under a path-sensitive
+distinguishability criterion; the accompanying algorithms instantiate
+this methodology under specified assumptions. Fisher--Rao geometry is used as the mathematical
+instrument for measuring distributional sensitivity, but the scientific target
+is the design and analysis of low-detectability embedding trajectories in
+statistical signal generators. The main contributions are as follows.
+
+\begin{enumerate}
+  \item \textbf{Detection-aware generative embedding model.}
+  We model coverless embedding as controlled motion of a generative signal
+  distribution from a cover state to a message-bearing state.
+
+  \item \textbf{Sequential detectability path cost.}
+  We formulate a multi-step steganographic embedding path cost using
+  accumulated sequential KL. Building on known chained-KL/geodesic limits
+  \cite{pavlichin2016chained}, we derive its local Fisher-energy surrogate
+  for the statistical generators studied here and characterize
+  constant-speed geodesic minimizers under stated assumptions.
+  This is an application-specific formulation, not a claim to originate
+  the general chained-KL/geodesic result.
+
+  \item \textbf{Natural-gradient embedding optimization.}
+  We derive NG-Stego as a Fisher-preconditioned embedding optimizer and analyze
+  its convergence under standard geodesic strong-convexity and smoothness
+  assumptions.
+
+  \item \textbf{Curvature-based robustness diagnostics.}
+  We study scalar curvature and minimum sectional curvature as
+  coordinate-invariant descriptors of local path instability, metric anisotropy,
+  and sensitivity of neighboring embedding trajectories.
+
+  \item \textbf{Detection-theoretic interpretation.}
+  Under exponential-family assumptions, we connect Neyman--Pearson testing,
+  information projections, and local Stein exponents to the Fisher--Rao
+  distance between cover and stego signal distributions.
+
+  \item \textbf{Numerical and operational diagnostics.}
+  We validate the geometric results on Gaussian and Gaussian-mixture signal
+  models. A matched-endpoint MNIST-VAE benchmark additionally evaluates a
+  Fisher-preconditioned latent path and distribution-preserving coding
+  baselines with held-out ResNet and SRM-feature detectors. In this particular
+  benchmark, the Fisher-preconditioned path has slightly higher discrete
+  Fisher energy than the Euclidean segment and remains detectable; the study
+  therefore does not establish an operational security advantage.
+\end{enumerate}
+
+\paragraph{What the framework contributes beyond established tools.}
+\label{subsec:beyond_tools}
+
+Fisher--Rao geometry, natural-gradient methods, and $\alpha$-connections are
+well-established mathematical tools.
+Our contribution is not that these tools exist, but that they yield a
+detection-aware embedding methodology for generative steganography when applied
+to the signal-processing problem of steering a generator while controlling
+statistical distinguishability.
+We address directly the question: \emph{what does the framework produce for
+steganographic embedding and detection beyond applying established mathematical
+machinery?}
+
+\paragraph{Problem formulation.}
+Established approaches, including Cachin's information-theoretic criterion~\cite{cachin1998information}
+and coverless coding schemes such as iMEC~\cite{imec2022} and Discop~\cite{discop2023},
+provide important endpoint-security and coding perspectives. The present work
+complements these perspectives by studying how a generator's parameter
+trajectory evolves from $\theta_0$ to $\theta_1$ and by examining the
+accumulated information-geometric cost along that trajectory.
+This paper asks: \emph{how can the trajectory through parameter space
+be designed, analyzed, and diagnosed using a local measure of
+accumulated distinguishability during multi-step embedding?}
+The general mathematical connection between chained KL divergences and
+Fisher geodesics is established in prior work
+\cite{pavlichin2016chained}. Our contribution is to employ this
+connection as a path-sensitive design and diagnostic criterion for
+steganographic signal generation:
+in the small-step, fixed-endpoint regime with appropriate
+parameterization, Fisher--Rao geodesics minimize the leading-order
+energy cost, which need not be attained by a Euclidean straight line.
+
+\paragraph{Results from the path formulation.}
+The continuum chained-KL/geodesic relationship is not new:
+Pavlichin and Weissman~\cite{pavlichin2016chained} characterized
+chained divergences and their Fisher-geodesic limit for distributions.
+Here, the local second-order expansion is given for the chosen
+smooth, parametrized generative family, and the resulting energy is
+used to analyse a steganographic design surrogate. The application-level
+interpretation must not be confused with a new general theorem on
+chained divergences, nor does the path surrogate establish
+endpoint indistinguishability.
+
+\paragraph{Detection-duality interpretation.}
+Theorem~\ref{thm:detection_duality} shows that the optimal Neyman--Pearson
+steganalyzer in the exponential-family setting admits a \emph{dual-affine}
+interpretation: its rejection region is affine in expectation coordinates (the
+$m$-flat half-space) and its statistic corresponds to projecting the empirical
+distribution along the $e$-geodesic direction connecting cover and stego
+parameters.
+The embedder's optimal path is governed by the \emph{Levi-Civita}
+(Fisher--Rao) geometry; the detector's rejection boundary is \emph{m-flat},
+while its normal direction is the \emph{$e$-geodesic} connecting cover and
+stego parameters.  This dual-affine structure, arising from the
+Amari--Chentsov connection pair, is specific to the adversarial
+steganographer--steganalyzer setting; we are not aware of an equivalent
+formulation in prior work on natural-gradient optimization, exponential
+families, or steganographic security.
+
+\paragraph{Curvature and its limits.}
+In the regime of negative sectional curvature, which includes the Gaussian
+family ($\kappa = -1/2$), curvature presents two opposite effects in the
+adversarial game.  From the detector's perspective, negative Ricci curvature
+only gives a hyperbolic \emph{upper} bound on Fisher--Rao ball volume via
+Bishop--Gromov; it does not, by itself, guarantee that the actual volume
+exceeds the Euclidean case (Section~\ref{sec:capacity}).  From the embedder's
+perspective, negative sectional curvature makes neighboring geodesics diverge
+super-linearly (Theorem~\ref{thm:curvature_instability}(iii)), amplifying
+transport instability.  The resulting trade-off, which is possible volume expansion
+versus certain path instability, appears to be absent from standard
+steganography and Riemannian-geometry treatments of these tools.
+
+This contribution is a path-level design formulation with theoretical
+results and numerical illustrations; it is not a complete encoder, decoder,
+or claim of operational security against arbitrary detectors. Table~\ref{tab:novelty}
+summarizes how this scope differs from the prior work discussed above.
+
+\begin{table*}[!t]
+\centering
+\caption{Positioning of the proposed steganographic signal-processing
+  contributions relative to prior literature.
+  \checkmark~=~provided; $\circ$~=~partially or implicitly; $\times$~=~not
+  provided.
+  Bold rows highlight application-specific emphases, not exclusive
+  mathematical discoveries.}
+\label{tab:novelty}
+\small
+\begin{tabularx}{\textwidth}{lXXXXX}
+\toprule
+\textbf{Capability} &
+\textbf{Cachin / Fridrich--Ker}$^{a}$ &
+\textbf{iMEC / Discop / SparSamp}$^{b}$ &
+\textbf{IG / KL chains}$^{c}$ &
+\textbf{Nat.\ grad.}$^{d}$ &
+\textbf{This paper} \\
+\midrule
+KL endpoint security criterion & \checkmark & \checkmark & $\times$ & $\times$ & \checkmark \\
+Coverless / generative embedding & $\times$ & \checkmark & $\times$ & $\times$ & \checkmark \\
+Fisher--Rao metric on param.\ space & $\times$ & $\times$ & \checkmark & \checkmark & \checkmark \\
+Natural-gradient optimization & $\times$ & $\times$ & $\circ$ & \checkmark & \checkmark \\
+\textbf{Steganographic trajectory-cost formulation} & $\times$ & $\times$ & $\circ$ & $\times$ & \checkmark \\
+Chained-KL/geodesic limit (known result) & $\times$ & $\times$ & \checkmark & $\times$ & \checkmark \\
+\textbf{Detection-duality theorem ($\pm1$ structure, Thm.~\ref{thm:detection_duality})} & $\times$ & $\times$ & $\times$ & $\times$ & \checkmark \\
+\textbf{Curvature trade-off in the steganographic adversarial game} & $\times$ & $\times$ & $\times$ & $\times$ & \checkmark \\
+Convergence guarantees for stego optimizer & $\times$ & $\times$ & $\times$ & \checkmark & \checkmark \\
+Numerical illustrations on statistical and learned generators & $\times$ & $\circ$ & $\times$ & $\circ$ & \checkmark \\
+\bottomrule
+\end{tabularx}
+\par\smallskip
+\raggedright\footnotesize
+$^{a}$~\cite{cachin1998information,fridrich2009steganography}.\quad
+$^{b}$~\cite{imec2022,discop2023,sparsamp2021}.\quad
+$^{c}$~\cite{amari1985differential,amari2000methods,ay2017information,pavlichin2016chained}.\quad
+$^{d}$~\cite{amari1998natural,martens2015optimizing}.
+\end{table*}
+
+\subsection{Organization and Scope Statement}
+
+Section~\ref{sec:related} reviews information-theoretic steganography,
+coverless generative embedding, information geometry, and natural-gradient
+optimization.
+Section~\ref{sec:background} recalls the Riemannian and statistical-geometric
+notions used throughout the paper.
+Section~\ref{sec:manifold} defines the steganographic statistical manifold and
+derives Fisher metrics for representative generator families.
+Section~\ref{sec:geodesics} develops the geodesic embedding formulation,
+its local sequential-KL optimality, and the dual affine structure
+($\alpha$-connections, Pythagorean identity) connecting embedding transport,
+Riemannian optimization, and idealized detection.
+Section~\ref{sec:natural_gradient} introduces NG-Stego and its constrained variant.
+Section~\ref{sec:curvature} studies scalar and sectional curvature as local
+geometric instability indicators.
+Section~\ref{sec:simulations} presents numerical illustrations on Gaussian and
+Gaussian-mixture manifolds and on a learned MNIST variational autoencoder.
+Section~\ref{sec:security} provides the detection-theoretic interpretation and
+scope limitations.
+The final section concludes and outlines future work.
+
+\noindent\textbf{Scope.}
+The framework is methodological and theoretical.
+It is designed to clarify how generative steganographic signals can be
+embedded, optimized, and analyzed in distribution space.
+Simulation~\ref{sec:sim_s5} supplies a limited matched-channel coding and
+detection diagnostic on a learned MNIST variational autoencoder. It does not
+establish a complete operational image-steganography system for large-scale
+deep generators.
+All geodesic and detection statements are local, asymptotic, or model-dependent
+unless explicitly stated otherwise.
+Extensions to high-dimensional deep generators, full payload-rate analysis,
+and modern steganalysis benchmarks are left for future work.
+
+\section{Related Work}
+\label{sec:related}
+% ============================================================
+
+\subsection{Information-Theoretic Steganography and Steganalysis}
+
+The mathematical foundations of steganographic security were laid by
+Cachin~\cite{cachin1998information}, who formalised the $\varepsilon$-security
+criterion via the KL divergence between cover and stego distributions.
+This information-theoretic framework was later refined by Fridrich and
+Ker~\cite{fridrich2009steganography}, who derived asymptotic bounds on
+detectability under empirical cover models.
+
+On the detection side, Pevn\'{y}, Filler and Bas~\cite{pevny2010using}
+introduced high-dimensional image models for steganalysis, demonstrating
+that the KL divergence remains the dominant statistical signal even when
+the adversary employs rich feature representations.
+These works treat the KL divergence as a \emph{scalar} cost evaluated at
+the endpoints of the embedding process; they do not consider the
+\emph{trajectory} in distribution space, nor the Riemannian geometry
+induced by the Fisher metric along that trajectory.
+Consequently, the accumulated detectability of a multi-step embedding
+path is approximated by its endpoint divergence, which can be suboptimal whenever the chosen coordinate path fails to be a
+Fisher--Rao geodesic; nonzero curvature is one source of such path dependence
+but is not, by itself, a sufficient condition.
+
+Modern steganalysis has moved beyond hand-crafted features to deep
+learning detectors, including rich models \cite{fridrich2012rich} and
+residual-network classifiers \cite{boroumand2019deep}, which provide
+strong empirical discrimination for cover-source models.  These methods are
+important image-domain benchmarks, but their published performance does not
+transfer automatically to 28-by-28 samples from a VAE decoder; a comparison
+requires matched cover/stego distributions and a common training protocol.
+From an information-theoretic standpoint, the capacity and fundamental limits of
+steganography and information hiding have been characterized by Moulin and
+O'Sullivan \cite{moulin2003information}.  Practical embedding schemes often
+minimize additive distortion via syndrome-trellis codes
+\cite{filler2011minimizing}.  These methods optimize endpoint statistics or
+distortion, not the generator trajectory in parameter space.  Geometric
+approaches to signal and tensor analysis, notably the Fisher--Rao geometry
+of covariance matrices \cite{pennec2006riemannian}, provide complementary
+tools for the parametric trajectory analysis developed in the present paper.
+
+\subsection{Coverless Steganography via Generative Models}
+
+Coverless steganography eliminates the cover-modification paradigm by
+generating or selecting objects whose native statistics encode the
+message.
+Recent methods exploit deep generative models.
+Ziegler and Rush~\cite{ziegler2019neural} proposed neural linguistic
+steganography via arithmetic coding over language-model distributions;
+Zhang et al.~\cite{zhang2021generative} extended the principle to image
+generation with explicit rate--distortion control.
+
+State-of-the-art provably secure schemes include iMEC~\cite{imec2022}
+and Discop~\cite{discop2023}, which use distribution-preserving coupling or
+sampling mechanisms.
+These methods do not optimize a Fisher--Rao trajectory-level embedding cost or
+use the natural gradient induced by the FIM for that purpose.
+From the perspective of information geometry, any prescribed coordinate path in
+$\Theta$ may incur higher accumulated Fisher energy than a length-minimizing
+Fisher--Rao geodesic when it fails to satisfy the Fisher--Rao geodesic equation.
+
+Recent work makes the comparison with operational systems more concrete.
+Pan et al.~\cite{pan2025rethinking} improve prefix-based generative
+steganography through quantization and distribution-coupling changes, while
+Levecque et al.~\cite{levecque2026targeted} derive a pooled likelihood-ratio
+steganalysis test in the latent space of diffusion-based image generation.
+These address message sampling and practical detection, respectively; they do
+not study Fisher path-energy optimization. Westphal et
+al.~\cite{westphal2026hide} study geometry-derived encodings and internal
+detection in language-model embeddings. Their text-generation threat model is
+adjacent to, but distinct from, the image-signal model considered here.
+
+\subsection{Information Geometry and Natural Gradient Optimisation}
+
+The differential-geometric structure of statistical manifolds was
+systematised by Rao~\cite{rao1945information} and
+Fisher~\cite{fisher1925theory}, and developed into the modern framework
+of information geometry by Amari~\cite{amari1985differential,amari2000methods,amari1998natural}
+and Chentsov~\cite{chentsov1982statistical}.
+Ay et al.~\cite{ay2017information} and Nielsen~\cite{nielsen2020elementary}
+provide comprehensive modern treatments.
+
+The natural gradient~\cite{amari1998natural} replaces Euclidean updates
+with Riemannian descent on the Fisher metric.
+For deep neural networks, Martens and Grosse~\cite{martens2015optimizing}
+introduced Kronecker-factored approximate curvature (K-FAC), making
+natural-gradient training tractable for million-parameter models.
+Bonnabel~\cite{bonnabel2013stochastic} analysed stochastic gradient descent
+on Riemannian manifolds with retractions, providing the convergence
+guarantees underlying Algorithm~\ref{alg:ng_stego}.
+
+\subsection{Geometric Methods in Statistical Learning and Transport}
+
+Riemannian geometry has been applied to signal processing on the cone of
+positive-definite covariance matrices~\cite{pennec2006riemannian} and to
+shape analysis, yet not to the steganographic embedding problem.
+Optimal transport (OT) theory~\cite{villani2009optimal,peyre2019computational}
+has gained traction in machine learning as an alternative to KL-based
+divergence measures.
+
+\textbf{Important distinction.}
+The Wasserstein framework operates on the \emph{sample space}
+$\mathcal{X}$ rather than the \emph{parameter space} $\Theta$ of the
+generator.
+For parametric families with smooth densities, the Fisher--Rao metric
+provides a \emph{different} geometry than the Wasserstein metric: it is
+intrinsic to the statistical model, invariant under sufficient
+statistics (Chentsov's theorem), and its geodesics locally minimize the leading-order accumulated sequential-KL cost along the transport path in the small-step regime (Theorem~\ref{thm:geodesic_optimality}).
+The two geometries are complementary, not competing: Fisher--Rao
+describes the parameter-space geometry of the embedding operation,
+while Wasserstein describes the sample-space geometry of the generated
+distributions.
+
+A research programme even closer to the present setting is outlined by
+Bharadwaj and Moskowitz~\cite{moskowitz2018assuring}, who propose to apply
+Fisher--Rao geometry and statistical manifolds to image analysis and
+steganography.
+That work, however, remains at the conceptual level: it does not formulate a
+sequential embedding cost, does not derive geodesic embedding optimality, does
+not connect embedding transport to Neyman--Pearson detection, and does not
+analyse curvature as an embedder--detector trade-off.
+The present paper develops precisely these formal elements.
+
+Proactive watermarking offers a complementary active-provenance mechanism:
+orthogonal-moment watermark methods test whether an embedded mark survives
+or has been altered by a forgery~\cite{wang2026focusdeepfakes,
+wang2026towardproactive}. This differs from the passive Neyman--Pearson test
+between fixed cover and stego distributions developed here; combining them
+would require an explicit watermark and key model.
+
+\subsection{Positioning and Gaps}
+
+While individual elements of our framework (Fisher metric, natural
+gradient, geodesic transport) have been studied extensively in
+statistics and machine learning, their \emph{joint application} to the
+design and security analysis of steganographic systems appears to be new.
+Existing coverless methods lack (i)~a geometric characterisation of
+optimal embedding paths, (ii)~a curvature-based instability analysis,
+and (iii)~a Riemannian optimisation algorithm tailored to the KL
+objective.
+The present paper unifies these ingredients under a single
+information-geometric formalism, with explicit scope limitations
+(Section~\ref{sec:limitations}).
+
+For a comprehensive study of gradient systems on statistical manifolds,
+including the complete integrability of gradient flows on lognormal and
+beta families, we refer to the information-geometry literature; these
+families exemplify the Hessian-metric structures used in the present
+paper.
+
+% ============================================================
+\section{Mathematical Background}
+\label{sec:background}
+% ============================================================
+
+\subsection{Riemannian Manifolds}
+
+We recall standard notions from Riemannian geometry; see, for example,
+\cite{petersen2016riemannian,do2002riemannian,lee2006riemannian}.
+
+\begin{definition}%[Smooth Riemannian manifold]
+  \label{def:riemannian_manifold}
+  A \emph{smooth Riemannian manifold} $(\calM, g)$ is a smooth manifold
+  $\calM$ together with a \emph{Riemannian metric} $g$, i.e., a family of
+  positive-definite inner products
+  $g_p : T_p\calM \times T_p\calM \to \R$ on each tangent space $T_p\calM$,
+  varying smoothly with $p \in \calM$.
+\end{definition}
+
+In local coordinates $\theta = (\theta^1,\ldots,\theta^d)$, the metric is
+represented by the symmetric positive-definite matrix
+$\Gmat(\theta) = [g_{ij}(\theta)]$, where
+$g_{ij}(\theta) = g\!\left(\tfrac{\partial}{\partial\theta^i},
+\tfrac{\partial}{\partial\theta^j}\right)$.
+The \emph{Riemannian length} of a smooth curve
+$\gamma: [0,1] \to \calM$ is
+\[
+\ell(\gamma)
+=
+\int_0^1
+\sqrt{\gij(\gamma(t))\,\dot\gamma^i(t)\,\dot\gamma^j(t)}
+\;\mathrm{d}t .
+\]
+
+\begin{definition}%[Levi-Civita connection]
+  \label{def:levi_civita}
+  The \emph{Levi-Civita connection} $\nabla$ of $(\calM,g)$ is the unique
+  torsion-free connection compatible with $g$.
+  In local coordinates, its Christoffel symbols are given by
+  \begin{equation}
+    \Gammaijk(\theta) \;=\; \frac{1}{2}\,g^{kl}(\theta)
+    \left(\frac{\partial g_{il}}{\partial\theta^j}
+         +\frac{\partial g_{jl}}{\partial\theta^i}
+         -\frac{\partial g_{ij}}{\partial\theta^l}\right).
+    \label{eq:christoffel}
+  \end{equation}
+\end{definition}
+
+\begin{definition}%[Geodesic]
+  \label{def:geodesic}
+  A smooth curve $\gamma:[0,1]\to\calM$ is a \emph{geodesic} if it satisfies
+  \begin{equation}
+    \ddot\gamma^k
+    + \Gammaijk(\gamma)\,\dot\gamma^i\,\dot\gamma^j
+    = 0,
+    \qquad k=1,\ldots,d .
+    \label{eq:geodesic}
+  \end{equation}
+\end{definition}
+
+\begin{definition}%[Sectional curvature]
+  \label{def:sectional_curvature}
+  For linearly independent tangent vectors $u,v\in T_p\calM$, the
+  \emph{sectional curvature} of the plane spanned by $u$ and $v$ is
+  \begin{equation}
+    K(u,v) \;=\;
+    \frac{R_{ijkl}\,u^i v^j u^k v^l}
+         {(g_{ik}g_{jl}-g_{il}g_{jk})\,u^i v^j u^k v^l}.
+    \label{eq:sectional_curvature}
+  \end{equation}
+\end{definition}
+
+\begin{definition}%[Scalar curvature]
+  \label{def:scalar_curvature}
+  The \emph{scalar curvature} $R(p)$ at $p \in \calM$ is the trace of the
+  Ricci curvature tensor with respect to the metric:
+  \begin{equation}
+    R(p) \;=\; g^{ij}(p)\, R_{ij}(p)
+    \;=\; g^{ij}(p)\, R^{k}_{\;ikj}(p).
+    \label{eq:scalar_curvature}
+  \end{equation}
+  It is a coordinate-invariant scalar field on $\calM$.
+\end{definition}
+
+\subsection{Statistical Manifold and Fisher--Rao Metric}
+
+We use standard terminology from information geometry and statistical
+manifold theory; see \cite{lauritzen1987statistical,amari2000methods,
+amari2012differential}.
+
+Let $\mathcal{X}$ be a measurable space and let $\Theta\subset\R^d$ be an open
+parameter domain. Consider a family of probability distributions
+$\{P_\theta : \theta\in\Theta\}$ dominated by a $\sigma$-finite measure
+$\mu$, with smooth densities $p_\theta = \mathrm{d}P_\theta/\mathrm{d}\mu$.
+The \emph{log-likelihood function} is
+$\ell(x,\theta)=\log p_\theta(x)$.
+
+\begin{definition}%[Statistical model]
+  \label{def:statistical_model}
+  A \emph{statistical model} on $(\mathcal{X},\mathcal{B},\mu)$ is a
+  parametric family $\mathcal{S}=\{P_\theta:\theta\in\Theta\}$ of
+  $\mu$-dominated probability measures whose densities
+  $p_\theta=\mathrm{d}P_\theta/\mathrm{d}\mu$ are smooth in $\theta$ and
+  for which the Fisher information matrix exists and is positive definite
+  on $\Theta$.
+\end{definition}
+
+\begin{definition}%[Statistical manifold]
+  \label{def:statistical_manifold}
+  A \emph{statistical manifold} is a triplet $(S,g,\nabla)$ where $g$ is
+  a Riemannian metric and $\nabla$ is a torsion-free affine connection such
+  that $\nabla g$ is totally symmetric.
+  In this work, $g$ is taken to be the Fisher--Rao metric. The Levi-Civita
+  connection $\nabla^{(0)}$ and the Amari--Chentsov
+  $\alpha$-connections $\nabla^{(\alpha)}$ are the canonical instances
+  considered later.
+\end{definition}
+
+The score representation of the Fisher information matrix is given in
+Eq.~\eqref{eq:fisher_rao_intro}. Under the usual regularity conditions for
+differentiation under the integral sign, it also has the expected-Hessian
+representation; see \cite{rao1945information,amari2000methods}.
+
+\begin{definition}%[Fisher information matrix]
+  \label{def:fim}
+  The \emph{Fisher information matrix} at $\theta\in\Theta$ is the
+  $d\times d$ matrix defined by Eq.~\eqref{eq:fisher_rao_intro}; for regular
+  models it equivalently satisfies
+  \begin{equation}
+    F_{ij}(\theta)
+    = -\,\E_{P_\theta}\!\left[
+    \frac{\partial^2 \log p_\theta(X)}
+         {\partial \theta^i\,\partial \theta^j}
+    \right].
+  \end{equation}
+\end{definition}
+
+The following uniqueness result is due to Chentsov
+\cite{chentsov1982statistical}.
+
+\begin{theorem}%[Chentsov]
+  \label{thm:chentsov}
+  Consider the space $\calP$ of all probability measures on a measurable
+  space, equipped with the structure of statistical manifolds. The Fisher
+  information matrix $F(\theta)$ is, up to a positive scalar factor, the
+  \emph{unique} Riemannian metric on $\calP$ that is invariant under
+  \emph{all} Markov morphisms, also called congruent embeddings.
+\end{theorem}
+
+\begin{remark}
+  \label{rem:chentsov_scope}
+  Chentsov's theorem applies to the \emph{entire} space of probability
+  distributions, not to a fixed parametric family
+  $\{P_\theta:\theta\in\Theta\}$. For such a family, the invariance
+  group is restricted to Markov morphisms that preserve the family
+  structure, and uniqueness is \emph{not} guaranteed: other metrics may
+  exist that are invariant under this smaller group. The Fisher metric
+  remains the \emph{canonical} choice, as it is the only metric that extends uniquely to the ambient space, but it is not the unique invariant metric \emph{within} the family.
+\end{remark}
+
+This canonical status, crucially absent from Euclidean metrics, motivates
+defining the geometry of $\calS_{\calG}$ via the FIM.
+Henceforth, we set $g_{ij}(\theta) = F_{ij}(\theta)$ and refer to it as the
+\emph{Fisher--Rao metric}.
+
+\paragraph{KL divergence and the Fisher metric.}
+
+The following second-order expansion is standard in information geometry
+under the usual regularity assumptions allowing differentiation under the
+integral sign.
+
+\begin{proposition}%[Second-order KL expansion]
+  \label{prop:kl_taylor}
+  For $\theta'\to\theta$, the KL divergence admits the second-order Taylor
+  expansion
+  \begin{equation}
+    \DKL\!\left(P_{\theta'}\,\|\,P_\theta\right)
+    \;=\; \frac{1}{2}(\theta'-\theta)^\top F(\theta)(\theta'-\theta)
+          + O(\|\theta'-\theta\|^3).
+    \label{eq:kl_taylor}
+  \end{equation}
+\end{proposition}
+
+\subsection{Natural Gradient}
+
+The natural gradient was introduced by Amari as the Riemannian gradient induced
+by the Fisher information metric \cite{amari1998natural}.
+
+\begin{definition}%[Natural gradient]
+  \label{def:natural_gradient}
+  Let $\ell:\Theta\to\R$ be a smooth functional.
+  The \emph{natural gradient} of $\ell$ at $\theta$ is
+  \begin{equation}
+    \natgrad_\theta\,\ell(\theta)
+    \;=\; F^{-1}(\theta)\,\nabla_\theta\,\ell(\theta).
+    \label{eq:natural_gradient}
+  \end{equation}
+\end{definition}
+% ============================================================
+\section{The Steganographic Manifold}
+\label{sec:manifold}
+% ============================================================
+
+\subsection{Definition and Basic Properties}
+
+Let $\calG$ be a coverless generator with parameter space
+$\Theta\subset\R^d$, producing objects in $\mathcal{X}$ with distribution
+$P_\theta$ for each $\theta\in\Theta$.
+
+\begin{assumption}[Regularity]
+  \label{ass:regularity}
+  \begin{enumerate}
+    \item[(i)] $\Theta$ is an open, connected subset of $\R^d$.
+    \item[(ii)] For each $x\in\mathcal{X}$, the map $\theta\mapsto p_\theta(x)$
+          is twice continuously differentiable.
+    \item[(iii)] For each $\theta\in\Theta$, the Fisher information matrix
+          $F(\theta)$ is strictly positive definite.
+    \item[(iv)] The map $\theta\mapsto F(\theta)$ is smooth ($C^\infty$).
+  \end{enumerate}
+\end{assumption}
+
+\begin{remark}%[On the smoothness assumption for ReLU networks]
+  \label{rem:relu_smoothness}
+  Assumption~\ref{ass:regularity}(ii) requires the density $p_\theta(x)$
+  to be $C^2$ in $\theta$.  For neural-network generators with ReLU
+  activations, the score $\nabla_\theta \log p_\theta(x)$ is not
+  differentiable everywhere in $\theta$ (the non-linearity is piecewise
+  linear). Replacing ReLU by
+  $\mathrm{softplus}_\beta(x)=\beta^{-1}\log(1+e^{\beta x})$ gives the
+  pointwise activation bound
+  $|\mathrm{softplus}_\beta(x)-\max(0,x)|\leq(\log 2)/\beta$.
+  This value bound does not give a uniform derivative bound near the ReLU
+  kink, nor does it bound the induced Fisher metric, its derivatives,
+  geodesics, or optimizer error. Almost-everywhere differentiability alone
+  likewise does not establish the smooth-manifold hypotheses used by the
+  curvature and geodesic theorems. All exact results in this paper therefore
+  apply only to models satisfying Assumption~\ref{ass:regularity}; extension
+  to piecewise-smooth deep generators requires additional approximation and
+  stability analysis that we do not claim here.
+\end{remark}
+
+
+\begin{lemma}[Expected derivative error under softplus smoothing]
+\label{lem:softplus_expectation}
+Let $\beta>0$, let $s_\beta(x)=\beta^{-1}\log(1+e^{\beta x})$,
+and let a random preactivation $X$ have a Lebesgue density $p_X$
+with $\|p_X\|_\infty\le M$. Then
+\begin{equation}
+\mathbb E\!\left|s'_\beta(X)-\mathbf 1_{\{X>0\}}\right|
+\le \frac{2M\log 2}{\beta}.
+\label{eq:softplus_derivative_expectation}
+\end{equation}
+\end{lemma}
+\begin{proof}
+Since $s'_\beta(x)=(1+e^{-\beta x})^{-1}$, bound the expectation
+by $M$ times the integral of the absolute difference. Its two
+half-line contributions each equal $(\log 2)/\beta$.
+\end{proof}
+This bound concerns the distribution of \emph{random preactivations},
+not a deterministic preactivation at fixed input. It bounds neither
+model-score error nor the error of the induced Fisher matrix; those
+require additional network-Jacobian and likelihood assumptions.
+
+\begin{definition}%[Steganographic manifold]
+  \label{def:stego_manifold}
+  Under Assumption~\ref{ass:regularity}, the \emph{steganographic manifold}
+  associated with generator $\calG$ is the Riemannian manifold
+  $\calS_{\calG} = (\,\{P_\theta : \theta\in\Theta\},\; g\,)$,
+  where $g_{ij}(\theta) = F_{ij}(\theta)$.
+\end{definition}
+
+\begin{theorem}%[Geodesic completeness for exponential families]
+  \label{thm:completeness}
+  Let $\calG$ be an exponential-family generator with natural parameter
+  space $\Theta$ open and convex, and suppose the log-partition function
+  $\psi(\theta)$ is strictly convex with $\nabla^2\psi(\theta) \succ 0$
+  on $\Theta$. Assume additionally that the Fisher--Rao metric
+  space $(\Theta,d_g)$ is complete. This is an explicit geometric
+  hypothesis to be checked for the family under consideration, not a
+  consequence of convexity or log-partition steepness alone.
+  Then the steganographic manifold $\calS_{\calG}$ is geodesically
+  complete: for any two points $\theta_0, \theta_1 \in \Theta$, there
+  exists a length-minimizing geodesic connecting them.
+
+  For the univariate Gaussian family, the geodesic is moreover \emph{unique}:
+  the Poincar\'{e} half-plane isometry gives non-positive sectional curvature
+  ($\kappa = -1/2$), and Cartan--Hadamard then implies global uniqueness.
+  For general exponential families, uniqueness of minimizing geodesics holds
+  locally within the injectivity radius; global uniqueness requires
+  non-positive sectional curvature on all of $\Theta$, which need not hold
+  (e.g., multinomial families can have positive curvature).
+\end{theorem}
+
+\begin{proof}
+  For exponential families, the Fisher metric is the Hessian of the
+  log-partition function: $g_{ij}(\theta) = \partial_i\partial_j\psi(\theta)$.
+  Since $\psi$ is strictly convex, the metric $g$ is a \emph{Hessian
+  metric} on the open convex set $\Theta$.
+
+  For the univariate Gaussian family $\{\mathcal{N}(\mu,\sigma^2):\mu\in\R,\sigma>0\}$,
+  the Fisher--Rao metric is $g = \sigma^{-2}\,\mathrm{diag}(1,2)$
+  (see Appendix~\ref{app:gaussian_fisher} for the explicit derivation).
+  The coordinate change $y=\sigma\sqrt{2}$ transforms this to
+  $\mathrm{d}s^2 = 2(\mathrm{d}\mu^2+\mathrm{d}y^2)/y^2$,
+  which is $2$ times the Poincar\'{e} metric on $\mathbb{H}^2=\{(\mu,y):y>0\}$
+  (see Appendix~\ref{app:gaussian_fisher} for the factor-of-2 derivation).
+  This constant rescaling preserves geodesics and non-positive curvature
+  ($\kappa = -1/2$).
+  It is well known (do Carmo~\cite{do2002riemannian}, Prop.~2.1) that
+  $\mathbb{H}^2$ with this metric is complete and that any two points are
+  connected by a \emph{unique} geodesic (vertical line or semicircle
+  orthogonal to the real axis); Cartan--Hadamard then implies uniqueness
+  for the Gaussian manifold.
+
+  For general exponential families, metric completeness is an explicit
+  assumption of the theorem. Hopf--Rinow then yields the existence of
+  minimizing geodesics. Convexity of the natural parameter domain alone
+  does not imply Riemannian metric completeness.
+
+  Uniqueness of minimizing geodesics holds within the injectivity radius
+  for any complete Riemannian manifold.  Global uniqueness for arbitrary
+  exponential families would require non-positive sectional curvature on
+  all of $\Theta$ (Cartan--Hadamard), which we do not assume here.
+\end{proof}
+
+\begin{remark}%[Geodesic completeness for general exponential families]
+  \label{rem:completeness_general}
+  Geodesic completeness is not automatic for all statistical models.
+  Conditions ensuring that the Hessian metric is complete must be
+  checked separately for the particular family; we do not invoke a
+  general implication from log-partition steepness alone.
+  For models outside the exponential family (e.g., Student-$t$, stable
+  distributions), completeness must be verified separately.
+  In this paper we restrict all completeness claims to families satisfying
+  this condition, or to the Gaussian family where the Poincar\'{e}
+  isometry gives an independent proof.
+\end{remark}
+
+\begin{remark}%[Scope of the completeness theorem]
+  Theorem~\ref{thm:completeness} requires an independently verified
+  complete Fisher metric. It does not assert that an arbitrary GMM
+  with $\pi\in(0,1)$ is complete, nor does clamping the mixing weight
+  to $[0.01,0.99]$ establish completeness of the original manifold.
+\end{remark}
+
+\subsection{Fisher Metric for Exponential Families}
+\label{subsec:exp_family}
+We recall the standard definition of exponential families following
+Brown~\cite{brown1986fundamentals} and Amari~\cite{amari2000methods}.
+
+\begin{definition}%[Exponential family~\cite{brown1986fundamentals,amari2000methods}]
+  \label{def:exp_family}
+  A family $\{P_\theta\}$ belongs to the \emph{exponential family} if its
+  densities take the form
+  \begin{equation}
+    p_\theta(x) \;=\; h(x)\exp\!\left\{\inner{\theta,T(x)} - \psi(\theta)\right\},
+    \label{eq:exp_family}
+  \end{equation}
+  where $\theta\in\Theta$ are the \emph{natural parameters},
+  $T:\mathcal{X}\to\R^d$ is the \emph{sufficient statistic},
+  $h:\mathcal{X}\to\R_{>0}$ is the \emph{carrier measure}, and
+  $\psi(\theta)$ is the \emph{log-partition function}.
+\end{definition}
+
+\begin{proposition}%[Fisher metric for exponential families]
+  \label{prop:fisher_exp}
+  For an exponential family, $F_{ij}(\theta) = \partial_i\partial_j\psi(\theta)
+  = \mathrm{Cov}_{P_\theta}[T_i(X), T_j(X)]$.
+\end{proposition}
+
+\begin{example}[Multivariate Gaussian family]
+  \label{ex:gaussian}
+  For $P_\theta = \mathcal{N}(\mu, \Sigma)$ with $\theta=(\mu,\Sigma)$,
+  the Fisher--Rao metric decomposes as
+  \begin{equation}
+    F_{ij}(\mu,\Sigma) \;=\;
+    \begin{pmatrix}
+      \Sigma^{-1} & 0 \\
+      0 & \frac{1}{2}\Sigma^{-1}\otimes\Sigma^{-1}
+    \end{pmatrix}.
+    \label{eq:fisher_gaussian}
+  \end{equation}
+  For the mean-only subfamily $\mathcal{N}(\mu,\sigma^2 I)$ with fixed
+  $\sigma^2$, we have $F_{ij}(\mu) = \sigma^{-2}\delta_{ij}$ (constant,
+  diagonal).
+  For the \emph{full} family with both $\mu$ and $\Sigma$ as parameters,
+  the metric is block-diagonal but the $\Sigma$-block is
+  \emph{non-constant} (it depends on $\Sigma^{-1}$).
+\end{example}
+
+\begin{example}[DDPM Gaussian latent process]
+  \label{ex:ddpm}
+  For a Denoising Diffusion Probabilistic Model~\cite{ho2020denoising}
+  parameterizing $P_\theta(x) = \mathcal{N}(x;\mu_\theta,\Sigma_\theta)$,
+  the Fisher--Rao metric at $\theta$ is
+  \begin{equation}
+    F_{ij}(\theta) \;=\;
+    \frac{\partial\mu_\theta^\top}{\partial\theta^i}
+    \Sigma_\theta^{-1}
+    \frac{\partial\mu_\theta}{\partial\theta^j}
+    \;+\;
+    \frac{1}{2}\,\tr\!\left(
+      \Sigma_\theta^{-1}
+      \frac{\partial\Sigma_\theta}{\partial\theta^i}
+      \Sigma_\theta^{-1}
+      \frac{\partial\Sigma_\theta}{\partial\theta^j}
+    \right).
+    \label{eq:fisher_ddpm}
+  \end{equation}
+\end{example}
+
+\begin{remark}[Signal-processing interpretation]
+  The Gaussian families above are not merely abstract examples: they arise as
+  the distributions of short-time Fourier coefficients, wavelet subbands,
+  linear-prediction residuals, or other transform-domain features used in
+  audio, image, and communications signal processing.  A Gaussian mixture
+  model can represent the marginal distribution of local image patches or
+  speech frames.  In each case, the generator parameter $\theta$ encodes
+  second-order signal statistics, and the Fisher--Rao metric measures how
+  sensitive the generated signal distribution is to parameter perturbations.
+  The framework therefore applies directly to any parametric signal model
+  whose density and score are tractable.
+\end{remark}
+
+\subsection{Fisher Metric for Latent Mixture Models}
+\label{subsec:mixture}
+
+For generative models with latent variables (VAE~\cite{kingma2014vae},
+GAN~\cite{goodfellow2014generative}), the marginal density is
+$p_\theta(x) = \int p_\theta(x|z)\,p(z)\,\mathrm{d}z$,
+which generally has no closed form.
+Following the empirical-Fisher approximation commonly used in natural-gradient
+and curvature-based optimisation, particularly in the K-FAC framework of
+Martens and Grosse~\cite{martens2015optimizing}, we use the following model-sampling estimator.
+
+\begin{definition}%[Empirical Fisher~\cite{martens2015optimizing}]
+  \label{def:empirical_fisher}
+  Given i.i.d.\ samples $\{x_n\}_{n=1}^N$ from $P_\theta$, the
+  \emph{Monte-Carlo Fisher information estimator} is\\
+  $\widehat{F}_{ij}(\theta) = \frac{1}{N}\sum_{n=1}^N
+    \partial_i\log p_\theta(x_n)\, \partial_j\log p_\theta(x_n)$.
+\end{definition}
+
+\begin{proposition}%[Empirical Fisher estimator]
+  \label{prop:empirical_fisher_consistency}
+  Under Assumption~\ref{ass:regularity}, if the score
+  $\nabla_\theta \log p_\theta(x)$ is computed \emph{exactly}
+  (no latent variables), then $\widehat{F}(\theta)\to F(\theta)$
+  almost surely as $N\to\infty$ by the strong law of large numbers.
+
+  For models with latent variables $z$, the exact score requires
+  $\nabla_\theta \log p_\theta(x) =
+  \E_{p(z|x,\theta)}[\nabla_\theta \log p_\theta(x,z)]$.
+  With a \emph{single} Monte-Carlo sample $z\sim p(z|x)$ per data point,
+  the empirical estimator $\widehat{F}$ is a \emph{stochastic approximation}
+  rather than a consistent estimator:
+  \[
+    \E_{z|x}[\widehat{F}_{ij}] \;=\;
+    F_{ij}(\theta) \;+\; \mathrm{Bias}_{ij}(x,\theta),
+  \]
+  where $\mathrm{Bias}_{ij}(x,\theta) =
+  \mathrm{Cov}_{p(z|x)}(\partial_i\log p_\theta(x,z),\,
+  \partial_j\log p_\theta(x,z)) \neq 0$ in general.
+  The bias vanishes only when multiple samples are used or when the
+  posterior $p(z|x)$ is deterministic.  In practice, $\widehat{F}$ is
+  treated as a computationally efficient approximation; see
+  Martens~\cite{martens2015optimizing} for variance-reduction techniques.
+
+  \textbf{Scope note.}
+  Algorithm~\ref{alg:ng_stego} (NG-Stego) uses the Monte-Carlo Fisher estimator
+  computed from samples $x \sim P_{\theta_t}$ with exact score
+  $\nabla_\theta \log p_{\theta_t}(x)$.  This exact form is tractable when
+  $p_\theta(x)$ is available in closed form (e.g., Gaussian, GMM
+  families, as in Simulations S1--S4).
+  For most deep generative models (GANs, VAEs with intractable
+  marginals), the exact score is not directly available, and the
+  algorithm as written must be replaced by a structured or model-specific
+  approximation.  Simulation~\ref{sec:sim_s5} follows this approximate route
+  by using the decoder pullback Fisher metric in a two-dimensional VAE latent
+  space; it is therefore an empirical extension, not part of the exact-score
+  theory.
+\end{proposition}
+
+In high-dimensional settings ($d\gg 1$), the full FIM is impractical.
+We consider structured approximations:
+\begin{align}
+  \widehat{F}^{\mathrm{diag}}_{ij}(\theta)
+  &= \delta_{ij}\,\widehat{F}_{ii}(\theta), \label{eq:diag_fisher} \\
+  \widehat{F}^{(r)}(\theta)
+  &= \sum_{k=1}^r \lambda_k\,u_k u_k^\top, \label{eq:kfac_fisher}
+\end{align}
+where \eqref{eq:kfac_fisher} is the rank-$r$ truncation of the eigendecomposition.
+
+% ============================================================
+\section{Geodesic Embedding Paths}
+\label{sec:geodesics}
+% ============================================================
+
+\paragraph{Embedding path objective.}
+
+An embedding instance is a pair $(\theta_0, \theta_1)\in\Theta^2$, where
+$\theta_0$ represents the ``neutral'' parameter configuration and $\theta_1$
+encodes the target message.
+The \emph{path energy} of a smooth curve $\gamma:[0,1]\to\Theta$ is
+\begin{equation}
+  E[\gamma] \;=\; \int_0^1 \dot\gamma(t)^\top F(\gamma(t))\,\dot\gamma(t)\,\mathrm{d}t
+  \;=\; \int_0^1 \|\dot\gamma(t)\|_g^2\,\mathrm{d}t.
+  \label{eq:path_energy}
+\end{equation}
+
+\subsection{Main Local Optimality Theorem}
+\label{sec:geodesic_optimality}
+
+The following result states the variational role of Fisher--Rao geodesics in
+the embedding problem.  The statement is deliberately local: on a complete
+Riemannian manifold, Hopf--Rinow guarantees the existence of minimizing
+geodesics between any two points, but not their global uniqueness.  Uniqueness
+is guaranteed only inside a normal neighbourhood, or globally under stronger
+assumptions such as simple connectedness and non-positive sectional curvature.
+
+\begin{remark}[Connection with prior chained-KL theory]
+Pavlichin and Weissman~\cite{pavlichin2016chained} studied the
+minimizers of chained KL divergences and their continuum Fisher-geodesic
+limit in the probability simplex. Part~(iv) below specializes the
+second-order asymptotic to the parametrized generator paths studied here;
+our contribution is its steganographic modeling and diagnostic use, not
+the general chained-KL/geodesic equivalence.
+The sequential path cost is a surrogate when the eavesdropper observes
+only the final image; it is not a bound on endpoint detectability.
+\end{remark}
+
+\begin{theorem}
+  \label{thm:geodesic_optimality}
+  Let $(\calS_{\calG},g)$ satisfy Assumption~\ref{ass:regularity}, and let
+  $\theta_0,\theta_1\in\Theta$.
+
+  \begin{enumerate}
+    \item[(i)] \emph{Variational characterization.}
+    Critical points of the path-energy functional
+    \begin{equation}
+      E[\gamma]
+      =
+      \int_0^1
+      \dot\gamma(t)^\top F(\gamma(t))\,\dot\gamma(t)
+      \,\mathrm{d}t
+      \label{eq:path_energy_variational}
+    \end{equation}
+    among smooth curves with fixed endpoints $\gamma(0)=\theta_0$ and
+    $\gamma(1)=\theta_1$ are precisely constant-speed geodesics satisfying
+    the geodesic equation.
+
+    \item[(ii)] \emph{Local energy and length minimality.}
+    If $\theta_1$ lies in a normal neighbourhood of $\theta_0$, then there
+    exists a unique geodesic segment $\gamma^*$ from $\theta_0$ to
+    $\theta_1$.  This geodesic locally minimizes both the Riemannian length
+    \begin{equation}
+      \ell_g[\gamma]
+      =
+      \int_0^1
+      \sqrt{
+        \dot\gamma(t)^\top F(\gamma(t))\,\dot\gamma(t)
+      }
+      \,\mathrm{d}t
+      \label{eq:riemannian_length}
+    \end{equation}
+    and, among constant-speed curves with the same endpoints, the energy
+    $E[\gamma]$.
+
+    \item[(iii)] \emph{Global minimizers.}
+    If $(\calS_{\calG},g)$ is geodesically complete, then at least one
+    length-minimizing geodesic exists between $\theta_0$ and $\theta_1$.
+    Any such length-minimizing geodesic minimizes $\ell_g[\gamma]$ globally
+    among piecewise-smooth paths joining the two endpoints.  If it is parametrized with constant speed on the fixed interval $[0,1]$, it also minimizes the energy among all piecewise-smooth curves with the same
+endpoints. Global uniqueness is not asserted unless
+    additional curvature and topology assumptions are imposed.
+
+    \item[(iv)] \emph{Sequential detectability.}
+    Let $\gamma:[0,1]\to\Theta$ be a smooth path, and consider the
+    $N$-step embedding process obtained by sampling the path at times
+    $t_k=k/N$.  Then, under the local KL expansion of
+    Proposition~\ref{prop:kl_taylor},
+    \begin{equation}
+      \sum_{k=0}^{N-1}
+      \DKL\!\left(
+        P_{\gamma(t_{k+1})}
+        \,\|\,
+        P_{\gamma(t_k)}
+      \right)
+      =
+      \frac{E[\gamma]}{2N}
+      +
+      R_N(\gamma),
+      \label{eq:sequential_kl}
+    \end{equation}
+    where $R_N(\gamma)=O(N^{-2})$ whenever the third-order derivatives of
+    the local KL divergence are uniformly bounded along $\gamma$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  Parts (i)--(iii) are standard consequences of Riemannian variational
+  theory.  The first variation of the energy functional
+  \eqref{eq:path_energy_variational}, under fixed-endpoint variations,
+  yields the geodesic equation.  Inside a normal neighbourhood, the
+  exponential map at $\theta_0$ is a diffeomorphism onto its image, hence
+  the geodesic segment connecting $\theta_0$ to $\theta_1$ is unique and
+  locally minimizing.  If the manifold is complete, Hopf--Rinow guarantees
+  the existence of a globally length-minimizing geodesic, but not its
+  uniqueness.
+
+  For part (iv), apply the second-order expansion of the KL divergence to
+  each short segment:
+  \[
+    \DKL\!\left(
+      P_{\gamma(t+h)}
+      \,\|\,
+      P_{\gamma(t)}
+    \right)
+    =
+    \frac{h^2}{2}
+    \dot\gamma(t)^\top F(\gamma(t))\dot\gamma(t)
+    +
+    O(h^3),
+  \]
+  with $h=1/N$.  Summing over $k=0,\ldots,N-1$ gives
+  \eqref{eq:sequential_kl}.  Uniform boundedness of the third-order local
+  KL derivatives along $\gamma$ gives $R_N(\gamma)=O(N^{-2})$.
+\end{proof}
+
+\begin{corollary}
+  \label{cor:geodesic_optimality}
+  In a normal neighbourhood of $\theta_0$, the Fisher--Rao geodesic
+  $\gamma^*$ from $\theta_0$ to $\theta_1$ is the unique locally optimal
+  embedding path: it minimizes the Riemannian length and, under
+  constant-speed parametrization, the path energy.  Consequently, in the
+  small-step regime, it also minimizes the leading-order term of the total
+  sequential detectability in \eqref{eq:sequential_kl}.
+
+  Globally, the same conclusion holds for any length-minimizing geodesic,
+  but uniqueness is not guaranteed in general.  A non-geodesic coordinate
+  path, such as a Euclidean straight line in an arbitrary chart, may incur
+  larger Fisher energy whenever it fails to satisfy the Fisher--Rao
+  geodesic equation.  Nonzero sectional curvature alone is not sufficient
+  to imply this failure: some Euclidean straight lines may still be
+  geodesics in special coordinate systems or special regions of the
+  manifold.
+\end{corollary}
+
+\noindent\textbf{Steganographic consequence.}
+For a generative embedder, the parameter trajectory is a relevant design
+variable whenever embedding is realized as a sequence of observable or
+physically meaningful operations, for example iterative sampling, MCMC
+transitions, or diffusion steps, or when the generator is sensitive to the
+order in which parameters are updated (e.g.\ numerical instability along
+non-geodesic paths).  In these settings the sequential-KL cost is a surrogate
+for the cumulative statistical footprint of the embedding process.  It should
+not be confused with the endpoint security criterion
+$\DKL(P_{\theta_1}\|P_{\theta_0})$: under the standard steganographic threat
+model in which the adversary observes only the final generated object, the
+endpoint KL remains the fundamental detectability measure.  The Fisher--Rao
+geodesic minimizes the sequential surrogate locally; whether this also reduces
+final-object detectability depends on the specific generator and threat model.
+
+\subsection{Explicit Geodesics for Gaussian Subfamilies}
+
+\begin{proposition}%[Full Gaussian geodesic -- Poincar{\'e} half-plane]
+  \label{prop:gaussian_full_geodesic}
+  For the univariate Gaussian family
+  $\{P_\theta=\mathcal{N}(\mu,\sigma^2):\mu\in\R,\sigma>0\}$,
+  the Fisher metric is
+  $g(\theta) = \sigma^{-2}\,\mathrm{diag}(1, 2)$.
+  The manifold is isometric (up to scale factor $\sqrt{2}$) to the
+  Poincar\'{e} upper half-plane $\mathbb{H}^2$.
+  Geodesics are either vertical lines ($\mu=\mathrm{const}$) or semicircles
+  centered on the $\sigma=0$ axis.
+\end{proposition}
+
+\begin{proof}
+  The coordinate change $y = \sigma\sqrt{2}$ transforms the metric to
+  $\mathrm{d}s^2 = 2(\mathrm{d}\mu^2 + \mathrm{d}y^2)/y^2$, which is
+  $2$ times the standard Poincar\'{e} metric on
+  $\mathbb{H}^2 = \{(\mu,y): y>0\}$ (see Appendix~\ref{app:gaussian_fisher}).
+  This map is a smooth diffeomorphism with smooth inverse
+  $\sigma = y/\sqrt{2}$; the constant rescaling by $2$ preserves
+  geodesics (it scales lengths by $\sqrt{2}$ uniformly).
+  Geodesics of $\mathbb{H}^2$ are well known: vertical lines and
+  semicircles orthogonal to the boundary $y=0$ (do Carmo~\cite{do2002riemannian}).
+\end{proof}
+
+\subsection{Amari--Chentsov \texorpdfstring{$\alpha$}{alpha}-Connections and Dual Affine Structure}
+\label{subsec:alpha_connections}
+
+The statistical manifold $\calS_{\calG}$ carries not only the Levi-Civita
+connection $\nabla^{(0)}$ of the Fisher--Rao metric, but also a one-parameter
+family of torsion-free affine connections that encode the geometry of
+exponential and mixture families.
+We use the standard Amari--Chentsov formalism for $\alpha$-connections and
+dual connections in information geometry; see Amari and Nagaoka
+\cite{amari2000methods}.
+
+\begin{definition}%[Amari--Chentsov $\alpha$-connection~\cite{amari2000methods}]
+  \label{def:alpha_connection}
+  For $\alpha\in\R$, the \emph{$\alpha$-connection} $\nabla^{(\alpha)}$ on
+  $\calS_{\calG}$ is defined in local coordinates by the Christoffel symbols
+  \begin{equation}
+    \Gamma^{(\alpha)}_{ij,k}(\theta)
+    \;=\; \E_{P_\theta}\!\left[
+      \left(\partial_i\partial_j\log p_\theta
+        + \frac{1-\alpha}{2}\,\partial_i\log p_\theta\,\partial_j\log p_\theta
+      \right)\partial_k\log p_\theta
+    \right].
+    \label{eq:alpha_christoffel}
+  \end{equation}
+  The cases $\alpha=0$, $\alpha=1$ (exponential, $e$-connection), and
+  $\alpha=-1$ (mixture, $m$-connection) are the most important:
+  $\nabla^{(0)}$ is the Levi-Civita connection of $g$; $\nabla^{(1)}$
+  and $\nabla^{(-1)}$ are flat on exponential families.
+\end{definition}
+
+\begin{definition}%[Dual connections~\cite{amari2000methods}]
+  \label{def:dual_connections}
+  Two connections $\nabla$ and $\nabla^*$ on $(\calS_{\calG},g)$ are
+  \emph{dual} if for all vector fields $X,Y,Z$:
+  \[
+    X\,g(Y,Z) \;=\; g(\nabla_X Y, Z) + g(Y, \nabla^*_X Z).
+  \]
+  The $\alpha$- and $(-\alpha)$-connections are dual:
+  $(\nabla^{(\alpha)})^* = \nabla^{(-\alpha)}$, and in particular
+  $\nabla^{(1)}$ ($e$-connection) and $\nabla^{(-1)}$ ($m$-connection)
+  form a dual pair with respect to the Fisher--Rao metric.
+\end{definition}
+
+For exponential families, the three canonical geodesic types have explicit
+coordinate descriptions:
+\begin{itemize}
+  \item \emph{$e$-geodesics} ($\nabla^{(1)}$): straight lines in natural
+        coordinates, $\gamma_e(t) = (1-t)\theta_0 + t\theta_1$.
+  \item \emph{$m$-geodesics} ($\nabla^{(-1)}$): straight lines in expectation
+        coordinates $\eta = \nabla\psi(\theta)$,
+        $\gamma_m(t) = \nabla\psi^{-1}((1-t)\eta_0 + t\eta_1)$.
+  \item \emph{Riemannian geodesics} ($\nabla^{(0)}$): curved in general in
+        both coordinate systems; computed numerically via
+        Algorithm~\ref{alg:geodesic_solver}.
+\end{itemize}
+
+The following generalized Pythagorean identity is a classical result of
+dually flat information geometry; see Amari and Nagaoka
+\cite{amari2000methods}.
+
+\begin{theorem}%[Generalised Pythagorean identity~\cite{amari2000methods}]
+  \label{thm:pythagorean}
+  Let $P, Q, R \in \calS_{\calG}$ be such that the $e$-geodesic from $Q$
+  to $R$ and the $m$-geodesic from $P$ to $Q$ meet orthogonally at $Q$
+  with respect to the Fisher--Rao metric.  Then:
+  \begin{equation}
+    \DKL(P \,\|\, R)
+    \;=\; \DKL(P \,\|\, Q) + \DKL(Q \,\|\, R).
+    \label{eq:pythagorean}
+  \end{equation}
+\end{theorem}
+
+This identity underlies both the geodesic optimality result
+(Section~\ref{sec:geodesics}) and the Detection Duality theorem
+(Section~\ref{sec:security}): in the exponential-family setting, the
+Neyman--Pearson statistic admits a local dual-affine interpretation through
+$m$-projection onto the $e$-geodesic direction connecting
+$\theta_c$ and $\theta_s$. The Pythagorean identity provides the geometric
+decomposition behind this local projection view.
+
+\paragraph{Numerical solver for geodesic equations.}
+
+\begin{algorithm}[t]
+\caption{Steganographic Geodesic Solver (RK4-Geo)}
+\label{alg:geodesic_solver}
+\KwIn{Initial position $\theta_0$, initial velocity $v_0\in T_{\theta_0}\calS_{\calG}$, step size $\Delta t$, number of steps $N_t$.}
+\KwOut{Trajectory $(\theta_0,\theta_1,\ldots,\theta_{N_t})$.}
+\For{$k=0,\ldots,N_t-1$}{
+  Compute $F(\theta_k)$ and $F^{-1}(\theta_k)$ (or rank-$r$ approximation)\;
+  Compute $\Gamma(\theta_k)$ via \eqref{eq:christoffel}\;
+  $a_k \leftarrow -\sum_{i,j}\Gamma^k_{ij}(\theta_k)\,v_k^i\,v_k^j$\tcp*{Geodesic acceleration}
+  $(\theta_{k+1},v_{k+1}) \leftarrow$ RK4 step on $(\dot\theta,\dot v)=(v,a)$ with step $\Delta t$\;
+}
+\Return $(\theta_0,\theta_1,\ldots,\theta_{N_t})$\;
+\end{algorithm}
+
+\begin{remark}%[RK4 error bound]
+  \label{rem:rk4_error}
+  For the Gaussian family, the Christoffel symbols satisfy
+  $|\Gamma^k_{ij}(\theta)| \leq C/\sigma$ for some constant $C>0$.
+  The local Lipschitz constant of the geodesic ODE is therefore
+  $L_G = O(1/\sigma_{\min})$, where $\sigma_{\min}$ is the minimum
+  $\sigma$ along the trajectory.  The global truncation error of RK4
+  after integrating over $[0,T]$ with $N$ steps is
+  $O(T \cdot (\Delta t)^4 \cdot \exp(L_G T))$ where $\Delta t = T/N$.
+  For $\sigma_{\min} \gtrsim 0.5$, this gives endpoint errors below
+  $10^{-12}$ with $N=1000$ steps (confirmed in Simulation~S1).
+\end{remark}
+
+% ============================================================
+\section{Natural Gradient Steganography (NG-Stego)}
+\label{sec:natural_gradient}
+% ============================================================
+
+\paragraph{Embedding as Riemannian optimization.}
+
+Encoding message $m$ with generator $\calG$ requires navigating from
+$\theta_0$ to $\theta_\mathrm{target}(m)$.
+We formulate this as the minimization of the \emph{embedding loss}:
+\begin{equation}
+  \mathcal{L}(\theta) \;=\; \DKL\!\left(P_\theta \,\|\, P_{\theta_\mathrm{target}}\right).
+  \label{eq:embedding_loss}
+\end{equation}
+
+\subsection{Message-to-Parameter Mapping: DecodeTarget}
+\label{subsec:decodetarget}
+
+Algorithms~\ref{alg:ng_stego} and~\ref{alg:ng_stego_constrained} call
+$\mathrm{DecodeTarget}(m, \mathcal{K})$, which maps a binary message
+$m\in\{0,1\}^L$ and a secret key $\mathcal{K}$ to a target parameter
+$\theta_{\mathrm{target}}\in\Theta$.
+We now make this construction explicit.
+
+\noindent\textbf{Voronoi partition of parameter space.}
+Let $N_{\mathrm{msg}} = 2^L$ be the message alphabet size.
+Choose a set of $N_{\mathrm{msg}}$ \emph{codepoint parameters}
+$\mathcal{C} = \{\theta^{(0)}, \ldots, \theta^{(N_{\mathrm{msg}}-1)}\}\subset\Theta$
+drawn pseudo-randomly using a keyed hash of $\mathcal{K}$
+(e.g.\ $\theta^{(i)} = f_{\mathcal{K}}(i)$ with $f_{\mathcal{K}}$ a
+deterministic hash-then-project function).
+These codepoints define a \emph{Fisher--Rao Voronoi partition} of $\Theta$:
+\[
+  \mathcal{V}_i \;=\; \bigl\{\theta\in\Theta : d_g(\theta, \theta^{(i)})
+  \leq d_g(\theta, \theta^{(j)})\;\;\forall\, j\neq i\bigr\}.
+\]
+The function $\mathrm{DecodeTarget}$ returns the codepoint for message $m$:
+\[
+  \mathrm{DecodeTarget}(m, \mathcal{K})
+  \;=\; \theta^{(\mathrm{int}(m))},
+\]
+where $\mathrm{int}(m)\in\{0,\ldots,N_{\mathrm{msg}}-1\}$ is the integer
+encoding of the bit string $m$.
+
+\noindent\textbf{Minimum codepoint separation.}
+Reliable decoding requires that the target parameters are well-separated.
+Define the \emph{minimum inter-codepoint distance}
+$d_{\min} = \min_{i\neq j} d_g(\theta^{(i)}, \theta^{(j)})$.
+A receiver who observes generated content $x\sim P_{\theta_{\mathrm{rec}}}$
+and estimates $\hat\theta = \argmax_\theta \log p_\theta(x)$ can decode
+correctly whenever $d_g(\theta_{\mathrm{rec}}, \theta^{(m)}) < d_{\min}/2$.
+The codepoints $\mathcal{C}$ should be chosen so that $d_{\min}$ is large
+relative to the Fisher--Rao estimation error
+$\sim d_g(\hat\theta, \theta^{(m)}) = O(n^{-1/2})$ (Cramer--Rao bound).
+
+\noindent\textbf{Practical instantiation.}
+For low-dimensional families ($d\leq 10$):
+\begin{enumerate}[label=(\arabic*)]
+  \item Sample $N_{\mathrm{msg}}$ candidate parameter vectors uniformly from
+        a bounded domain $\Theta_0\subset\Theta$.
+  \item Accept a set $\mathcal{C}$ such that all pairwise Fisher--Rao
+        distances exceed a threshold $\delta > 0$, via a greedy
+        max-min selection.
+  \item Store $\mathcal{C}$ as a shared secret (part of $\mathcal{K}$).
+\end{enumerate}
+This guarantees $d_{\min}\geq\delta$ by construction.
+For the low-dimensional codebook construction considered here, the maximum
+message length is controlled by the packing number of the admissible
+parameter region under the Fisher--Rao metric. In particular, if
+$N_{\mathrm{pack}}(\Theta_0,d_g,\delta)$ denotes the largest number of
+points in $\Theta_0$ with pairwise Fisher--Rao distance at least $\delta$,
+then the codebook size must satisfy
+\[
+2^L \leq N_{\mathrm{pack}}(\Theta_0,d_g,\delta),
+\qquad
+L \leq \log_2 N_{\mathrm{pack}}(\Theta_0,d_g,\delta).
+\]
+This is a geometric packing constraint, not an operational payload theorem.
+
+\noindent\textbf{Computational feasibility.}
+For non-compact natural parameter spaces (e.g., $\sigma>0$ in the
+Gaussian family), the uniform sampling in step~(1) is performed after
+a logarithmic reparametrisation $(\mu,\log\sigma)$ that maps the domain
+to $\R^{d}$.  The greedy max-min selection in step~(2) then runs in
+$O(N_{\mathrm{msg}}^{2}\cdot\mathrm{cost}(d_{g}))$; each Fisher--Rao
+distance $d_{g}$ is computed by numerical quadrature of the energy
+integral along the geodesic segment.  For the low-dimensional families
+studied in this paper ($d\leq 5$), this construction is tractable;
+for high-dimensional deep generators, the codebook must be replaced by
+a structured hash-to-parameter mapping whose Fisher separation is
+implicitly enforced by the architecture.
+
+\paragraph{The NG-Stego algorithm.}
+
+\begin{algorithm}[t]
+\caption{Natural-Gradient Steganography (NG-Stego)}
+\label{alg:ng_stego}
+\KwIn{Message $m\in\{0,1\}^L$, generator $\calG$ with parameters $\theta_0$, secret key $\mathcal{K}$, learning rate schedule $\{\eta_t\}$, batch size $N$, tolerance $\epsilon>0$.}
+\KwOut{Parameter vector $\theta^*$ such that $P_{\theta^*}$ encodes $m$ with $\DKL(P_{\theta^*}\|P_{\theta_\mathrm{target}})\leq\epsilon$.}
+$\theta_{\mathrm{target}} \leftarrow \mathrm{DecodeTarget}(m,\mathcal{K})$\;
+$t \leftarrow 0$\;
+\While{$\mathcal{L}(\theta_t) > \epsilon$}{
+  Sample $\{x_n\}_{n=1}^N \sim P_{\theta_t}$\;
+  $\hat F(\theta_t) \leftarrow \frac{1}{N}\sum_{n=1}^N \nabla_\theta\log p_{\theta_t}(x_n)\, \nabla_\theta\log p_{\theta_t}(x_n)^\top$\;
+  $g_t \leftarrow \nabla_\theta\mathcal{L}(\theta_t)$\;
+  $v_t \leftarrow \hat F(\theta_t)^{-1}\,g_t$\tcp*{Natural gradient}
+  $\theta_{t+1} \leftarrow \theta_t - \eta_t\,v_t$\tcp*{First-order retraction}
+  $t \leftarrow t+1$\;
+}
+\Return $\theta_T$\;
+\end{algorithm}
+
+\begin{proposition}%[NG-Stego as geodesic retraction]
+\label{prop:ng_geodesic_link}
+For the embedding loss $\mathcal{L}(\theta)=D_{\mathrm{KL}}(P_{\theta}\|P_{\theta_{\mathrm{target}}})$,
+the natural-gradient descent iteration of Algorithm~\ref{alg:ng_stego}
+with a sufficiently small step size is a first-order discretization of
+Riemannian gradient descent on $(\mathcal{S}_{\mathcal{G}},g)$.
+The condition $\eta_t\leq 1/\sqrt{\kappa(F(\theta_t))}$ is a conservative
+heuristic used in some simulations, not a universal convergence theorem.
+In the mean-only Gaussian constant-FIM quadratic case, a unit step
+$\eta=1$ reaches the target in one iteration.  For non-constant metrics,
+the iterates follow an approximate descent trajectory, not necessarily
+a connecting Fisher--Rao geodesic;
+see Bonnabel~\cite{bonnabel2013stochastic} for convergence of
+Riemannian gradient descent with retractions.
+\end{proposition}
+
+\subsection{Convergence Analysis}
+
+\begin{theorem}[Conditional rate for ideal Riemannian gradient descent]
+  \label{thm:ng_convergence}
+  Let $f(\theta)=D_{\mathrm{KL}}(P_\theta\|P_{\theta^*})$
+  have an interior minimizer $\theta^*$ on a geodesically convex
+  region $\mathcal U$ with $f(\theta^*)=0$.
+  Assume $f$ is geodesically $\mu$-strongly convex and
+  Riemannian $L_g$-smooth there, with $0<\mu\le L_g$.
+  Suppose the minimizing geodesic and each exponential-map update
+  $\theta_{t+1}=\operatorname{Exp}_{\theta_t}
+    (-L_g^{-1}\operatorname{grad}_g f(\theta_t))$
+  stay inside $\mathcal U$ and satisfy the usual descent lemma.
+  Then the \emph{ideal Riemannian} iterates obey
+  \begin{equation}
+    f(\theta_{t+1})\le
+    \left(1-\frac{\mu}{L_g}\right)f(\theta_t),
+    \qquad \kappa_g=L_g/\mu.
+    \label{eq:ng_rate}
+  \end{equation}
+  An analogous Euclidean rate holds under Euclidean strong convexity
+  and smoothness, with condition number $\kappa_e=L_e/\mu_e$,
+  for iterates staying in the corresponding region.
+  This theorem does \emph{not} provide a rate for the sampled-Fisher
+  \emph{coordinate update} in Algorithm~\ref{alg:ng_stego}:
+  that update is a first-order retraction and requires its own
+  step-size, metric-error, and region-invariance analysis.
+  Neither constant $F$ nor nonconstant $F$ alone determines
+  one-step convergence.
+\end{theorem}
+
+\begin{proof}
+By Riemannian smoothness and the exponential-map descent lemma,
+$f(\theta_{t+1})\le f(\theta_t)
+ -(2L_g)^{-1}\|\operatorname{grad}_g f(\theta_t)\|_g^2$.
+Geodesic strong convexity and $f(\theta^*)=0$ imply the
+Riemannian Polyak--\L ojasiewicz bound
+$\|\operatorname{grad}_g f(\theta_t)\|_g^2\ge2\mu f(\theta_t)$
+under the stated geodesic-domain assumptions. Substitution gives
+\eqref{eq:ng_rate}. No identification of the exponential map with
+Algorithm~\ref{alg:ng_stego}'s coordinate update is used.
+\end{proof}
+
+\begin{proposition}[Exact local Fisher--KL identity for a ReLU decoder]
+  \label{prop:relu_cell_kl}
+  Consider a Bernoulli generator with logits $h(z)$ and
+  $p_i(z)=\sigma(h_i(z))$. Let $z$ and target $z^*$ belong to the
+  \emph{same} open activation region of a piecewise-affine decoder,
+  where $h(z)=Az+b$, and suppose the pullback Fisher
+  $F(z)=A^\top\operatorname{diag}(p_i(z)(1-p_i(z)))A$
+  is positive definite. For
+  $f(z)=D_{\mathrm{KL}}(P_z\|P_{z^*})$, one has
+  \begin{equation}
+    \nabla f(z)=F(z)(z-z^*).\label{eq:relu_cell_exact}
+  \end{equation}
+  Thus the \emph{undamped exact-Fisher coordinate update} with
+  step size one reaches $z^*$ algebraically in one step.
+  The metric $F(z)$ need not be constant.
+\end{proposition}
+\begin{proof}
+For independent Bernoulli coordinates, writing $q_i=p_i(z^*)$,
+$\partial f/\partial h_i=p_i(1-p_i)(h_i(z)-h_i(z^*))$.
+Since both logits are given by the same affine map,
+$h(z)-h(z^*)=A(z-z^*)$. Applying the chain rule yields
+\eqref{eq:relu_cell_exact}.
+\end{proof}
+
+\begin{proposition}[One-step perturbation diagnostic]
+  \label{prop:relu_cell_inexact}
+  Under Proposition~\ref{prop:relu_cell_kl}, let
+  $e=z-z^*$, $m=\lambda_{\min}(F(z))>0$ and
+  $\delta=\|F(z)^{-1/2}(\widehat F(z)-F(z))F(z)^{-1/2}\|_2$.
+  For damping $\lambda\ge0$, define $\alpha=\delta+\lambda/m<1$.
+  If $0<\eta\le1$ and
+  $e^+=e-\eta(\widehat F+\lambda I)^{-1}\nabla f(z)$,
+  then
+  \begin{equation}
+    \|e^+\|_{F(z)}\le
+    \left(1-\eta+\eta\frac{\alpha}{1-\alpha}\right)
+    \|e\|_{F(z)}.\label{eq:relu_cell_inexact}
+  \end{equation}
+  In particular, $\alpha<1/2$ suffices for a strict \emph{single-step}
+  contraction. A multi-step convergence theorem additionally requires
+  control of successive Fisher matrices and activation-region crossings.
+\end{proposition}
+\begin{proof}
+In $F$-whitened coordinates set $B=F^{-1/2}(\widehat F+\lambda I)F^{-1/2}$.
+Then $\|B-I\|_2\le\alpha$ and
+$\lambda_{\min}(B)\ge1-\alpha>0$.
+Writing $e^+=(1-\eta)e+\eta(\widehat F+\lambda I)^{-1}
+(\widehat F+\lambda I-F)e$ and taking the Fisher norm yields
+\eqref{eq:relu_cell_inexact} by $\|B^{-1}(B-I)\|_2
+\le\alpha/(1-\alpha)$.
+\end{proof}
+
+\noindent\textbf{Scope for Algorithm~\ref{alg:ng_stego}.}
+The constant-Fisher quadratic Gaussian case in S2 has the required
+quadratic KL structure and a unit-step update, hence reaches the target
+in one step. For a general constant-Fisher model or a variable-Fisher
+model, one-step behavior cannot be inferred from metric constancy alone.
+In the ReLU VAE, the local identity applies only within a shared
+activation cell; it does not govern a trajectory crossing cells or
+establish global convergence. The per-iteration Monte-Carlo Fisher
+error must be measured before using the bound. In S2-EXT, the observed
+$2.1\times$ speedup is empirical and cannot determine $\kappa_g$ or
+prove that one-step convergence is impossible.
+
+\subsection{Constrained NG-Stego for Bounded Parameters}
+
+Many generator parameters have natural constraints ($\sigma > 0$ for
+variances, $\pi \in (0,1)$ for mixture weights).  Algorithm~\ref{alg:ng_stego}
+uses a first-order retraction that does not preserve these constraints.
+We propose the following modified algorithm:
+
+\begin{algorithm}[t]
+\caption{Constrained NG-Stego}
+\label{alg:ng_stego_constrained}
+\KwIn{Same as Algorithm~\ref{alg:ng_stego}; constraint functions $c_i(\theta) \leq 0$.}
+$\theta_{\mathrm{target}} \leftarrow \mathrm{DecodeTarget}(m,\mathcal{K})$\;
+$t \leftarrow 0$\;
+\While{$\mathcal{L}(\theta_t) > \epsilon$}{
+  Compute $\hat F(\theta_t)$ and $g_t$ as in Algorithm~\ref{alg:ng_stego}\;
+  $v_t \leftarrow \hat F(\theta_t)^{-1}\,g_t$\;
+  $\theta_{\mathrm{cand}} \leftarrow \theta_t - \eta_t\,v_t$\;
+  \For{each constraint $c_i$}{
+    \If{$c_i(\theta_{\mathrm{cand}}) > 0$}{
+      $\theta_{\mathrm{cand}} \leftarrow \Pi_{\{c_i \leq 0\}}(\theta_{\mathrm{cand}})$
+      \tcp*{Project onto this constraint (decoupled constraints assumed)}
+    }
+  }
+  $\theta_{t+1} \leftarrow \theta_{\mathrm{cand}}$\;
+  $t \leftarrow t+1$\;
+}
+\Return $\theta_T$\;
+\end{algorithm}
+
+\begin{remark}[Convergence with projection]
+  Algorithm~\ref{alg:ng_stego_constrained} enforces constraints one at a
+  time.  When the constraints are decoupled (e.g.\ box constraints on
+  individual coordinates) this procedure returns a feasible point; for
+  coupled constraints the iterate may require an additional projection
+  onto the intersection of the feasible sets.
+
+  If each feasible set $\{c_i \leq 0\}$ is geodesically convex and its
+  Euclidean projection is non-expansive in the Fisher metric, then the
+  convergence rate of Theorem~\ref{thm:ng_convergence} is preserved up to
+  a multiplicative distortion factor.  In particular, projection onto
+  the probability simplex is non-expansive in the Fisher metric induced
+  on the simplex, whereas projection onto the SPD cone via eigenvalue
+  clipping is non-expansive in the Euclidean spectral norm but not
+  necessarily in the Fisher metric.  A rigorous quantitative bound for
+  the Fisher-metric case would require
+  $\|\Pi(x)-\Pi(y)\|_g \leq (1+\delta_\Pi)\|x-y\|_g$; we leave a complete
+  analysis as an open problem.
+\end{remark}
+
+\subsection{Fisher Matrix Approximations for Deep Generators}
+
+For high-dimensional generators, two tractable approximations:
+
+\begin{definition}%[Diagonal NG-Stego]
+  \label{def:diagonal_ng}
+  Replace $\hat F(\theta)$ with $\hat F^{\mathrm{diag}}(\theta)$ from
+  \eqref{eq:diag_fisher}.  The update becomes
+  $\theta_{t+1}^i = \theta_t^i - \eta_t\,\partial_i\mathcal{L}(\theta_t) /
+  (\hat F^{\mathrm{diag}}_{ii}(\theta_t) + \delta)$,
+  where $\delta>0$ is a damping constant.  Cost: $O(d)$ per iteration.
+\end{definition}
+
+\begin{definition}%[K-FAC NG-Stego]
+  \label{def:kfac_ng}
+  For layered generators with parameters $\theta = (\theta^{(1)},\ldots,\theta^{(L)})$,
+  K-FAC approximates $F(\theta)$ as a block-diagonal matrix with
+  Kronecker-product blocks.  For a fully connected network with $L$ uniform
+  square layers of width $w$ and total parameters $d \approx L w^2$, each
+  layer-wise block costs $O(w^3)$ to invert, so the total per-step inversion
+  cost is $O(L\cdot w^3) = O(d^{3/2}/\sqrt{L})$, compared to $O(d^3)$ for the
+  full FIM; for typical fixed-depth architectures ($L$ constant), this reduces
+  the cost from cubic to $O(d^{3/2})$ (Martens \&
+  Grosse~\cite{martens2015optimizing}).
+  \emph{This definition is a theoretical extension only:}
+  no instantiation for steganographic generators is provided, and the
+  approximation quality (dependence on layer-wise separability, skip
+  connections, batch normalization) has not been validated empirically.
+  See Section~\ref{sec:discussion} for a discussion of scalability
+  avenues.
+\end{definition}
+
+The \emph{approximation quality} of the diagonal FIM can be quantified:
+if $\rho = \max_{i\neq j} |F_{ij}| / \sqrt{F_{ii}F_{jj}}$, then the
+relative error in the natural gradient direction satisfies
+$\|\natgrad^{\mathrm{diag}} - \natgrad\|_g / \|\natgrad\|_g \leq
+\rho\,d / (1 - \rho\,d)$ for $\rho < 1/d$.
+
+For a finite-sample score estimate, let
+$s_\theta(X)=\nabla_\theta\log p_\theta(X)$ and
+$\widehat F_N=N^{-1}\sum_{n=1}^N s_\theta(X_n)s_\theta(X_n)^\top$ for
+i.i.d. observations. If $s_\theta(X)$ is mean-zero and sub-Gaussian with
+scale $K$, standard sample-covariance concentration gives, with probability
+at least $1-\delta$,
+\[
+\|\widehat F_N-F(\theta)\|_{\mathrm{op}}
+\lesssim K^2\!\left[
+\sqrt{\frac{d+\log(2/\delta)}{N}}
++\frac{d+\log(2/\delta)}{N}\right]
+\]
+\cite{vershynin2018highdimensional}. If the right-hand side is
+$\epsilon_F<\lambda_{\min}(F)$, then $\widehat F_N$ is positive definite
+and
+\[
+\|\widehat F_N^{-1}-F^{-1}\|_{\mathrm{op}}
+\leq \frac{\epsilon_F}
+{\lambda_{\min}(F)\,[\lambda_{\min}(F)-\epsilon_F]}.
+\]
+This controls the local inverse-metric error under the stated tail and
+conditioning assumptions. It does not by itself bound geodesic or curvature
+error: those require control of the Fisher metric and its parameter
+derivatives along the path. We have not established such a propagated bound,
+so the NG convergence and geodesic-optimality theorems are not claimed for
+noisy empirical metrics without their stated assumptions.
+
+
+\begin{proposition}[Contraction under an inexact Fisher preconditioner]
+\label{prop:inexact_fisher_contraction}
+Let $F\succ0$ be constant and $J(e)=\tfrac12e^\top Fe$. For
+$\widehat F\succ0$ set
+$\delta=\|F^{-1/2}(\widehat F-F)F^{-1/2}\|_2<1$.
+The unit-step iteration $e^+=e-\widehat F^{-1}Fe$ obeys
+\begin{equation}
+\|e^+\|_F\le\frac{\delta}{1-\delta}\|e\|_F,
+\qquad \|e\|_F=(e^\top Fe)^{1/2}.
+\label{eq:inexact_fisher_contraction}
+\end{equation}
+Thus $\delta<1/2$ is a uniform sufficient contraction condition.
+For any fixed $\widehat F$, strict contraction holds if and only if
+all eigenvalues of $F^{-1/2}\widehat F F^{-1/2}$ exceed $1/2$.
+If $\lambda_{\min}(F)\ge m>0$ and
+$\|\widehat F-F\|_2\le\epsilon_F$, the stronger condition
+$\epsilon_F<m/2$ is sufficient.
+\end{proposition}
+\begin{proof}
+Write $A=F^{-1/2}\widehat F F^{-1/2}=I+\Delta$ and
+$u=F^{1/2}e$. Then $u^+=(I-A^{-1})u$ and
+$\|I-A^{-1}\|_2\le\|A^{-1}\|_2\|\Delta\|_2
+\le\delta/(1-\delta)$.
+The eigenvalues of $I-A^{-1}$ are $1-1/\lambda_i(A)$,
+so all their absolute values are below one exactly when
+$\lambda_i(A)>1/2$. Finally
+$\delta\le\epsilon_F/m$.
+\end{proof}
+The proposition is exact for this constant-Fisher quadratic model,
+which includes the mean-only Gaussian case in its natural metric.
+It is not a global NG-Stego convergence theorem for varying Fisher
+matrices or nonquadratic objectives. The covariance concentration
+bound above can imply $\epsilon_F<m/2$ with high probability for
+sufficiently many independent model-score samples, with dimension,
+tail scale and conditioning dependence as stated there; no universal
+finite-sample constant is claimed.
+
+% ============================================================
+\section{Curvature and Local Geometric Instability}
+\label{sec:curvature}
+% ============================================================
+
+\subsection{Riemann Curvature of the Steganographic Manifold}
+
+The Riemann curvature tensor is computed from the
+Christoffel symbols (eq.~\eqref{eq:christoffel}) via the standard formula
+\begin{equation}
+  R^l_{\,ijk} \;=\; \frac{\partial\Gamma^l_{jk}}{\partial\theta^i}
+  - \frac{\partial\Gamma^l_{ik}}{\partial\theta^j}
+  + \Gamma^l_{im}\Gamma^m_{jk} - \Gamma^l_{jm}\Gamma^m_{ik}.
+  \label{eq:riemann_coords}
+\end{equation}
+For the steganographic manifold with Fisher--Rao metric, the fully
+covariant components are $R_{ijkl} = g_{im}\,R^m_{\;jkl}$.
+The \emph{Ricci curvature tensor} is obtained by contraction:
+\begin{equation}
+  R_{ij} \;=\; R^k_{\;ikj} \;=\; g^{kl}\,R_{kilj},
+  \label{eq:ricci_tensor}
+\end{equation}
+and the \emph{scalar curvature} (recalled from
+Definition~\ref{def:scalar_curvature}) is
+\begin{equation}
+  R \;=\; g^{ij}\,R_{ij}.
+  \label{eq:scalar_curvature_sec8}
+\end{equation}
+The sign of $R$ distinguishes the local geometry:
+$R<0$ indicates hyperbolic behaviour, $R>0$ spherical behaviour, and
+$R=0$ flatness (see Lee~\cite{lee2006riemannian}).
+For the univariate Gaussian family, the constant sectional curvature
+$\kappa = -1/2$ (from the Poincar\'e metric with scale factor $\sqrt{2}$)
+yields scalar curvature $R(\theta) = 2\kappa = -1$ at every point,
+i.e., a \emph{constant} scalar curvature
+(Appendix~\ref{app:gaussian_fisher}).
+This illustrates that $R(\theta)$ is coordinate-invariant; it does
+\emph{not} vary with $\sigma$ for the Gaussian family.
+
+\subsection{Two Invariant Curvature Indices}
+
+We use two coordinate-invariant curvature indices based on standard
+Riemannian curvature notions; see Petersen~\cite{petersen2016riemannian}
+and Lee~\cite{lee2006riemannian}. 
+
+\begin{definition}%[Scalar curvature instability index~\cite{petersen2016riemannian,lee2006riemannian}]
+  \label{def:scalar_instability}
+  The \emph{scalar curvature instability index} at $\theta$ is the
+  Riemannian scalar curvature $R(\theta) = \tr_g(\mathrm{Ric})$
+  (Definition~\ref{def:scalar_curvature}).
+  As a coordinate-invariant scalar field on $\calS_{\calG}$, it provides
+  a global summary of local geometry:
+  \begin{itemize}
+    \item $R(\theta) < 0$: locally hyperbolic; neighboring geodesics separate
+          faster than in flat space, amplifying the sensitivity of embedding
+          paths to perturbations.
+    \item $R(\theta) > 0$: locally spherical; neighboring geodesics separate
+          more slowly than in flat space.
+    \item $R(\theta) = 0$: locally flat.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}%[Minimum sectional curvature~\cite{petersen2016riemannian}]
+  \label{def:min_sectional}
+  The \emph{minimum sectional curvature} at $\theta$ is the infimum of
+  $K(u,v)$ over all tangent two-planes:
+  \begin{equation}
+    K_{\sec}^{\min}(\theta)
+    \;=\; \inf_{\substack{u,v\,\in\, T_\theta\calS_{\calG} \\
+                          \|u\|_g=\|v\|_g=1,\;u\perp_g v}}
+          K(u,v),
+    \label{eq:min_sectional}
+  \end{equation}
+  where $u\perp_g v$ denotes orthogonality with respect to the Fisher--Rao
+  metric $g$.
+  This definition is coordinate-invariant: both the metric and the
+  Riemann tensor transform covariantly under reparameterisation.
+  In practice, $K_{\sec}^{\min}(\theta)$ is estimated by Monte-Carlo
+  sampling of $M$ random tangent planes drawn uniformly from the
+  Grassmannian $G(2, T_\theta\calS_{\calG})$
+  (Section~\ref{subsec:kmin_bootstrap}).
+\end{definition}
+
+\begin{remark}%[Why not coordinate-axis sectional curvatures]
+  \label{rem:no_coord_V}
+  One might consider aggregating the sectional curvatures of the
+  coordinate-axis planes $\mathrm{span}\{\partial_{\theta^i}, \partial_{\theta^j}\}$.
+  Such a sum is \emph{coordinate-dependent}: under a reparameterisation
+  $\phi:\Theta\to\Phi$ the coordinate planes change and the aggregate
+  changes accordingly.
+  It is therefore unsuitable for coordinate-invariant geometric conclusions
+  and is not used in this paper.
+  The scalar curvature $R(\theta)$ and the minimum sectional curvature
+  $K_{\sec}^{\min}(\theta)$ both avoid this defect.
+\end{remark}
+
+\begin{theorem}%[Curvature, Riemannian distance, and detectability]
+  \label{thm:curvature_instability}
+  Let $\theta^*\in\Theta$, $u\in T_{\theta^*}\calS_{\calG}$ with $\|u\|_g=1$,
+  and $\epsilon>0$ small.
+  \begin{enumerate}
+    \item[(i)] \emph{Geodesic distance and metric in normal coordinates:}
+          By definition of the exponential map at unit speed,
+          $d_g(\theta^*,\,\Exp_{\theta^*}(\epsilon u)) = \epsilon$ \emph{exactly}
+          (no curvature correction).
+          In geodesic normal coordinates centered at $\theta^*$, the Fisher--Rao
+          metric tensor satisfies
+          \begin{equation}
+            g_{ij}\!\bigl(\Exp_{\theta^*}(\epsilon u)\bigr)
+            \;=\; \delta_{ij}
+            - \frac{\epsilon^2}{3}\,R_{iajb}(\theta^*)\,u^a u^b
+            + O(\epsilon^3),
+            \label{eq:metric_normal_coords}
+          \end{equation}
+          so curvature modifies the local metric along the geodesic:
+          $K(u,v)<0$ expands it in directions perpendicular to $u$,
+          increasing the information cost of transverse deviations.
+    \item[(ii)] \emph{KL divergence expansion (with explicit cubic term):}
+          For exponential families in natural coordinates, with $u$ normalized by $g(\theta^*)$,
+          \begin{equation}
+            \DKL\!\left(P_{\theta^*+\epsilon u} \,\|\, P_{\theta^*}\right)
+            \;=\;
+            \frac{\epsilon^2}{2}
+            +
+            \frac{\epsilon^3}{3}\,
+            T_{ijk}(\theta^*)\,u^i u^j u^k
+            +
+            O(\epsilon^4),
+            \label{eq:kl_expansion_corrected}
+          \end{equation}
+          where $T_{ijk} = \E[\partial_i\ell\, \partial_j\ell\, \partial_k\ell]$
+          is the Amari--Chentsov skewness tensor.  The cubic term vanishes
+          for Gaussian families parameterized by mean only.
+    \item[(iii)] \emph{Geodesic path stability (Jacobi field):}
+          For a plane of sectional curvature $K(u,v)$:
+          $\|J(t)\| = t - \frac{K(u,v)}{6}\,t^3 + O(t^5)$.
+          If $K(u,v)<0$, neighboring geodesic paths diverge
+          \emph{super-linearly}.  In spaces of constant negative curvature,
+          $\|J(t)\| \geq \sinh(|K|^{1/2}t) / |K|^{1/2}$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  Part (i): the exact identity $d_g(\theta^*,\Exp_{\theta^*}(\epsilon u))=\epsilon$
+  is the definition of the exponential map at unit speed.
+  The metric expansion~\eqref{eq:metric_normal_coords} is the standard
+  normal-coordinate expansion of the Riemannian curvature tensor
+  (see Petersen~\cite{petersen2016riemannian}, Ch.~5, Lemma~5.4.1).
+  Part (ii) follows from the Bregman structure of the KL divergence
+  for exponential families; the cubic term is the third-order
+  derivative of the log-partition function.
+  Part (iii) is standard Riemannian geometry (see
+  Petersen~\cite{petersen2016riemannian}, Ch.~6--7).
+\end{proof}
+
+\begin{corollary}%[Curvature and embedding geometry]
+  \label{cor:curvature_instability}
+  \begin{enumerate}
+    \item[(i)] \emph{Path instability.}
+          In regions where $K_{\sec}^{\min}(\theta)\ll 0$,
+          neighboring geodesic paths diverge super-linearly.
+          Small perturbations of the initial embedding velocity induce
+          amplified deviations along the trajectory.
+    \item[(ii)] \emph{Capacity.}
+          The scalar curvature $R(\theta)$ provides a coordinate-invariant
+          summary of local geometry (see Remark~\ref{rem:two_faces_curvature}),
+          but its sign alone does \emph{not} determine the size of the
+          undetectable Fisher--Rao ball or the embedding capacity.
+          Whether $R<0$ enlarges or $R>0$ contracts the ball relative to
+          the flat case must be established by explicit numerical computation
+          of $\vol_g(B_g(\theta,r))$, not inferred from the Bishop--Gromov
+          upper bound alone (see Theorem~\ref{thm:bishop_gromov_hyperbolic},
+          Appendix~\ref{app:bishop_gromov_corrected}, and
+          verified numerically in Simulation~S3).
+    \item[(iii)] \emph{KL asymmetry.}
+          The skewness tensor $T_{ijk}$ governs directional
+          asymmetry in the local KL cost at cubic order, independently
+          of sectional curvature.
+  \end{enumerate}
+\end{corollary}
+
+\noindent\textbf{Steganographic consequence.}
+Curvature indices should be read as robustness and sensitivity diagnostics for
+the embedder. Strongly negative sectional curvature warns that nearby embedding
+directions may separate quickly, so small optimization or estimation errors can
+produce larger distributional deviations than endpoint KL alone suggests.
+
+\begin{remark}%[From geometric divergence to detectability, now quantitative]
+  \label{rem:bridge}
+  Theorem~\ref{thm:stein_exponent} (Section~\ref{sec:detection_duality})
+  provides a leading-order quantitative link:
+  the type-II error of the optimal NP steganalyzer decays as
+  $\exp(-n\,d_g(\theta_c,\theta_s)^2/2 + O(n\,d_g^3))$.
+  Geodesic path instability (Jacobi divergence) affects the embedder's
+  trajectory but is \emph{distinct} from the detection rate:
+  the former depends on sectional curvature $K(u,v)$ along the path,
+  the latter on the Fisher--Rao distance $d_g(\theta_c,\theta_s)$
+  between endpoints.
+  A rigorous bound linking \emph{accumulated path KL} to endpoint
+  detectability for paths with large Jacobi divergence is left as an open
+  problem; the scalar curvature $R(\theta)$ serves as a reliable
+  \emph{qualitative} predictor pending such a bound.
+\end{remark}
+
+\begin{lemma}[Local comparison between KL and Fisher distance]
+  \label{lem:kl_fisher_bound}
+  Let $\theta,\theta'$ belong to a convex natural-parameter region
+  $U$ of a regular exponential family, and assume
+  $0<mI\preceq F(\vartheta)\preceq MI$ for all $\vartheta\in U$.
+  Suppose a length-minimizing Fisher geodesic between these parameters
+  lies in $U$, so that $d_{g,U}$ is its intrinsic distance. Then
+  \begin{equation}
+    \frac{m}{2M}d_{g,U}(\theta,\theta')^2
+    \le D_{\mathrm{KL}}(P_\theta\|P_{\theta'})
+    \le\frac{M}{2m}d_{g,U}(\theta,\theta')^2.
+    \label{eq:kl_fisher_bound}
+  \end{equation}
+  For sufficiently close parameters in a smooth positive-definite region,
+  the sharper intrinsic local expansion is
+  \begin{equation}
+    D_{\mathrm{KL}}(P_\theta\|P_{\theta'})
+    =\tfrac12 d_g(\theta,\theta')^2+O(d_g^3).
+    \label{eq:kl_curvature_bound}
+  \end{equation}
+  Neither statement by itself gives an operational detection bound
+  from sectional curvature or a Jacobi-field separation.
+\end{lemma}
+\begin{proof}
+  For a regular exponential family in natural parameters, the
+  log-partition Bregman formula yields
+  $D_{\mathrm{KL}}(P_\theta\|P_{\theta'})
+  =\int_0^1(1-s)\,\Delta^\top F(\theta+s\Delta)\Delta\,ds$
+  with $\Delta=\theta'-\theta$; thus
+  $(m/2)\|\Delta\|_E^2\le D_{\mathrm{KL}}
+  \le(M/2)\|\Delta\|_E^2$.
+  The assumed metric bounds imply
+  $\sqrt m\|\Delta\|_E\le d_{g,U}(\theta,\theta')
+   \le\sqrt M\|\Delta\|_E$:
+  the first inequality holds along every curve in $U$, and the
+  second follows by using the straight segment in $U$ as a candidate.
+  Combining these inequalities proves \eqref{eq:kl_fisher_bound}.
+  The local expansion follows from smoothness and the common quadratic
+  leading term of KL and squared Fisher distance in normal coordinates.
+\end{proof}
+
+\noindent\textbf{Curvature-sensitive interpretation.}
+Negative sectional curvature can amplify some infinitesimal
+Jacobi-field separations (Theorem~\ref{thm:curvature_instability}(iii)).
+However, a separation expressed in Fisher norm must not be multiplied
+again by a coordinate-space minimum eigenvalue. Without additional
+regularity, observation assumptions, and a controlled conversion
+between distances, this phenomenon does not imply a lower bound on
+endpoint KL or improved statistical security. The role of curvature
+here is as a conditional diagnostic of path sensitivity.
+
+\subsection{Monte-Carlo Estimation of \texorpdfstring{$K_{\sec}^{\min}$}{Minimum Sectional Curvature} with Bootstrap Confidence}
+\label{subsec:kmin_bootstrap}
+
+The minimum sectional curvature $K_{\sec}^{\min}(\theta)$
+(Definition~\ref{def:min_sectional}) is estimated by sampling $M$ random
+tangent planes uniformly from the Grassmannian $G(2, T_\theta\calS_{\calG})$.
+Each sample $(u_i, v_i)$ is obtained by drawing two independent standard
+Gaussian vectors in $\R^d$, orthonormalising them with respect to the Fisher
+metric $g$ via the Gram--Schmidt process, and computing $K(u_i, v_i)$.
+
+\begin{proposition}%[Bootstrap confidence interval for $K_{\sec}^{\min}$]
+  \label{prop:kmin_confidence}
+  Let $K_1, \ldots, K_M$ be $M$ i.i.d.\ samples of the sectional curvature
+  at random Fisher-orthonormal tangent planes at $\theta$, and let
+  $m = K_{\sec}^{\min}(\theta)$ be the true minimum.
+
+  \textbf{Bias of the sample minimum.}
+  The Monte-Carlo estimator $\widehat{K}_{\sec}^{\min} = \min_i K_i$ is
+  \emph{upward-biased}, because $\P(K_i \leq m)=0$ for any finite sample
+  (the infimum over a continuous family is not attained at a generic
+  random plane), so $\widehat{K}_{\sec}^{\min} > m$ almost surely.
+  The bias decreases as $M^{-1/\alpha}$ where $\alpha$ is the tail index
+  of the curvature distribution near its minimum; for $M = 500$
+  (used in Simulation~S3) this provides a reliable upper bound on $m$.
+
+  \textbf{Bootstrap procedure.}
+  A confidence interval for the \emph{sampling uncertainty} of
+  $\widehat{K}_{\sec}^{\min}$ is obtained as follows:
+  \begin{enumerate}
+    \item Resample $K_1^*, \ldots, K_M^*$ with replacement from\\
+          $\{K_1, \ldots, K_M\}$.
+    \item Compute $(\widehat{K}_{\sec}^{\min})^* = \min_i K_i^*$.
+    \item Repeat $B$ times to obtain quantiles $q_{\alpha/2}$ and
+          $q_{1-\alpha/2}$.
+  \end{enumerate}
+  The interval $[q_{\alpha/2}, q_{1-\alpha/2}]$ quantifies the
+  uncertainty of $\widehat{K}_{\sec}^{\min}$.
+  The true minimum $m$ is almost surely more negative than $q_{\alpha/2}$;
+  a rigorous lower bound would require a grid search over a
+  discretisation of $G(2, d)$ (e.g., via the Pl\"{u}cker embedding).
+\end{proposition}
+
+% ============================================================
+\section{Numerical Simulations}
+\label{sec:simulations}
+% ============================================================
+
+We validate the theoretical contributions through seven numerical
+experiments.  All simulation code and data are provided in the
+supplementary material.
+
+% -------------------------------------------------------------------
+\subsection{Simulation S1: Geodesics on the 2D Gaussian Manifold}
+\label{sec:sim_s1}
+% -------------------------------------------------------------------
+
+Manifold: $\calS_{\calG}=\{\mathcal{N}(\mu,\sigma^2):\mu\in\R,\,\sigma>0\}$
+with Fisher metric $g=\mathrm{diag}(1/\sigma^2,\,2/\sigma^2)$.
+
+Results (Table~\ref{tab:s1}): endpoint errors at machine precision
+($\leq 5\times10^{-13}$), confirming the RK4 solver accuracy.
+The theoretical RK4 error bound
+$|\mathrm{error}| \leq C \cdot (\Delta t)^4 \cdot T \cdot \exp(L_G T)$
+with $L_G \sim 1/\sigma_{\min}$ is satisfied with substantial margin.
+Observed energy differences of $10.5$--$24.2\%$ are consistent with
+Corollary~\ref{cor:geodesic_optimality} under the sampled parameterizations,
+but also reflect speed parametrization; TC2 has equal path lengths and
+therefore does not demonstrate a geometric shortening
+(Figure~\ref{fig:s1}).  The variation in endpoint errors across test
+cases (three orders of magnitude, $2.2\times10^{-16}$ to
+$5\times10^{-13}$) reflects the condition number of the shooting
+Jacobian, which is largest for highly curved semicircular geodesics
+(TC4, TC1) and smallest for vertical geodesics (TC2).
+
+\begin{table*}[ht]
+  \centering
+  \caption{S1 -- Geodesic accuracy and energy improvement with error bounds.}
+  \label{tab:s1}
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{lcccccc}
+    \toprule
+    TC & $\ell_g^{\mathrm{ana}}$ & $\ell_g^{\mathrm{num}}$
+       & $\ell_g^{\mathrm{str}}$ & $\epsilon_{\mathrm{ep}}$ & RK4 bound & $\Delta E$ \\
+    \midrule
+    1 & 2.6124 & 2.6124 & 3.0000 & $2.36\times10^{-13}$ & $10^{-9}$ & 24.17\% \\
+    2 & 1.9605 & 1.9605 & 1.9605 & $2.22\times10^{-16}$ & $10^{-10}$ & 14.59\% \\
+    3 & 1.6388 & 1.6388 & 1.6979 & $1.78\times10^{-15}$ & $10^{-9}$ & 10.48\% \\
+    4 & 2.4929 & 2.4929 & 2.6910 & $4.96\times10^{-13}$ & $10^{-8}$ & 22.32\% \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\begin{figure*}[ht]
+  \centering
+  \includegraphics[width=0.85\linewidth]{s1_geodesics.pdf}
+  \caption{S1 -- Geodesic paths (solid blue) versus Euclidean straight
+    lines (dashed) on the Poincar\'{e} half-plane for four test
+    configurations.  The geodesics follow semicircular arcs orthogonal to
+    the $\sigma=0$ boundary. In TC2 the straight and geodesic paths have equal length; differing sampled energies can reflect the parameterization, not a shorter geometric path.}
+  \label{fig:s1}
+\end{figure*}
+
+% -------------------------------------------------------------------
+\subsection{Simulation S2: Natural Gradient on Diagonal Gaussian}
+\label{sec:sim_s2}
+% -------------------------------------------------------------------
+
+Model: $\mathcal{N}(\theta, \Sigma)$ with diagonal, fixed $\Sigma$,
+$d=50$, $\kappa(F)=100$.
+
+Results: NG-Stego converges in exactly 1 step (all 50 runs),
+Euclidean GD requires 586 mean iterations, confirming the
+$586\times$ speedup for the most favorable (diagonal, constant FIM) case.
+This is an illustrative favorable case, not a general upper bound
+on potential speedups; see S2-EXT for the non-diagonal case.
+
+\begin{table}[ht]
+  \centering
+  \caption{S2 -- Natural gradient on diagonal Gaussian ($d=50$,
+    $\kappa(F)=100$, 50 runs).}
+  \label{tab:s2}
+  \begin{tabular}{lcc}
+    \toprule
+    Metric & NG-Stego & Euclidean GD \\
+    \midrule
+    Mean iterations to convergence & $\mathbf{1.0}$ & $586.3$ \\
+    Std.\ iterations & $0.0$ & $0.0$ \\
+    Speedup ratio & \multicolumn{2}{c}{$\mathbf{586\times}$} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{Interpretation.}
+In this fixed-covariance Gaussian model, the KL objective is exactly
+quadratic in the mean and its Hessian equals the constant Fisher matrix.
+Consequently a unit-step natural-gradient update coincides with
+Newton's step and reaches the unique optimum. This result depends on
+the quadratic objective, not on metric constancy alone.
+Euclidean GD, which ignores the metric anisotropy, takes
+$O(\kappa(F)\log(1/\varepsilon))$ steps.  The $586\times$ speedup in Table~\ref{tab:s2} is specific to this
+quadratic numerical setup and is not a general upper bound. The
+separate S2-EXT campaign reports a smaller advantage
+(Figure~\ref{fig:s2ext}).
+
+% -------------------------------------------------------------------
+\subsection{Simulation S2-EXT: Natural Gradient on Full Gaussian (Non-Diagonal)}
+\label{sec:sim_s2ext}
+% -------------------------------------------------------------------
+
+Model: $P_\theta = \mathcal{N}(\mu, \Sigma)$
+with \emph{both} $\mu \in \R^2$ and $\Sigma \in \mathrm{SPD}_2$ as
+parameters, giving $\theta \in \R^5$ with \emph{non-diagonal,
+non-constant} Fisher metric.
+
+\begin{table}[ht]
+  \centering
+  \caption{S2-EXT -- NG-Stego on full Gaussian family (non-diagonal FIM).
+           30 random runs, $d=2$, $\epsilon=10^{-5}$.}
+  \label{tab:s2ext}
+  \begin{tabular}{lcc}
+    \toprule
+    Metric & Euclidean GD & NG-Stego \\
+    \midrule
+    Mean recorded iterations (200 cap) & $99.7$ & $\mathbf{53.9}$ \\
+    Std.\ iterations (sample) & $80.8$ & $43.4$ \\
+    Mean per-run speedup ratio & \multicolumn{2}{c}{$\mathbf{2.1\times}$} \\
+    Mean $\kappa(F(\theta^*))$ & \multicolumn{2}{c}{$14.8$} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure*}[ht]
+  \centering
+  \includegraphics[width=0.85\linewidth]{s2_nondiagonal.pdf}
+  \caption{S2-EXT -- Summary of convergence iterations for NG-Stego and
+    Euclidean GD on the full Gaussian family with non-diagonal
+    Fisher metric.  NG-Stego reduces the iteration count by $2.1\times$ on
+    average, though the advantage is smaller than the $586\times$ of the
+    diagonal case.}
+  \label{fig:s2ext}
+\end{figure*}
+
+\textbf{Discussion.}
+The mean per-run ratio $2.1\times$ (Table~\ref{tab:s2ext}) differs from the ratio of mean counts and is smaller than
+the $586\times$ of S2 because:
+\begin{enumerate}
+  \item The objective is not the same constant-Fisher quadratic as in
+        S2; nonconstant Fisher alone does not rule out one-step updates.
+  \item The condition number $\kappa(F) \approx 15$ varies across runs;
+        the advantage is largest for ill-conditioned points.
+  \item The natural gradient direction must be recomputed at each step
+        (unlike S2 where $F^{-1}$ is constant).
+  \item Conservative step-size adaptation
+        $\eta = \min(0.5, 1/\sqrt{\kappa(F)})$ prevents divergence
+        but slows convergence on well-conditioned instances.
+\end{enumerate}
+This simulation demonstrates that the NG advantage \emph{persists}
+beyond the trivial diagonal case, though the margin depends strongly
+on the local geometry.
+
+% -------------------------------------------------------------------
+\subsection{Simulation S2-ADAPTIVE: NG-Stego vs. Adam and RMSprop}
+\label{sec:sim_s2adaptive}
+% -------------------------------------------------------------------
+
+Same model as S2-EXT, comparing:
+\begin{itemize}
+  \item NG-Stego (exact FIM inverse)
+  \item NG-Stego-Diag (diagonal FIM approximation)
+  \item Adam ($\beta_1=0.9, \beta_2=0.999$, lr=$0.01$)
+  \item RMSprop ($\alpha=0.99$, lr=$0.001$)
+\end{itemize}
+
+\begin{table}[ht]
+  \centering
+  \caption{S2-ADAPTIVE -- Convergence comparison (20 runs, non-diagonal FIM).}
+  \label{tab:s2adaptive}
+  \begin{tabular}{lcccc}
+    \toprule
+    Method & Mean iters & Std & Min iters & Max iters \\
+    \midrule
+    Euclidean GD & $191.8$ & $34.4$ & $42$ & $200$ \\
+    \textbf{NG-Stego} & $\mathbf{40.7}$ & $67.0$ & $10$ & $200$ \\
+    NG-Stego-Diag & $62.5$ & $53.8$ & $13$ & $200$ \\
+    Adam & $170.1$ & $39.7$ & $83$ & $200$ \\
+    RMSprop & $200.0$ & $0.0$ & $200$ & $200$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure*}[ht]
+  \centering
+  \includegraphics[width=0.85\linewidth]{s2_adaptive_comparison.pdf}
+  \caption{S2-ADAPTIVE -- Convergence comparison across five optimisation
+    methods.  NG-Stego (blue) achieves the lowest mean iteration count;
+    RMSprop fails to converge within 200 iterations on all runs.
+    The diagonal approximation (green) offers a practical compromise at
+    $O(d)$ cost per iteration.}
+  \label{fig:s2adaptive}
+\end{figure*}
+
+\textbf{Discussion.}
+NG-Stego achieves the best mean iteration count among the tested methods
+in this synthetic setting (Table~\ref{tab:s2adaptive}),
+though the margin varies with problem conditioning:
+\begin{itemize}
+  \item The ratio of capped mean iteration counts is $\mathbf{4.7\times}$ for Euclidean GD versus NG-Stego and
+        $\mathbf{4.2\times}$ faster than Adam on average.
+  \item High variance ($\sigma = 67.0$) reflects sensitivity to initial
+        conditions: on well-conditioned instances NG converges in $\sim$10
+        iterations, but difficult initializations hit the 200-iteration cap.
+  \item The diagonal approximation (NG-Stego-Diag) achieves comparable
+        results to full NG at $O(d)$ cost, making it a candidate for
+        high-dimensional generators, though its accuracy depends on the
+        off-diagonal ratio $\rho$ (Appendix~\ref{app:diag_error},
+        Figure~\ref{fig:s2adaptive}).
+  \item RMSprop fails to converge within 200 iterations on all runs, suggesting that geometry-aware optimization can be important in this
+synthetic configuration.
+\end{itemize}
+
+% -------------------------------------------------------------------
+\subsection{Simulation S3: Curvature Map for Gaussian Mixtures}
+\label{sec:sim_s3}
+% -------------------------------------------------------------------
+
+Family: $P_\theta=\pi\mathcal{N}(\mu_1,1)+(1{-}\pi)\mathcal{N}(\mu_2,1)$,
+$\theta=(\pi,\mu_1,\mu_2)$, $\sigma=1$ fixed.
+Grid: $\pi\in[0.1,0.9]$, $\Delta\mu\in[0.3,4.0]$.
+
+\textbf{Computed quantities:}
+\begin{itemize}
+  \item \textbf{Scalar curvature $R(\theta)$:} computed as the trace
+        $\mathrm{tr}_g(\mathrm{Ric})$ for each grid point.
+        $R(\theta)$ ranges from $-7.404$ to $324.238$ (mean $11.515$),
+        revealing strong variation across the parameter space.
+        Negative values ($R \in [-7.4, -0.2]$ at interior points)
+        confirm the hyperbolic character of the GMM manifold in a
+        coordinate-invariant manner; large positive values ($R \approx 324$)
+        arise near degenerate configurations ($\pi \approx 0.1$ or $0.9$,
+        $\Delta\mu \approx 0.3$) where the Fisher metric is highly ill-conditioned
+        ($\kappa(F) \approx 96{,}528$).
+  \item \textbf{Bootstrap confidence for $K_{\sec}^{\min}$:}
+        $B=200$ bootstrap replicates of $M=500$ Monte-Carlo tangent-plane samples
+        from the Grassmannian $G(2, T_\theta\calS_{\calG})$, orthonormalised w.r.t.\
+        the Fisher metric, give $\widehat{K}_{\sec}^{\min}$ with descriptive resampling intervals, not a confidence interval for the true minimum.
+        The interval endpoints in the supplied data use the sampled minimum as the lower limit and must not be interpreted as coverage-valid confidence bounds on the true sectional-curvature minimum. At the most ill-conditioned point $(\pi=0.10, \Delta\mu=0.3)$:
+        $K_{\sec}^{\min} = -2.22$ [$-2.22$, $-0.40$] (Table~\ref{tab:s3revised}).
+        A naive tensor contraction with a repeated Einstein index can produce
+        spurious extreme values; using the coordinate-correct contraction gives
+        $K_{\sec}^{\min}\in[-4.0,\,-0.28]$
+        across the full grid.
+        Interior rows use the $12\times12$ fine grid ($M=500$); boundary rows
+        use the coarse $8\times8$ grid ($M=50$) because the fine grid does not
+        reach $\pi=0.1$.
+  \item \textbf{Grid convergence study:} comparing $8\times8$ and
+        $12\times12$ grids at matching points shows mean absolute difference in
+        $K_{\sec}^{\min}$ of $0.1$ (relative to the $[-4.0, -0.28]$ range),
+        confirming numerical stability of the curvature computation.
+  \item \textbf{Failure rate:} $0/208$ points ($0.0\%$) had finite-difference
+        failures; all FIM matrices were invertible after regularization.
+\end{itemize}
+
+\begin{table}[ht]
+  \centering
+  \caption{S3 -- Curvature summary at selected GMM parameter points.
+    $R(\theta)$: coordinate-invariant scalar curvature.
+    $\widehat{K}_{\sec}^{\min}$: Monte-Carlo minimum sectional curvature
+    (Fisher-orthonormal random Grassmannian planes; $M=500$ for the fine-grid
+    interior points and $M=50$ for the coarse boundary points).
+    Bootstrap percentile interval from $B=200$ replicates (a resampling diagnostic, not a calibrated 95\% confidence interval for the population minimum).}
+  \label{tab:s3revised}
+  \begin{tabular}{cccc}
+    \toprule
+    $(\pi, \Delta\mu)$ & $R(\theta)$ & $\widehat{K}_{\sec}^{\min}$ & Bootstrap interval \\
+    \midrule
+    $(0.50, 1.0)$ & $-4.24$ & $-1.12$ & [$-1.12$, $-0.58$] \\
+    $(0.50, 3.0)$ & $-3.64$ & $-1.04$ & [$-1.04$, $-0.66$] \\
+    $(0.10, 0.3)$ & $+324.2$ & $-2.22$ & [$-2.22$, $-0.40$] \\
+    $(0.90, 0.3)$ & $+324.0$ & $-0.77$ & [$-0.77$, $-0.71$] \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\noindent\textbf{Small-ball volume interpretation.}
+For a smooth $d$-dimensional Fisher--Rao manifold, the intrinsic local
+ball-volume expansion is
+\[
+  \frac{\vol_g(B_g(p,r))}{\omega_d r^d}
+  =1-\frac{R(p)}{6(d+2)}r^2+O(r^4),\qquad r\to0.
+\]
+At a point with negative scalar curvature, its leading small-radius
+correction is positive; this does not establish any operational embedding
+capacity or any finite-radius numerical estimate. We therefore do not
+report an empirical ball-volume comparison for the GMM without
+independently verifiable geodesic-ball samples and uncertainty estimates.
+The Bishop--Gromov comparison remains an upper bound under its global
+Ricci-lower-bound and completeness assumptions, not a demonstration of
+increased capacity for this GMM.
+
+% -------------------------------------------------------------------
+\subsection{Simulation S4: Geodesic vs. Euclidean Path}
+\label{sec:sim_s4}
+% -------------------------------------------------------------------
+
+We consider the Gaussian family
+$P_\theta=\mathcal{N}(\mu,\sigma^2 I_2)$ with
+$\theta=(\mu_1,\mu_2,\sigma)$, $\sigma>0$, and the
+corresponding Fisher metric
+$g=\operatorname{diag}(1,1,4)/\sigma^2$.
+
+\textbf{Convergence experiment.} We independently computed
+constant-Fisher-speed geodesics using the exact hyperbolic representation
+of this Gaussian model, and evaluated the same 50 seeded endpoint pairs
+(seed 123) and their Euclidean straight-line comparators at exact
+partition times $t=k/L$, with
+$L\in\{16,32,64,128,256,512,1024\}$. The reference energy was
+computed independently of the KL sums. The relative discrepancy
+$\left|2L\,\mathrm{KL}_{\mathrm{seq}}(\gamma,L)/E_F(\gamma)-1\right|$
+decreases as $L$ increases (Table~\ref{tab:s4}). At $L=1024$ it is
+$0.0403\%$ for geodesics and $0.0489\%$ for straight-line paths,
+averaged over the 50 pairs. The mean pairwise ratio
+$E_{\mathrm{geo}}/E_{\mathrm{str}}$ is $0.865107$; the corresponding
+mean KL ratio at $L=1024$ is $0.865108$. These numerical
+results support the fixed-curve asymptotic statement of
+Theorem~\ref{thm:geodesic_optimality} in this Gaussian example. They
+do not imply lower endpoint KL or improved endpoint-only steganalytic
+security: both paths have the same endpoints. The experiment uses independently evaluated trajectories and does not
+assign a significance level or a shooting-solver failure rate to these results.
+
+\begin{table}[ht]
+\centering
+\caption{S4 convergence: mean relative discrepancy $|2L\mathrm{KL}_{\mathrm{seq}}/E_F-1|$ (50 pairs), and mean KL ratio (geodesic/straight). The mean energy ratio is $0.865107$ for all resolutions.}
+\label{tab:s4}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{rccc}
+\toprule
+$L$ & Geo error (\%) & Straight error (\%) & KL ratio \\
+\midrule
+16 & 2.6065 & 3.1211 & 0.865914 \\
+32 & 1.2959 & 1.5621 & 0.865323 \\
+64 & 0.6463 & 0.7814 & 0.865168 \\
+128 & 0.3228 & 0.3908 & 0.865126 \\
+256 & 0.1613 & 0.1954 & 0.865113 \\
+512 & 0.0806 & 0.0977 & 0.865109 \\
+1024 & 0.0403 & 0.0489 & 0.865108 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{center}
+\includegraphics[width=0.95\linewidth]{s4_convergence_audit.png}
+\captionof{figure}{S4 convergence experiment with the corrected Fisher
+metric of the Gaussian family: the relative KL--energy discrepancies
+decrease with the partition resolution.}
+\label{fig:s4}
+\end{center}
+
+% -------------------------------------------------------------------
+\subsection{Simulation S5: MNIST VAE Latent-Space Embedding}
+\label{sec:sim_s5}
+% -------------------------------------------------------------------
+
+The previous simulations use low-dimensional parametric families where the
+Fisher metric, geodesics, and curvature are available in closed form or via
+standard ODE solvers. This experiment adds a controlled coding and detection
+diagnostic for the MNIST variational autoencoder (VAE)
+\cite{kingma2014vae}, which has a 2-D latent space and a Bernoulli decoder over
+the $28\times28$ pixels. The latent space inherits the decoder pullback Fisher metric
+\begin{equation}
+  F(z)=\sum_{i=1}^{784}\frac{1}{\pi_i(z)(1-\pi_i(z))}
+  \,\nabla_z\pi_i(z)\,\nabla_z\pi_i(z)^{\!\top}.
+\end{equation}
+A cover latent $z_0$ and target latent $z_1$ are the training-set mean
+encoder outputs for digits 0 and 1, respectively. Both path strategies use
+these same endpoints:
+\begin{itemize}
+  \item \textbf{Euclidean path:} linear interpolation $z(t)=(1-t)z_0+tz_1$.
+  \item \textbf{Fisher-preconditioned path:} iterative natural-gradient
+        preconditioning of the Euclidean endpoint loss
+        $\tfrac12\|z-z_1\|^2$, followed by an exact endpoint closure.
+        This finite-step construction is not a geodesic solver and is not
+        guaranteed to lower path energy.
+\end{itemize}
+
+For the illustrative four-point path code, each message selects one of four equally spaced
+points along either path (nominal capacity: 2 bits). The VAE encoder and nearest-codeword rule decode the
+image. The coding comparison also includes iMEC and Discop on the same fixed
+784-symbol Bernoulli channel $p_{\theta}(x\mid z_0)$: iMEC uses the authors'
+complete public \texttt{IMECEncoder}/\texttt{IMECDecoder} and MEC routines,
+with a channel adapter; Discop uses a Python port of the authors' Huffman
+encode/decode recursion with the same pixel probabilities. These are matched
+algorithm-level adaptations; they do not use iMEC's ImageTransformer or
+Discop's ImageGPT image model.
+All coding runtimes below are CPU timings for the public Python iMEC MEC
+implementation and the Python Discop recursion. The optimized C++ iMEC backend
+used for the original paper's timing results is not part of its public release;
+the original Discop Cython extension is likewise replaced by the stated Python
+port for this matched-channel experiment.
+
+For detection, 100 independently generated cover samples and 100 stego samples
+per method form each balanced held-out comparison. Pooled training uses 100
+training samples per method and 400 cover samples. We report a ResNet-18
+residual detector trained from scratch for eight epochs and a Rich-Model
+detector using all 34,671 SRM features with the reference FLD ensemble (200
+base learners and subspace dimension 200). The ResNet-18 is not pretrained.
+An ExtraTrees classifier on the same features is retained as an audit
+classifier. Percentile confidence intervals use 1,000 bootstrap resamples. We
+test 50 round trips for each payload length from one to four bits. Distortion is the empirical mean
+pixel MSE between each stego sample and the decoder's expected cover image
+$p_{\theta}(x\mid z_0)$; it is a reference-image proxy, not a paired-cover
+distortion measure.
+
+\begin{table*}[ht]
+  \centering
+  \caption{S5 -- Held-out, balanced cover-versus-stego detection. Accuracy and
+    ROC-AUC are reported with 95\% percentile-bootstrap intervals.}
+  \label{tab:s5}
+  \small
+  \begin{tabular}{lcccc}
+    \toprule
+    Method & ResNet-18 accuracy & ResNet-18 AUC & Rich-Model FLD accuracy & Rich-Model FLD AUC \\
+    \midrule
+    Euclidean path & $0.875\,[0.835,0.915]$ & $0.885\,[0.831,0.931]$ & $0.875\,[0.835,0.915]$ & $0.889\,[0.841,0.933]$ \\
+    Fisher-preconditioned path & $0.845\,[0.800,0.890]$ & $0.880\,[0.826,0.925]$ & $0.855\,[0.810,0.900]$ & $0.864\,[0.804,0.916]$ \\
+    iMEC channel adaptation & $0.540\,[0.510,0.570]$ & $0.579\,[0.501,0.654]$ & $0.495\,[0.485,0.500]$ & $0.501\,[0.421,0.583]$ \\
+    Discop channel adaptation & $0.510\,[0.490,0.530]$ & $0.500\,[0.414,0.579]$ & $0.510\,[0.490,0.530]$ & $0.513\,[0.433,0.595]$ \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\begin{table*}[ht]
+  \centering
+  \caption{S5 -- Matched-endpoint geometry and held-out coding diagnostics.}
+  \label{tab:s5coding}
+  \small
+  \begin{tabular}{lccccc}
+    \toprule
+    Method & Fisher energy & MSE to cover mean & Exact decode (reported test) & Encode (ms) & Decode (ms) \\
+    \midrule
+    Euclidean path & $7.777\times10^3$ & 0.1097 & 0.74 & 0.052 & 0.325 \\
+    Fisher-preconditioned path & $8.077\times10^3$ & 0.1079 & 0.80 & 0.088 & 0.228 \\
+    iMEC channel adaptation & -- & 0.0703 & 1.00 & 66.5 & 56.1 \\
+    Discop channel adaptation & -- & 0.0697 & 1.00 & 2.37 & 2.46 \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+The 64-segment Fisher energy of the Fisher-preconditioned path is 3.9\% higher
+than that of the Euclidean segment despite their identical endpoints. The
+pooled held-out AUCs are 0.693 for ResNet-18 and 0.698 for the Rich-Model FLD
+ensemble; per-method path-code AUCs range from 0.864 to 0.889. The iMEC and
+Discop FLD AUC intervals include 0.5. Both distribution-preserving coding
+adaptations decoded all 50 trials at each payload. Building the
+Fisher-preconditioned path took 546.7 s on the reported CPU; this setup cost is
+separate from the per-message encoding times in Table~\ref{tab:s5coding}. For detector evaluation, the path codebook uses $k_{\mathrm{det}}=2$, i.e., four fixed points. The separate round-trip evaluation reconstructs $2^k$ path codewords at each payload $k\in\{1,2,3,4\}$, including 16 codewords for $k=4$. The path decoder uses nearest-codeword latent decoding, as implemented in \texttt{benchmark\_s5\_comparison.py}.\par
+The latent path
+decoder's four-bit exact recovery was 74\% for the Euclidean codebook and 80\%
+for the Fisher-preconditioned codebook. These results are conditional on one
+cover latent and a small MNIST VAE. They do not establish security against
+adaptive detectors, generalization to natural-image benchmarks, or superiority
+of NG-Stego. The detector and coding procedures are reproducible in the
+supplementary benchmark script; implementation boundaries are detailed in its
+protocol note.
+
+
+\paragraph{Additional native-pipeline evidence and scope.}
+An independent, versioned campaign (protocol \texttt{v2.1-one-shot-500-20261028}, master seed 20261014) evaluates native upstream implementations independently of the common-channel MNIST-VAE comparison above. In its native text configuration, iMEC with GPT-2 and reconstructed WikiText-103 token files recovered 100 of 100 tested messages. The native Discop statistics driver, based on the upstream per-example loop, reports a mean embedding rate of 4.14291 bits/token for Transformer-XL/IMDb text (100,000 tokens) and 1.72580 bits/token for ImageGPT/CelebA image tokens (256,000 tokens). These native Discop rate summaries must not be interpreted as matched-channel security comparisons or deterministic, independently verified exact-decoding rates; its upstream driver uses \texttt{os.urandom}. A separate controlled Discop experiment records exact decoding of 100/100 text messages and 500/500 image messages. The controlled image experiment preserves the quantized token context, not the original unquantized RGB pixels.
+
+An independent neural evaluation on the same 500 source pairs uses
+ResidualCNN v1, a distinct detector with five fixed high-pass kernels
+on the generated lower image half, five source-grouped folds,
+training-only normalization, and inner-validation model selection.
+The prespecified detector-health control achieves macro ROC-AUC
+0.99028 (pair-bootstrap 95\% CI [0.98360, 0.99602]), exceeding
+its 0.8 acceptance threshold. For controlled Discop cover--stego pairs,
+the model yields macro ROC-AUC 0.50477 (95\% CI [0.47088, 0.53817]).
+These results provide a bounded empirical characterization under this
+particular detector, dataset and experimental protocol.
+ResidualCNN v1 and ResNet-18 are distinct neural architectures.
+The native iMEC image experiment awaits its original ImageTransformer
+checkpoint. The native and controlled evaluations complement the
+separate matched-channel MNIST-VAE diagnostics in
+Tables~\ref{tab:s5}--\ref{tab:s5coding}.
+The complete independent-neural fold artifacts and execution protocol
+are supplied with the supplementary materials; the native campaign's
+remote export is identified by its SHA-256 manifest.
+% ============================================================
+
+
+\section{Detection-Theoretic Interpretation}
+\label{sec:security}
+% ============================================================
+
+\subsection{Geometric Reformulation of Cachin's Criterion}
+
+\begin{theorem}%[Local geometric security approximation]
+  \label{thm:geometric_security}
+  Let $\gamma^*:[0,1]\to\calS_{\calG}$ be the geodesic from $\theta_0$
+  to $\theta_1$.  In the local regime $d_g(\theta_0,\theta_1)\to 0$:
+  \begin{equation}
+    \varepsilon(\mathcal{E}_{\gamma^*})
+    \;=\; \DKL(P_{\theta_1}\|P_{\theta_0})
+    \;=\; \frac{1}{2}\,d_g(\theta_0,\theta_1)^2
+    + O(d_g^3),
+    \label{eq:geometric_security_approx}
+  \end{equation}
+  The cubic coefficient depends on the orientation of KL and the
+  coordinate representation; the local quadratic approximation is
+  coordinate invariant. For Gaussian mean-only families with constant
+  Fisher metric, the equality is exact.
+\end{theorem}
+
+\begin{remark}%[Validity regime]
+Equation~\eqref{eq:geometric_security_approx} is a local, second-order
+approximation for regular smooth families. In natural coordinates of a
+regular exponential family with log-partition function $\psi$ and
+$\Delta=\theta_1-\theta_0$, the oriented divergence has the expansion
+\[
+ D_{\mathrm{KL}}(P_{\theta_1}\Vert P_{\theta_0})
+ =\tfrac12 g_{ij}\Delta^i\Delta^j
+ +\tfrac13 (\partial_i\partial_j\partial_k\psi)
+ \Delta^i\Delta^j\Delta^k+O(\|\Delta\|^4).
+\]
+The conversion from the coordinate quadratic form to $d_g^2$ also
+contains coordinate-dependent higher-order terms. Accordingly, the
+coefficient $1/3$ above must not be attached unmodified to $d_g^2$.
+No universal fourth-order bound or higher-order inversion of the
+security parameter is claimed without additional derivative bounds.
+\end{remark}
+
+% -----------------------------------------------------------------------
+% -----------------------------------------------------------------------
+\subsection{The Steganalyzer as an m-Projection}
+\label{sec:detection_duality}
+% -----------------------------------------------------------------------
+
+We now introduce the adversary into the geometric framework.
+The purpose of this subsection is not to propose a new operational
+steganalysis algorithm, but to reinterpret the optimal Neyman--Pearson
+test in exponential families through the affine geometry of information
+geometry.
+
+Throughout this subsection, we consider the binary testing problem
+\[
+H_0 : X_1,\ldots,X_n \sim P_{\theta_c},
+\qquad
+H_1 : X_1,\ldots,X_n \sim P_{\theta_s},
+\]
+where $\theta_c$ is the cover parameter and $\theta_s\neq\theta_c$ is the
+stego parameter.  Type-I and type-II errors are defined as
+\[
+\alpha_n = P_{\theta_c}(\text{reject }H_0),
+\qquad
+\beta_n = P_{\theta_s}(\text{accept }H_0).
+\]
+
+The following result gives an information-geometric form of the
+Neyman--Pearson test in exponential families.
+Its novelty is not that exponential families admit dual-affine coordinates
+(a classical result due to Amari and Nagaoka~\cite{amari2000methods}), but
+that the \emph{adversarial structure of the steganographic problem} endows
+this duality with a specific operational meaning: the embedder's optimal
+transport path is governed by the Levi-Civita ($\nabla^{(0)}$, Fisher--Rao)
+geometry, while the optimal steganalyzer's rejection region is an affine
+half-space in expectation coordinates, i.e.\ it is governed by the
+$m$-geometry ($\nabla^{(-1)}$).
+The normal to that half-space is the $e$-geodesic direction connecting
+$\theta_c$ and $\theta_s$.
+Thus the $\pm 1$ connection pair plays opposite and complementary roles for
+the two adversaries, a structural observation that we have not found in prior
+work on exponential families or on steganographic security.
+
+\begin{theorem}
+\label{thm:detection_duality}
+Let $\{P_\theta : \theta\in\Theta\}$ be a regular exponential family with
+sufficient statistic $T$, log-partition function $\psi$, natural parameter
+$\theta$, and expectation parameter
+$\eta(\theta)=\nabla\psi(\theta)$.
+Fix $\theta_c,\theta_s\in\Theta$ with $\theta_s\neq\theta_c$, and define
+\[
+\hat\eta_n
+=
+\frac{1}{n}\sum_{i=1}^n T(X_i).
+\]
+Then the following statements hold.
+
+\begin{enumerate}
+  \item[(i)] \emph{Log-likelihood ratio decomposition.}
+  The normalized log-likelihood ratio satisfies
+  \begin{equation}
+    \Lambda_n
+    :=
+    \frac{1}{n}
+    \sum_{i=1}^n
+    \log\frac{p_{\theta_s}(X_i)}{p_{\theta_c}(X_i)}
+    =
+    \bigl\langle
+      \theta_s-\theta_c,\,
+      \hat\eta_n-\eta_c
+    \bigr\rangle
+    -
+    \DKL(P_{\theta_c}\|P_{\theta_s}),
+    \label{eq:llr_decomp}
+  \end{equation}
+  where $\eta_c=\eta(\theta_c)$.
+
+  \item[(ii)] \emph{Neyman--Pearson region as an m-flat half-space.}
+  For any threshold $\tau$, the rejection region
+  $\{\Lambda_n>\tau\}$ is equivalent to
+  \begin{equation}
+    \mathcal{R}_{\tau}
+    =
+    \left\{
+      \hat\eta_n :
+      \bigl\langle
+        \theta_s-\theta_c,\,
+        \hat\eta_n
+      \bigr\rangle
+      >
+      c_{\tau}
+    \right\},
+    \label{eq:np_halfspace}
+  \end{equation}
+  for a constant $c_{\tau}$ depending on $\tau$, $\theta_c$, and
+  $\theta_s$.  Hence the Neyman--Pearson rejection boundary is affine in
+  expectation coordinates, i.e., it is m-flat.
+
+  \item[(iii)] \emph{Projection interpretation.}
+  In a dually flat exponential family, the e-geodesic joining
+  $\theta_c$ to $\theta_s$ is the natural-parameter segment
+  \[
+    \theta(t)=(1-t)\theta_c+t\theta_s,
+    \qquad t\in[0,1].
+  \]
+  The statistic
+  $\langle\theta_s-\theta_c,\hat\eta_n\rangle$ orders empirical
+  distributions according to their affine coordinate along the normal
+  direction to the m-flat Neyman--Pearson boundary.  Equivalently, the
+  optimal test can be interpreted geometrically as comparing the empirical
+  distribution with the e-geodesic direction connecting cover and stego
+  parameters through the dual affine structure.
+
+  More explicitly, when the m-projection of the empirical distribution onto
+  the e-geodesic segment exists and is unique, its coordinate
+  \[
+    t^*
+    =
+    \argmin_{t\in[0,1]}
+    \DKL\!\left(
+      P_{\hat\eta_n}
+      \,\middle\|\,
+      P_{\theta(t)}
+    \right)
+    \label{eq:m_projection_coordinate}
+  \]
+  is monotone with the Neyman--Pearson score in a neighbourhood of the
+  segment.  Thus thresholding the NP score is locally equivalent to
+  thresholding this projection coordinate.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+For an exponential family,
+\[
+  \log p_\theta(x)
+  =
+  \langle\theta,T(x)\rangle-\psi(\theta)+\log h(x).
+\]
+Therefore,
+\[
+  \log\frac{p_{\theta_s}(x)}{p_{\theta_c}(x)}
+  =
+  \langle\theta_s-\theta_c,T(x)\rangle
+  -
+  \bigl(\psi(\theta_s)-\psi(\theta_c)\bigr).
+\]
+Averaging over $n$ samples gives
+\[
+  \Lambda_n
+  =
+  \langle\theta_s-\theta_c,\hat\eta_n\rangle
+  -
+  \bigl(\psi(\theta_s)-\psi(\theta_c)\bigr).
+\]
+Using the exponential-family identity
+\[
+  \DKL(P_{\theta_c}\|P_{\theta_s})
+  =
+  \psi(\theta_s)-\psi(\theta_c)
+  -
+  \langle\theta_s-\theta_c,\eta_c\rangle,
+\]
+we obtain \eqref{eq:llr_decomp}.
+
+Part~(ii) follows immediately because the condition
+$\Lambda_n>\tau$ is equivalent to a linear inequality in
+$\hat\eta_n$.  Since expectation coordinates are m-affine coordinates,
+the rejection boundary is m-flat.
+
+Part~(iii) follows from the dual affine structure of exponential families:
+e-geodesics are affine in natural coordinates, whereas m-geodesics are
+affine in expectation coordinates.  The Neyman--Pearson statistic is the
+linear functional in expectation coordinates associated with the natural
+direction $\theta_s-\theta_c$.  The final statement is local because
+existence, uniqueness, and monotonicity of the m-projection coordinate can
+fail globally without additional convexity assumptions.
+\end{proof}
+
+\noindent\textbf{Steganographic consequence.}
+The optimal detector is not an external add-on to the embedding model: in
+exponential-family signal models, its Neyman--Pearson statistic is aligned with
+the same cover-to-stego parameter displacement that defines the embedding
+problem. This gives a common statistical coordinate system for analyzing
+embedding design and steganalysis.
+
+\begin{remark}[What Theorem~\ref{thm:stein_exponent} adds beyond classical Stein's lemma]
+The classical Stein's lemma identifies $-D_{\mathrm{KL}}(P_{\theta_c}\|P_{\theta_s})$
+as the optimal type-II error exponent for a simple binary hypothesis test.
+That result is well known.
+What is new here is the chain of connections it establishes in the
+steganographic setting: (i)~the Stein exponent is expressed via the
+Fisher--Rao distance $d_g(\theta_c,\theta_s)$ through the local KL expansion
+(Theorem~\ref{thm:geometric_security}), so that the parameter-space geometry
+directly governs detection difficulty; and (ii)~this connects to the embedder's
+problem, a small Fisher--Rao distance buys both low accumulated embedding
+distortion (Theorem~\ref{thm:geodesic_optimality}) and high type-II error for
+the steganalyzer.
+The local bound $\beta_n \lesssim \exp(-nd_g^2/2)$ thus closes the loop
+between the embedding geometry and the detection geometry, something that the
+endpoint-only security literature (Cachin, Fridrich--Ker) does not provide.
+\end{remark}
+
+\begin{theorem}%[Stein Error Exponent and Fisher--Rao Distance]
+\label{thm:stein_exponent}
+Under the conditions of Theorem~\ref{thm:detection_duality}, the optimal
+type-II error at fixed type-I level $\alpha\in(0,1)$ satisfies the Stein limit
+\begin{equation}
+  \lim_{n\to\infty}\frac{1}{n}\log\beta_n^{(\alpha)}
+  \;=\;-\DKL(P_{\theta_c}\|P_{\theta_s}).
+  \label{eq:stein_limit}
+\end{equation}
+Combined with Theorem~\ref{thm:geometric_security}, this gives
+\begin{equation}
+  \beta_n^{(\alpha)}
+  \;\lesssim\;
+  \exp\!\Bigl(-\tfrac{n}{2}\,d_g(\theta_c,\theta_s)^2
+              + O(n\,d_g(\theta_c,\theta_s)^3)\Bigr),
+  \label{eq:beta_exponent}
+\end{equation}
+so the type-II error decays exponentially in $n$ at leading rate
+$\frac{1}{2}d_g(\theta_c,\theta_s)^2$.
+In the local regime, the squared Fisher--Rao distance therefore gives the
+leading-order per-observation detection cost of the embedding.
+\end{theorem}
+
+\begin{proof}
+Equation~\eqref{eq:stein_limit} is the Chernoff--Stein lemma
+(\cite{cover2006elements}, Chernoff--Stein lemma).
+Equation~\eqref{eq:beta_exponent} follows by substituting the local
+approximation~\eqref{eq:geometric_security_approx}.\qed
+\end{proof}
+
+\begin{corollary}
+\label{cor:undetectable_ball}
+For cover parameter $\theta_c$, $n$ observations, and required type-II
+error $\beta\in(0,1)$, define the local asymptotic undetectability region
+\[
+  \mathcal{U}_n(\theta_c,\beta)
+  :=
+  \left\{
+    \theta_s\in\Theta :
+    \beta_n^{(\alpha)}(\theta_c,\theta_s)\geq\beta
+  \right\}.
+\]
+In the local regime $d_g(\theta_c,\theta_s)\to 0$, the Stein approximation
+implies the leading-order condition
+\[
+  d_g(\theta_c,\theta_s)^2
+  \lesssim
+  \frac{2\log(1/\beta)}{n}.
+\]
+Thus, to leading order, the local Fisher--Rao ball
+\[
+  B_g\!\left(
+    \theta_c,\sqrt{\frac{2\log(1/\beta)}{n}}
+  \right)
+\]
+provides a heuristic local asymptotic scale for the region in which
+the type-II error may remain above $\beta$. This is not a
+finite-sample lower bound on $\beta_n$ and is not a certified
+undetectability region without uniform remainder and testing bounds.
+
+The geometric quantity
+\[
+C_{\mathrm{geo}}^{(\mathrm{Stein})}
+=
+\log_2\vol_g\!\left(
+B_g\!\left(
+\theta_c,\sqrt{\frac{2\log(1/\beta)}{n}}
+\right)
+\right)
+\]
+should be interpreted as a local Fisher-ball packing proxy. It does not,
+by itself, constitute an operational payload capacity unless a codebook,
+decoder, estimation model, and reliability criterion are specified.
+\end{corollary}
+
+
+% -----------------------------------------------------------------------
+\subsection{Embedding Capacity and Geometry}
+\label{sec:capacity}
+% -----------------------------------------------------------------------
+
+\begin{definition}
+  \label{def:geometric_capacity}
+  The \emph{local geometric packing proxy} at security level $\varepsilon$
+  is
+  \[
+  C_{\mathrm{geo}}
+  =
+  \log_2 \vol_g\!\left(B_g(\theta_0,\sqrt{2\varepsilon})\right).
+  \]
+  This quantity measures the logarithmic Fisher--Rao volume of a local
+  distinguishability ball. It should not be interpreted as an operational
+  steganographic payload capacity without an explicit codebook, decoder,
+  sampling model, and reliability criterion.
+\end{definition}
+\begin{remark}%[Evaluation of geometric capacity]
+  \label{rem:capacity_evaluation}
+  The positivity and magnitude of $C_{\mathrm{geo}}$ depend on the explicit
+  geometry of $(\mathcal{S}_{\mathcal{G}},g)$ and must be evaluated
+  numerically for non-flat manifolds.
+  In particular, the sign of the scalar curvature $R(\theta)$ or the Ricci
+  curvature does not determine, by monotonicity alone, whether
+  $C_{\mathrm{geo}}>0$ or how large it is.
+  The Gaussian family has explicit hyperbolic geometry. For the
+  Gaussian-mixture family, an independently validated finite-radius
+  volume estimate remains necessary before making empirical capacity
+  claims.
+\end{remark}
+For Riemannian manifolds, the Bishop--Gromov comparison theorem relates
+geodesic ball volume to Ricci curvature.  We distinguish two cases:
+\begin{itemize}
+  \item \textbf{Non-negative Ricci curvature} ($\mathrm{Ric} \geq 0$):
+        volumes are bounded above by the Euclidean comparison
+        ($\vol(B_g(p,r)) \leq V_0(r) = \omega_d r^d$).
+  \item \textbf{Negative Ricci curvature}
+        ($\mathrm{Ric} \geq (d-1)K$ with $K < 0$):
+        the comparison space is hyperbolic $\mathbb{H}^d(K)$, whose
+        balls grow \emph{exponentially} in $r$.  The ratio
+        $\vol(B_g(p,r)) / V_K(r)$ is non-increasing and bounded by $1$,
+        but $V_K(r) \gg V_0(r)$ for $K < 0$.
+\end{itemize}
+The GMM family of \S\ref{subsec:mixture} has \emph{negative} scalar
+curvature at interior parameter points ($\pi\approx 0.5$,
+$\Delta\mu\approx 1$--$3$), as confirmed by Simulation~S3
+($R\in[-7.4,-2.3]$).
+Near degenerate configurations ($\pi\approx 0.1$ or $0.9$,
+$\Delta\mu\approx 0.3$, where $\kappa(F)\approx 96{,}528$),
+the scalar curvature turns strongly positive ($R\approx +325$),
+reflecting the spherical local geometry of ill-conditioned regimes.
+For the interior (negative-$R$) regime we apply the hyperbolic form:
+
+\begin{theorem}%[Bishop--Gromov for negative Ricci curvature]
+\label{thm:bishop_gromov_hyperbolic}
+Let $(\mathcal{M},g)$ be a complete $d$-dimensional Riemannian manifold with 
+$\operatorname{Ric} \geq (d-1)K$ for some $K<0$.  
+Let $V_{K}(r)$ denote the volume of a geodesic ball of radius $r$ in the 
+$d$-dimensional hyperbolic space of constant sectional curvature $K$.  
+Then for all $p\in\mathcal{M}$ and $r>0$:
+\[
+\frac{\operatorname{vol}(B_{g}(p,r))}{V_{K}(r)} \;\leq\; 1.
+\]
+Consequently, the geodesic ball volume is bounded above by the hyperbolic 
+comparison volume $V_{K}(r)$, which grows exponentially in $r$.  
+This bound is not tight enough to infer increased capacity without additional 
+upper bounds on Ricci curvature or explicit volume computation.  
+For mixture families, no numerical ball-volume assertion follows
+without independently checked integration and uncertainty estimates.
+\end{theorem}
+
+\begin{proof}
+The standard Bishop--Gromov theorem \cite[Thm.~III.4.2]{chavel2006riemannian} 
+states that if $\operatorname{Ric} \geq (d-1)K$, then 
+$\operatorname{vol}(B_{g}(p,r))/V_{K}(r)$ is non-increasing in $r$, where 
+$V_{K}(r)$ is the volume in the $d$-dimensional simply connected space form of 
+constant sectional curvature $K$.  
+For $K<0$ this is hyperbolic space $\mathbb{H}^{d}(K)$, whose ball volume 
+$V_{K}(r)$ grows exponentially in $r$.  
+The ratio bound follows from monotonicity at $r\to 0$, where the ratio 
+approaches $1$.  
+However, $\operatorname{vol}(B_{g}(p,r)) \leq V_{K}(r)$ is an \emph{upper} 
+bound; it does not imply that the actual volume exceeds the Euclidean 
+comparison $V_{0}(r)$.  
+A lower bound on $\operatorname{vol}(B_{g}(p,r))$ would require an upper bound 
+on $\operatorname{Ric}$, which is not provided by the Bishop--Gromov theorem.
+\end{proof}
+
+\begin{corollary}%[Capacity regime]
+\label{cor:capacity_regime}
+Consider the formal geometric log-volume proxy
+$C_{\mathrm{geo}}=\log_{2}\operatorname{vol}(B_{g}
+(\theta_{0},\sqrt{2\varepsilon}))$. It is not an operational
+payload capacity and need not be nonnegative.
+For a $d$-dimensional manifold with bounded sectional curvature
+$|K|\leq K_{\max}$, the leading-order flat-space approximation gives
+\[
+C_{\mathrm{geo}}>0
+\quad\Longleftrightarrow\quad
+(2\varepsilon)^{d/2}V_{d}>1,
+\]
+or equivalently
+$d\cdot\log_{2}(\sqrt{2\varepsilon})+\log_{2}V_{d}>0$,
+where $V_{d}$ is the volume of the unit ball in $\mathbb{R}^{d}$.
+Thus, for fixed dimension $d$, a positive value requires
+$\varepsilon>\frac12 V_{d}^{-2/d}$; for fixed $\varepsilon<\frac12$, only
+finitely many dimensions satisfy the inequality.
+In that formal positivity regime, the log-volume proxy is approximately
+\[
+C_{\mathrm{geo}}
+\;\approx\;
+\frac{d}{2}\log_{2}(2\varepsilon)+\log_{2}V_{d}
++O(\varepsilon\cdot K_{\max}).
+\]
+Outside this regime, the proxy is negative; no coding-capacity conclusion
+follows without an explicit packing normalization, codebook, decoder and
+reliability criterion.
+\end{corollary}
+
+\begin{remark}%[No curvature monotonicity]
+\label{rem:no_curvature_mono}
+The approximate formula above shows that, to leading order, 
+$C_{\mathrm{geo}}$ depends on the dimension $d$ and the security level 
+$\varepsilon$, not on the sign of the curvature.  
+The $O(\varepsilon\cdot K_{\max})$ correction is small in the local regime 
+$\varepsilon\ll 1$.  
+The sign of curvature alone does not determine operational capacity;
+validated geodesic-ball volumes and a specified coding protocol would
+be needed for any such conclusion.
+\end{remark}
+
+\begin{remark}%[The two faces of curvature]
+\label{rem:two_faces_curvature}
+Combining Theorems~\ref{thm:stein_exponent}, \ref{thm:bishop_gromov_hyperbolic}, 
+and Corollary~\ref{cor:curvature_instability}, we give a more precise account 
+of the role of curvature, which presents two opposite effects for the 
+steganographer:
+\begin{enumerate}
+\item \textbf{Capacity (detection perspective).}  
+The effect of negative Ricci curvature on embedding capacity cannot be inferred 
+from lower Ricci bounds alone.  
+Bishop--Gromov provides only an upper bound on ball volume via a hyperbolic 
+comparison space; it does not guarantee that the actual volume exceeds the 
+Euclidean case.  
+For the GMM family, a reliable finite-radius numerical comparison requires independently validated geodesic-ball integration and uncertainty estimates; no such capacity advantage is asserted here.
+Capacity advantages, if any, must be verified by direct computation for the 
+specific manifold.
+
+\item \textbf{Embedding stability (path perspective).}  
+Negative sectional curvature causes Jacobi fields to diverge 
+(Theorem~\ref{thm:curvature_instability}(iii)), making geodesic embedding 
+paths sensitive to initial velocity perturbations.  
+Negative curvature can therefore penalise the steganographer.
+\end{enumerate}
+These effects depend on the region of the parameter manifold.  
+For the GMM family, the sampled interior regime
+($\pi\approx 0.5$, $\Delta\mu\approx 1$--$3$, $R\in[-7,-2]$,
+$K_{\mathrm{sec}}^{\min}\approx -1.2$) supplies local curvature diagnostics.
+Their implications for finite-radius packing or operational payload require
+separate validated volume and decoding studies.
+The extreme boundary ($\pi\approx 0.1$, $\Delta\mu\approx 0.3$, $R\approx +325$, 
+$\kappa(F)\approx 96\,528$) has positive curvature, small undetectable balls, 
+and an ill-conditioned Fisher metric, and is doubly unfavourable.
+\end{remark}
+
+% ============================================================
+\subsection{Discussion and Limitations}
+\label{sec:discussion}
+
+\paragraph{Comparison scope.}
+The matched-channel S5 results compare coding and detection over one shared
+MNIST-VAE carrier distribution. Native upstream iMEC and Discop runs
+characterize their own language and image generators; the independently
+validated ResidualCNN analysis addresses controlled Discop image pairs.
+These evidence tracks differ in source populations, generators, representations,
+payload protocols, and detector-training conditions. Accordingly, ROC-AUCs
+are interpreted only within their corresponding evaluation designs, with no
+cross-track ranking or aggregation. The independent positive-control result
+qualifies the ResidualCNN pipeline for its specified test, rather than
+providing a measurement of NG-Stego security.
+
+% ============================================================
+
+\noindent\textbf{Reproducible sensitivity check (supplementary evidence).}
+For the exact constant-Fisher quadratic model of the inexact-preconditioner
+proposition, an eight-dimensional synthetic example evaluates nine relative
+perturbation levels $\delta\in\{0,0.05,0.1,0.2,0.3,0.4,0.49,0.55,0.7\}$,
+with 100 random symmetric perturbations per level (900 trials). The
+measured Fisher-norm error ratio satisfies the analytical upper bound
+$\delta/(1-\delta)$ in every trial. A deterministic extremal construction
+with relative error $\delta$ attains this factor, up to floating-point
+rounding. This is a numerical check of a constant-metric quadratic
+identity, not experimental evidence of convergence on deep generators.
+Source code and CSV records are supplied in the supplementary
+\texttt{research\_evidence} directory. In particular, the experiment
+does not address multi-step variation of $F(\theta)$ or the effect on
+computed Fisher--Rao geodesics.
+
+\subsubsection{Interpretation of Geodesic Embedding}
+
+A constant-speed minimizing Fisher geodesic has the least Fisher
+path energy among admissible connecting curves. Consequently it
+minimizes the leading-order sequential-KL path surrogate at fixed
+endpoints, under the conditions of Theorem~\ref{thm:geodesic_optimality}.
+This established geometric property is used here for steganographic
+trajectory diagnosis; it must not be read as minimizing endpoint
+statistical detectability. The Gaussian S4 convergence experiment supports the asymptotic energy--sequential-KL relationship under the consistent Fisher metric, without implying improved endpoint detectability. The $2.1\times$ speedup in S2-EXT is an algorithmic observation under its separate protocol.  As noted in Section~\ref{sec:geodesic_optimality},
+this does not imply a reduction of the endpoint divergence
+$\DKL(P_{\theta_1}\|P_{\theta_0})$ when only the final object is observed.
+
+\subsubsection{Path to Scalability for Deep Generators}
+
+The present framework is tractable for low-dimensional parametric families
+with available densities and scores ($d \leq 10$, e.g., Gaussian and GMM
+families).  For deep generators
+with $d \sim 10^6$--$10^8$, three approximation avenues exist:
+
+\begin{enumerate}
+  \item \textbf{Diagonal approximation.}  Cost $O(d)$ per iteration,
+        but error grows with the off-diagonal ratio $\rho$
+        (Appendix~\ref{app:diag_error}).  For convolutional generators,
+        $\rho$ may be small due to spatial locality.
+  \item \textbf{K-FAC.}  Kronecker-factored approximate curvature
+        reduces cost to $O(d^{3/2})$ but assumes separable layer-wise
+        structure, which may not hold for generators with skip
+        connections or attention mechanisms.
+  \item \textbf{Online natural gradient.}  Methods such as
+        Ollivier~\cite{ollivier2015riemannian} maintain a running estimate of $F^{-1}$ with
+        $O(d^2)$ memory, avoiding per-step inversion.  The trade-off
+        between approximation accuracy and forgetting factor remains
+        to be analyzed for steganographic objectives.
+\end{enumerate}
+
+\textbf{Verdict.}  None of these approximations has been validated for
+steganographic generators. The $2.1\times$ speedup observed for the full Gaussian (S2-EXT) suggests that Fisher-aware updates may remain beneficial beyond the constant-metric
+case, but whether this advantage persists for deep architectures is an
+open empirical question.
+
+\subsubsection{Comparison with Adaptive Methods}
+
+The S2-ADAPTIVE simulation shows that,
+in the tested synthetic setting, NG-Stego achieves a lower mean iteration
+count than Adam and RMSprop with their default hyperparameters. A plausible explanation is that the natural gradient directly accounts for
+the \emph{anisotropy} of the statistical manifold (captured by $F(\theta)$), while adaptive methods only estimate this anisotropy indirectly through gradient history.
+
+\subsubsection{Relation with Bregman Divergence}
+\label{subsec:bregman}
+
+For exponential families, the KL divergence can be expressed as a
+\emph{Bregman divergence} generated by the log-partition function $\psi$:
+\begin{equation}
+  \DKL(P_\theta \,\|\, P_{\theta'})
+  \;=\;
+  B_\psi(\theta' \,\|\, \theta)
+  \;=\;
+  \psi(\theta') - \psi(\theta)
+  - \langle\theta' - \theta,\, \nabla\psi(\theta)\rangle.
+  \label{eq:bregman_kl}
+\end{equation}
+Under this identification, the Fisher--Rao metric $g_{ij}=\partial_i\partial_j\psi$
+is the Hessian of the Bregman generator, and the geodesics of the
+$e$-connection correspond to straight lines in the natural parameter
+$\theta$ (i.e., Bregman straight lines).
+
+This duality has two immediate consequences for our framework.
+First, the exact unit-step update in the fixed-covariance Gaussian
+example follows because the KL loss is quadratic and its Hessian is the
+constant Fisher matrix. This must not be generalized to arbitrary
+diagonal exponential families; Proposition~\ref{prop:relu_cell_kl}
+gives a distinct variable-Fisher, locally exact case.
+Second, the Detection Duality theorem
+(Theorem~\ref{thm:detection_duality}) admits a local Bregman-geometric
+interpretation: when the relevant projection exists, is unique, and is
+locally monotone with the Neyman--Pearson score, the test can be viewed as
+thresholding the projection coordinate of the empirical model onto the
+$e$-geodesic direction.
+
+A full generalisation of Theorems~\ref{thm:completeness}
+and~\ref{thm:geodesic_optimality} to arbitrary Bregman divergences
+(not necessarily arising from exponential families) is a natural
+extension; similar Hessian-metric structures for lognormal and beta
+families have been studied in the information-geometry literature, and
+we leave a complete Bregman treatment for future work.
+
+
+
+\subsubsection{Limitations and Scope}\label{sec:limitations}
+
+The present work has several important limitations.
+
+First, most theoretical results are established under smooth exponential-family assumptions and may not directly extend to arbitrary deep generative models.
+
+Second, the optimality results derived in Sections~5 and~7 rely on local second-order Fisher approximations of the KL divergence.
+
+Third, the curvature-based analysis provides geometric indicators of embedding instability rather than direct operational local statistical surrogates.
+
+Fourth, the current experiments remain limited to low- or moderate-dimensional
+parametric and latent manifolds, including the two-dimensional MNIST VAE latent
+space.
+
+Finally, Simulation S5 adds a matched-channel operational diagnostic on one
+low-dimensional MNIST VAE, but it does not use the native pretrained image
+pipelines of iMEC and Discop or large-scale natural-image steganography
+datasets. The public iMEC image loader expects a CIFAR-10 ImageTransformer
+checkpoint that was unavailable for the native image campaign; native
+Discop uses an ImageGPT color-token distribution. These model-specific image
+spaces cannot serve as runs under the same MNIST VAE. The pinned upstream
+sources and asset requirements are recorded in the benchmark provenance note.
+The balanced held-out tests are specific to the chosen cover latent and message
+protocol. The Rich-Model FLD ensemble and residual-network results show that
+the path codebooks remain detectable under these diagnostics.
+A full evaluation against standard image steganalyzers on large datasets is
+left for future work. In particular, the Neyman--Pearson
+duality result assumes specified cover and stego distributions and a fixed
+likelihood-ratio test. It does not cover adaptive adversaries or learned
+steganalyzers trained to exploit Fisher-path or generator-specific artifacts.
+For fully specified simple hypotheses $H_0:X\sim P_C$ and
+$H_1:X\sim P_S$, the Neyman--Pearson likelihood-ratio test is most
+powerful at a fixed false-positive level among tests observing the
+\emph{same data}. A specialized geometry-aware or learned detector
+cannot exceed this \emph{ideal} power bound under those assumptions.
+This statement does not say that the implemented diagnostic detectors
+attain the ideal test, nor does it rule out strong adaptive detectors
+for composite or misspecified hypotheses, access to additional
+observations, or generator-aware latent-space attacks. We do not
+claim an adversarially trained encoder or measured robustness to
+such attacks. For the endpoint-distribution interpretation of S5,
+path energy alone gives neither an endpoint-KL value nor an exact
+detection-power prediction; observed detectability must be understood
+in the context of this particular separated codebook protocol.
+
+The S5 detectors are held out, but they expose the path codebooks
+(ResNet-18 AUC 0.880--0.885; Rich-Model FLD AUC 0.864--0.889). We therefore make no
+claim that NG-Stego is secure against these detectors or outperforms dedicated
+Rich-Model or residual-network steganalyzers
+\cite{fridrich2012rich,boroumand2019deep}.
+
+The smooth-theory results require the regularity and positive-definite Fisher
+information assumptions stated with each theorem. Softplus approximates ReLU
+in activation value; Lemma~\ref{lem:softplus_expectation} also bounds the expected activation-derivative error under a bounded preactivation density, but neither result gives a uniform bound on derivatives,
+Fisher matrices, geodesics, curvature, or optimization error. For a sample
+Fisher estimate formed from $m$ independent score vectors with sub-Gaussian
+norm bound $K$, concentration controls the matrix estimate at a rate depending
+on dimension and conditioning; translating that error into a path or optimizer
+bound additionally requires uniform control of the Fisher spectrum and its
+derivatives along the path. Such end-to-end bounds are not established here.
+Diffusion and GAN models with intractable likelihoods therefore require
+approximate scores or surrogate Fisher estimates, whose bias must be measured
+before applying the exact theorems.
+
+The quantity $C_{geo}$ is a local geometric packing proxy derived from
+Fisher-ball volume. It is not a bit-rate or an achievable payload. Although
+S5 uses a four-point (2-bit) path codebook for the held-out detector study and separately reconstructs $2^k$ latent codewords for each $k\in\{1,2,3,4\}$ in the round-trip study (16 codewords at four bits); it
+does not establish a general mapping from $C_{geo}$ to effective payload under
+noise, codebook growth, and channel estimation. Its iMEC and Discop rows use
+their complete public encoder/decoder algorithms on an adapter for the same
+Bernoulli VAE-pixel channel; they do not reproduce the authors' pretrained
+ImageTransformer or ImageGPT image-generation pipelines. Thus, the matched
+comparison is algorithm-level and conditional on this static pixel channel.
+
+Recent latent-space steganalysis for diffusion generators provides a relevant
+passive-adversary direction, while embedding-space methods for language models
+and enhanced prefix methods address different carrier and coding settings
+\cite{levecque2026targeted,westphal2026hide,pan2025rethinking}. Proactive
+orthogonal-moment watermarking instead traces marked generated content and is
+an active provenance mechanism, complementary to the passive likelihood-ratio
+analysis here \cite{wang2026focusdeepfakes,wang2026towardproactive}. Scene
+parsing and visible-infrared vehicle detection develop features for complex
+visual scenes, but are not steganalyzers; such features may inform future
+high-resolution detector design \cite{liu2024humanparsing,wang2024maskmamba}.
+Chaotic video encryption protects message confidentiality and can be composed
+with a hiding system, but it does not by itself establish cover
+indistinguishability or decoding reliability \cite{gao2025encryptstory,gao2025chaosreview}.
+
+\subsubsection{Open Problems}
+
+\begin{enumerate}
+  \item Tight quantitative bound linking sectional curvature to KL
+        divergence between distributions on neighboring geodesics
+        (Remark~\ref{rem:bridge}).
+  \item Efficient estimation of the minimum sectional curvature
+        $K_{\sec}^{\min}(\theta)$ and scalar curvature $R(\theta)$
+        during generator training.
+  \item Global geodesic uniqueness for non-positively curved
+        steganographic manifolds (Cartan--Hadamard analogue).
+  \item Game-theoretic interaction between geodesic encoding strategy
+        and adaptive steganalysis.
+\end{enumerate}
+
+% ============================================================
+
+
+
+
+\section{Conclusion}
+\label{sec:conclusion}
+% A07: inferential separation of the three independent evidence tracks
+
+% ============================================================
+
+The evidence consists of a matched MNIST-VAE comparison, separately
+documented native upstream coding experiments, and an independent controlled
+Discop detector assessment. Their AUCs are protocol-specific and are not
+combined into an overarching security comparison.
+
+We have established a Fisher--Rao geometric methodology for
+\emph{designing, analyzing, and diagnosing} generative steganographic
+embedding trajectories. The principal scientific contribution is the
+trajectory-level mathematical framework and its verifiable optimality
+and diagnostic statements under explicit assumptions. The algorithms
+and experiments illustrate its use; they do not assert a universal
+security or performance advantage. The framework comprises five theoretical and methodological
+contributions plus a sixth contribution in numerical diagnostics.
+
+\textbf{(C1)} A statistical signal-manifold formulation with an explicit metric-completeness condition for general exponential
+families and a direct completeness proof for the Gaussian family,
+with uniqueness of minimizing geodesics established for the Gaussian
+family (via the Poincar\'e isometry giving $\kappa=-1/2$) and locally
+within the injectivity radius for general families.
+\textbf{(C2)} A steganographic interpretation of the established
+chained-KL/Fisher-geodesic asymptotic result~\cite{pavlichin2016chained},
+using locally energy-minimizing geodesics as a sequential embedding surrogate
+in the small-step regime, illustrated by the corrected S4 convergence audit (mean energy ratio $0.865107$ and sequential-KL ratio $0.865108$ at $L=1024$). The reported energy comparison also depends on path parameterization. The matched-endpoint MNIST-VAE benchmark in
+Section~\ref{sec:sim_s5} does not show a Fisher-energy or detection advantage
+for its Fisher-preconditioned path; it is reported as a bounded operational
+diagnostic rather than validation of the geodesic-optimality theorem.
+\textbf{(C3)} A natural-gradient formulation of steganographic embedding,
+with a conditional rate for ideal exponential-map Riemannian descent and
+an exact local ReLU-cell Fisher--KL identity and inexact-Fisher step bound;
+these do not imply convergence of the full sampled-Fisher Algorithm~\ref{alg:ng_stego}
+across activation boundaries. The low-dimensional optimizer comparisons
+remain empirical rather than universal convergence guarantees.
+\textbf{(C4)} A curvature-based instability analysis using two
+coordinate-invariant indices: the scalar curvature $R(\theta)$ and the
+minimum sectional curvature $K_{\sec}^{\min}(\theta)$ (Monte-Carlo
+estimated over the Grassmannian), together with bootstrap resampling diagnostics.
+For the two-parameter univariate Gaussian family, $R = -1$ (constant); for GMMs, $R$ varies
+across the parameter space.
+\textbf{(C5)} The \emph{Detection Duality} theorem
+(Theorem~\ref{thm:detection_duality}): in regular exponential families,
+the Neyman--Pearson statistic admits a local dual-affine interpretation
+through the $m$-projection of the empirical distribution onto the
+$e$-geodesic direction connecting $\theta_c$ and $\theta_s$.
+The Stein type-II error exponent is
+$-D_{\mathrm{KL}}(P_{\theta_c}\|P_{\theta_s})$ for the cover-null convention, and in the local regime
+\[
+D_{\mathrm{KL}}(P_{\theta_c}\|P_{\theta_s})
+=
+\tfrac{1}{2}d_g(\theta_c,\theta_s)^2 + O(d_g^3).
+\]
+Consequently, a local Fisher ball of radius
+$\sqrt{2\log(1/\beta)/n}$ provides a leading-order heuristic scale, not a finite-sample
+guarantee that type-II error exceeds $\beta$.
+
+Together, contributions (C1)--(C5), complemented by the sixth
+contribution of numerical diagnostics described in Section~\ref{sec:sim_s4}, establish a local embedding-detection
+duality:
+the \emph{embedder} is modeled through Fisher--Rao transport paths on the
+statistical manifold, while the \emph{optimal Neyman--Pearson steganalyzer}
+admits a local dual-affine interpretation through projection onto the
+$e$-geodesic direction connecting cover and stego parameters. The
+structural $\pm1$-duality under Amari--Chentsov connections appears in the
+affine description of the detection geometry, whereas the embedding
+optimality result is governed by the Levi-Civita/Fisher--Rao geometry.
+
+The security analysis (Section~\ref{sec:security}) clarifies the
+Bishop--Gromov application for negative curvature regimes, provides
+explicit validity conditions for the capacity formula, and reveals the
+two-faces-of-curvature phenomenon: negative curvature yields a trade-off
+between \emph{potential} Fisher-ball volume expansion (governed by the explicit
+geometry of the Fisher--Rao ball, not by comparison-theorem monotonicity)
+and geodesic transport instability (amplified Jacobi-field divergence,
+cost for the embedder).
+
+\textbf{Scope statement.}
+The proposed methodology is validated on tractable statistical signal
+models (low-dimensional parametric families, $d \leq 10$) and, in
+Simulation~\ref{sec:sim_s5}, on a learned MNIST VAE whose latent space is
+also low-dimensional but whose decoder is a trained neural network.
+Extensions to high-capacity deep generators with $d \sim 10^6$--$10^8$
+require structured FIM approximations (diagonal, K-FAC, online NG) whose
+accuracy for steganographic objectives remains to be validated.
+The Detection Duality theorem applies to any exponential family;
+extending it to computationally bounded (neural) steganalyzers remains
+an open problem.
+
+%\printcredits
+
+\section*{Declarations}
+\begin{sloppypar}
+\textbf{Ethical Approval} This study does not contain any studies with
+human or animal subjects performed by any of the authors.
+\end{sloppypar}
+
+\noindent
+\begin{sloppypar}
+\textbf{Competing Interests} The authors declare they have no known
+competing financial interests or personal relationships that could have
+appeared to influence the work reported in this paper.
+\end{sloppypar}
+
+%\noindent
+%\begin{sloppypar}
+% Author-contribution details omitted for double-anonymous review.
+%\end{sloppypar}
+
+\noindent
+\begin{sloppypar}
+\textbf{Funding} This work has no funding.
+\end{sloppypar}
+
+\noindent
+\begin{sloppypar}
+\textbf{Availability of Data and Materials} The Python source code,
+simulation outputs, and reproduction scripts for the experiments
+(S1--S5, S2-EXT, S2-ADAPTIVE), together with the curvature-computation
+code and learned-model artifacts where applicable, are publicly available at
+\url{https://anonymous.4open.science/r/IG-based-Generative-Steganography-D255}.
+\end{sloppypar}
+
+%% Loading bibliography style file
+\bibliographystyle{cas-model1-num-names}
+%\bibliographystyle{cas-model2-names}
+
+% Loading bibliography database
+%\bibliography{cas-refs}
+\begin{thebibliography}{60}
+
+\bibitem{cachin1998information}
+C.~Cachin, An information-theoretic model for steganography, Information and Computation 192~(1) (2004) 41--56.
+
+\bibitem{rao1945information}
+C.~R. Rao, Information and the accuracy attainable in the estimation of statistical parameters, Bulletin of the Calcutta Mathematical Society 37 (1945) 81--91.
+
+\bibitem{fisher1925theory}
+R.~A. Fisher, Theory of statistical estimation, Mathematical Proceedings of the Cambridge Philosophical Society 22~(5) (1925) 700--725.
+
+\bibitem{amari1985differential}
+S.~Amari, Differential-Geometrical Methods in Statistics, vol.~28 of Lecture Notes in Statistics, Springer, New York, 1985.
+
+\bibitem{amari2000methods}
+S.~Amari, H.~Nagaoka, Methods of Information Geometry, vol.~191 of Translations of Mathematical Monographs, American Mathematical Society, Providence, RI, 2000.
+
+\bibitem{luo2023coverless}
+Y.~Luo, J.~Qin, X.~Xiang, Y.~Tan, Coverless image steganography based on generative adversarial network, Mathematics 8~(9) (2020) 1394.
+
+\bibitem{sparsamp2021}
+G.~Kaptchuk, T.~M. Jois, M.~Green, A.~D. Rubin, Meteor: cryptographically secure steganography for realistic distributions, in: Proceedings of the 2021 ACM SIGSAC Conference on Computer and Communications Security, Association for Computing Machinery, Virtual Event, Republic of Korea, 2021, pp. 1529--1548.
+
+\bibitem{imec2022}
+C.~Schroeder de Witt, S.~Sokota, J.~Z. Kolter, J.~Foerster, M.~Strohmeier, Perfectly secure steganography using minimum entropy coupling, in: Proceedings of the 11th International Conference on Learning Representations (ICLR), 2023.
+
+\bibitem{discop2023}
+J.~Ding, K.~Chen, Y.~Wang, N.~Zhao, W.~Zhang, N.~Yu, Discop: provably secure steganography in practice based on ``distribution copies'', in: Proceedings of the 2023 IEEE Symposium on Security and Privacy (SP), IEEE, San Francisco, CA, USA, 2023, pp. 2238--2255.
+
+\bibitem{ay2017information}
+N.~Ay, J.~Jost, H.~V. L\^{e}, L.~Schwachh{\"o}fer, Information Geometry, vol.~64 of Ergebnisse der Mathematik und ihrer Grenzgebiete, Springer, Cham, 2017.
+
+\bibitem{chentsov1982statistical}
+N.~N. Chentsov, Statistical Decision Rules and Optimal Inference, vol.~53 of Translations of Mathematical Monographs, American Mathematical Society, Providence, RI, 1982.
+
+\bibitem{amari1998natural}
+S.~Amari, Natural gradient works efficiently in learning, Neural Computation 10~(2) (1998) 251--276.
+
+\bibitem{pavlichin2016chained}
+D.~S. Pavlichin, T.~Weissman, Chained Kullback--Leibler divergences,
+in: 2016 IEEE International Symposium on Information Theory (ISIT),
+IEEE, 2016, pp.~580--584. doi:10.1109/ISIT.2016.7541365.
+
+\bibitem{fridrich2009steganography}
+J.~Fridrich, Steganography in Digital Media: Principles, Algorithms, and Applications, Cambridge University Press, Cambridge, UK, 2009.
+
+\bibitem{martens2015optimizing}
+J.~Martens, R.~Grosse, Optimizing neural networks with Kronecker-factored approximate curvature, in: Proceedings of the 32nd International Conference on Machine Learning, vol.~37 of Proceedings of Machine Learning Research, PMLR, Lille, France, 2015, pp. 2408--2417.
+
+\bibitem{pevny2010using}
+T.~Pevn\'y, T.~Filler, P.~Bas, Using high-dimensional image models to perform highly undetectable steganography, in: Proceedings of the 12th International Workshop on Information Hiding, vol.~6387 of Lecture Notes in Computer Science, Springer, Berlin, Heidelberg, 2010, pp. 161--177.
+
+\bibitem{fridrich2012rich}
+J.~Fridrich, J.~Kodovsk\'y, Rich models for steganalysis of digital images, IEEE Transactions on Information Forensics and Security 7~(3) (2012) 868--882.
+
+\bibitem{boroumand2019deep}
+M.~Boroumand, M.~Chen, J.~Fridrich, Deep residual network for steganalysis of digital images, IEEE Transactions on Information Forensics and Security 14~(5) (2019) 1181--1193.
+
+\bibitem{moulin2003information}
+P.~Moulin, J.~A. O'Sullivan, Information-theoretic analysis of information hiding, IEEE Transactions on Information Theory 49~(3) (2003) 563--593.
+
+\bibitem{filler2011minimizing}
+T.~Filler, J.~Judas, J.~Fridrich, Minimizing additive distortion in steganography using syndrome-trellis codes, IEEE Transactions on Information Forensics and Security 6~(3) (2011) 920--935.
+
+\bibitem{pennec2006riemannian}
+X.~Pennec, P.~Fillard, N.~Ayache, A Riemannian framework for tensor computing, International Journal of Computer Vision 66~(1) (2006) 41--66.
+
+\bibitem{ziegler2019neural}
+Z.~M. Ziegler, Y.~Deng, A.~M. Rush, Neural linguistic steganography, in: Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP), Association for Computational Linguistics, Hong Kong, China, 2019, pp. 1210--1215.
+
+\bibitem{zhang2021generative}
+Z.~Zhang, J.~Liu, Y.~Ke, Y.~Lei, J.~Li, M.~Zhang, X.~Yang, Generative steganography by sampling, IEEE Access 7 (2019) 118586--118597.
+
+\bibitem{nielsen2020elementary}
+F.~Nielsen, An elementary introduction to information geometry, Entropy 22~(10) (2020) 1100.
+
+\bibitem{bonnabel2013stochastic}
+S.~Bonnabel, Stochastic gradient descent on Riemannian manifolds, IEEE Transactions on Automatic Control 58~(9) (2013) 2217--2229.
+
+\bibitem{villani2009optimal}
+C.~Villani, Optimal Transport: Old and New, vol.~338 of Grundlehren der mathematischen Wissenschaften, Springer, Berlin, 2009.
+
+\bibitem{peyre2019computational}
+G.~Peyr\'e, M.~Cuturi, Computational optimal transport, Foundations and Trends in Machine Learning 11~(5--6) (2019) 355--607.
+
+\bibitem{moskowitz2018assuring}
+R.~Bharadwaj, I.~S. Moskowitz, Assuring autonomy, in: STO Meeting Proceedings STO-MP-IST-166, NATO Science and Technology Organization, 2018, paper~2.
+
+\bibitem{petersen2016riemannian}
+P.~Petersen, Riemannian Geometry, 3rd Edition, vol.~171 of Graduate Texts in Mathematics, Springer, 2016.
+
+\bibitem{do2002riemannian}
+M.~P. do~Carmo, Riemannian Geometry, 1st Edition, Birkh{\"a}user, Boston, 1992.
+
+\bibitem{lee2006riemannian}
+J.~M. Lee, Riemannian Manifolds: An Introduction to Curvature, vol.~176 of Graduate Texts in Mathematics, Springer, New York, 1997.
+
+\bibitem{lauritzen1987statistical}
+S.~L. Lauritzen, Statistical manifolds, in: Differential Geometry in Statistical Inference, vol.~10 of Lecture Notes--Monograph Series, Institute of Mathematical Statistics, Hayward, CA, 1987, pp. 163--216.
+
+\bibitem{amari2012differential}
+S.~Amari, Differential-Geometrical Methods in Statistics, vol.~28 of Lecture Notes in Statistics, Springer, New York, 2012, reprint of the 1985 edition.
+
+\bibitem{brown1986fundamentals}
+L.~D. Brown, Fundamentals of Statistical Exponential Families with Applications in Statistical Decision Theory, vol.~9 of Lecture Notes--Monograph Series, Institute of Mathematical Statistics, Hayward, CA, 1986.
+
+\bibitem{ho2020denoising}
+J.~Ho, A.~Jain, P.~Abbeel, Denoising diffusion probabilistic models, in: Advances in Neural Information Processing Systems, vol.~33, 2020, pp. 6840--6851.
+
+\bibitem{kingma2014vae}
+D.~P. Kingma, M.~Welling, Auto-encoding variational Bayes, in: Proceedings of the 2nd International Conference on Learning Representations (ICLR), 2014.
+
+\bibitem{goodfellow2014generative}
+I.~J. Goodfellow, J.~Pouget-Abadie, M.~Mirza, B.~Xu, D.~Warde-Farley, S.~Ozair, A.~Courville, Y.~Bengio, Generative adversarial nets, in: Advances in Neural Information Processing Systems, vol.~27, 2014, pp. 2672--2680.
+
+\bibitem{cover2006elements}
+T.~M. Cover, J.~A. Thomas, Elements of Information Theory, 2nd Edition, Wiley-Interscience, Hoboken, NJ, 2006.
+
+\bibitem{chavel2006riemannian}
+I.~Chavel, Riemannian Geometry: A Modern Introduction, 2nd Edition, vol.~98 of Cambridge Studies in Advanced Mathematics, Cambridge University Press, Cambridge, 2006.
+
+\bibitem{ollivier2015riemannian}
+Y.~Ollivier, Riemannian description of a learning system with Schr{\"o}dinger bridge, arXiv preprint arXiv:1506.04958 (2015).
+
+\bibitem{boothby1986differentiable}
+W.~M. Boothby, An Introduction to Differentiable Manifolds and Riemannian Geometry, 2nd Edition, Academic Press, Orlando, FL, 1986.
+
+\bibitem{levecque2026targeted}
+E.~Levecque et al., Targeted pooled latent-space steganalysis applied to generative steganography, with a fix, in: Proceedings of the IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2026, doi:10.1109/ICASSP55912.2026.11464379.
+
+\bibitem{westphal2026hide}
+C.~Westphal, K.~Navaie, F.~E. Rosas, Hide and seek in embedding space: Geometry-based steganography and detection in large language models, arXiv:2601.22818, 2026.
+
+\bibitem{pan2025rethinking}
+C.~Pan et al., Rethinking prefix-based steganography for enhanced security and efficiency, IEEE Transactions on Information Forensics and Security 20 (2025) 3287--3301.
+
+\bibitem{wang2026focusdeepfakes}
+C.~Wang et al., Focus on finding deepfakes: A robust proactive detection method based on orthogonal moment watermarking, IEEE Transactions on Image Processing 35 (2026) 3507--3521, doi:10.1109/TIP.2026.3678069.
+
+\bibitem{wang2026towardproactive}
+C.~Wang et al., Toward robust proactive deepfake detection via orthogonal moment watermarking, IEEE Transactions on Dependable and Secure Computing 23 (4) (2026) 9387--9399, doi:10.1109/TDSC.2026.3692272.
+
+\bibitem{liu2024humanparsing}
+Y.~Liu et al., From simple to complex scenes: Learning robust feature representations for accurate human parsing, IEEE Transactions on Pattern Analysis and Machine Intelligence 46 (8) (2024) 5449--5462, doi:10.1109/TPAMI.2024.3366769.
+
+\bibitem{wang2024maskmamba}
+S.~Wang et al., Mask-guided mamba fusion for drone-based visible-infrared vehicle detection, IEEE Transactions on Geoscience and Remote Sensing 62 (2024), doi:10.1109/TGRS.2024.3452550.
+
+\bibitem{gao2025encryptstory}
+S.~Gao et al., Encrypt a story: A video segment encryption method based on the discrete sinusoidal memristive Rulkov neuron, IEEE Transactions on Dependable and Secure Computing 22 (6) (2025) 8011--8024, doi:10.1109/TDSC.2025.3603570.
+
+\bibitem{gao2025chaosreview}
+S.~Gao et al., Chaos-based video encryption techniques: A review, Computer Science Review 58 (2025) 100816, doi:10.1016/j.cosrev.2025.100816.
+
+\bibitem{vershynin2018highdimensional}
+R.~Vershynin, High-Dimensional Probability: An Introduction with Applications in Data Science, Cambridge University Press, Cambridge, 2018.
+
+\end{thebibliography}
+
+\appendix
+
+\section{Proof of Theorem~\ref{thm:completeness} (Geodesic Completeness)}
+\label{app:completeness}
+
+For an exponential family with natural parameter space $\Theta$ and
+log-partition function $\psi$, the Fisher metric is
+$g_{ij}(\theta) = \partial_i\partial_j\psi(\theta)$.  For a regular full exponential family, the natural parameter set is
+convex, and the Fisher metric is the Hessian of a strictly convex
+log-partition function; these facts alone do not imply metric
+completeness.
+
+For the Gaussian family $\mathcal{N}(\mu,\sigma^2)$, the change of
+coordinates $y = \sigma\sqrt{2}$ gives the metric
+$\mathrm{d}s^2 = 2(\mathrm{d}\mu^2 + \mathrm{d}y^2)/y^2$, which is
+$2$ times the Poincar\'{e} metric on $\mathbb{H}^2$ (see
+Appendix~\ref{app:gaussian_fisher}).  This metric is complete (do
+Carmo~\cite{do2002riemannian}, Prop.~2.1), so geodesics exist
+between any two points.  Non-positive curvature ($\kappa=-1/2$)
+and Cartan--Hadamard then imply uniqueness of geodesics for the
+Gaussian family.
+
+For general exponential families, geodesic completeness cannot be
+inferred from the Hessian representation alone. Under the explicitly
+assumed completeness of $(\Theta,d_g)$, Hopf--Rinow implies geodesic
+completeness and existence of minimizing geodesics.  Uniqueness of minimizing geodesics holds locally within
+the injectivity radius; global uniqueness for arbitrary exponential
+families would require non-positive sectional curvature on all of
+$\Theta$, which we do not assume here.  \qed
+
+\section{Note on Bishop--Gromov and Capacity}
+\label{app:bishop_gromov_corrected}
+
+The Bishop--Gromov volume comparison theorem (Chavel~\cite{chavel2006riemannian},
+Theorem~\ref{thm:bishop_gromov_hyperbolic}) states: if $\mathrm{Ric} \geq (d-1)K$ on a complete
+$d$-dimensional Riemannian manifold $\calM$, then for any $p \in \calM$
+and $0 < r < R$:
+\[
+  \frac{\vol(B_g(p, R))}{\vol(B_g(p, r))} \leq \frac{V_K(R)}{V_K(r)},
+\]
+where $V_K(r)$ is the volume of a ball of radius $r$ in the
+$d$-dimensional simply connected space form of constant sectional
+curvature $K$.
+
+Taking $r \to 0$ gives $\vol(B_g(p,R)) \leq V_K(R)$ for all $R>0$.
+For $K<0$, $V_K(R)$ grows exponentially (hyperbolic space), so the
+upper bound is very large.  However, this does \emph{not} guarantee that
+the actual volume $\vol(B_g(p,R))$ is large; it only says it cannot
+exceed that large number.  A lower bound on volume would require an
+upper bound on Ricci curvature (i.e., $\mathrm{Ric} \leq (d-1)K$),
+which Bishop–Gromov does not provide.  Therefore, we cannot conclude
+that negative Ricci curvature \emph{increases} capacity; we can only say
+that the theoretical maximum allowed volume is larger than in flat space.
+Any claim of increased capacity for a specific manifold requires
+explicit computation or a different comparison theorem.
+Simulation~\ref{sec:sim_s3} reports local curvature diagnostics, not
+independently verified numerical ball volumes.
+
+In this paper we do not rely on Bishop--Gromov to assert capacity
+advantages. The Gaussian family admits explicit hyperbolic geometry;
+for GMMs, the small-ball expansion only supplies a local asymptotic
+indication and does not establish operational payload capacity.
+A trustworthy finite-radius numerical claim requires verifiable
+samples, convergence and uncertainty diagnostics.
+
+\section{Proof of Theorem~\ref{thm:bishop_gromov_hyperbolic}}
+\label{app:proof_bishop_gromov}
+
+\begin{proof}
+The standard Bishop--Gromov volume comparison theorem 
+\cite[Thm.~III.4.2]{chavel2006riemannian} states that if 
+$\operatorname{Ric} \geq (d-1)K$ on a complete $d$-dimensional Riemannian 
+manifold $(\mathcal{M},g)$, then for any $p\in\mathcal{M}$ and 
+$0 < r < R$:
+\[
+\frac{\operatorname{vol}(B_{g}(p,R))}{\operatorname{vol}(B_{g}(p,r))}
+\;\leq\;
+\frac{V_{K}(R)}{V_{K}(r)},
+\]
+where $V_{K}(t)$ is the volume of a geodesic ball of radius $t$ in the 
+$d$-dimensional simply connected space form of constant sectional 
+curvature $K$.
+
+Taking $r\to 0$ and using 
+$\operatorname{vol}(B_{g}(p,r))/V_{K}(r) \to 1$ yields, for all $R>0$:
+\begin{equation}
+\operatorname{vol}(B_{g}(p,R)) \;\leq\; V_{K}(R).
+\label{eq:bg_upper_bound}
+\end{equation}
+
+For $K<0$, the comparison space is hyperbolic space 
+$\mathbb{H}^{d}(K)$, whose ball volume grows exponentially in $R$:
+\[
+V_{K}(R) \;\sim\; c_{d}\,|K|^{-d/2}\,e^{(d-1)\sqrt{|K|}\,R}
+\quad\text{for large }R.
+\]
+Thus $V_{K}(R)$ is very large, and the right-hand side 
+of~\eqref{eq:bg_upper_bound} exceeds the Euclidean comparison volume 
+$V_{0}(R)=\omega_{d}R^{d}$.
+
+However, \eqref{eq:bg_upper_bound} is an \emph{upper} bound: it states 
+that the actual volume $\operatorname{vol}(B_{g}(p,R))$ cannot exceed a 
+large number.  It does \emph{not} guarantee that the actual volume is 
+itself large, nor that it exceeds the Euclidean volume $V_{0}(R)$.  
+A lower bound on $\operatorname{vol}(B_{g}(p,R))$ would require an 
+\emph{upper} bound on Ricci curvature (i.e. 
+$\operatorname{Ric} \leq (d-1)K$ with $K<0$), which the 
+Bishop--Gromov theorem does not provide.
+
+Consequently, one cannot infer from $\operatorname{Ric} \geq (d-1)K$ 
+with $K<0$ that the Fisher--Rao ball is larger than its Euclidean 
+counterpart, nor that embedding capacity is increased.  Any claim of 
+capacity advantage for a specific statistical manifold requires explicit 
+numerical computation of $\operatorname{vol}_{g}(B_{g})$ or a different 
+comparison theorem yielding a lower bound.
+\end{proof}
+
+\section{Proof scope and implementation of Theorem~\ref{thm:ng_convergence}}
+\label{app:ng_convergence}
+The proof of the ideal exponential-map gradient-descent rate appears
+with Theorem~\ref{thm:ng_convergence}. For its one-step consequence,
+the exact fixed-covariance Gaussian KL loss satisfies
+$\nabla f(\theta)=F(\theta-\theta^*)$ with constant $F\succ0$;
+therefore $\theta-F^{-1}\nabla f(\theta)=\theta^*$.
+This algebraic identity is not a consequence of constant metric alone.
+The actual sampled-Fisher coordinate update in
+Algorithm~\ref{alg:ng_stego} is not the exponential-map update;
+Propositions~\ref{prop:relu_cell_kl} and
+\ref{prop:relu_cell_inexact} give separate applicable one-step
+statements for an affine-logit ReLU cell. No global convergence claim
+follows across activation boundaries.
+
+\section{Christoffel Symbols for the Gaussian Family}
+\label{app:christoffel_gaussian}
+
+For the univariate Gaussian $\mathcal{N}(\mu,\sigma^2)$ with
+$\theta=(\mu,\sigma)$ and Fisher metric
+$g = \mathrm{diag}(\sigma^{-2},\,2\sigma^{-2})$:
+\begin{align}
+  \Gamma_{11}^1 &= 0, & \Gamma_{12}^1 = \Gamma_{21}^1 &= -\sigma^{-1},
+  & \Gamma_{22}^1 &= 0, \notag\\
+  \Gamma_{11}^2 &= \sigma^{-1}/2, & \Gamma_{12}^2 = \Gamma_{21}^2 &= 0,
+  & \Gamma_{22}^2 &= -\sigma^{-1}.
+\end{align}
+Geodesic equations: $\ddot\mu - 2\dot\mu\,\dot\sigma/\sigma = 0$,
+$\ddot\sigma + \dot\mu^2/(2\sigma) - \dot\sigma^2/\sigma = 0$.
+
+\section{Error Bound for Diagonal FIM Approximation}
+\label{app:diag_error}
+
+Let $F$ be the exact FIM and $F^{\mathrm{diag}} = \diag(F_{11},\ldots,F_{dd})$.
+Let $\rho = \max_{i\neq j} |F_{ij}| / \sqrt{F_{ii}F_{jj}}$.
+The natural gradient is $\natgrad = F^{-1}g$; the diagonal approximation
+is $\natgrad^{\mathrm{diag}} = (F^{\mathrm{diag}})^{-1}g$.
+Then:
+\[
+  \frac{\|\natgrad^{\mathrm{diag}} - \natgrad\|_g}{\|\natgrad\|_g}
+  \leq \frac{\rho d}{1 - \rho d} \quad \text{for } \rho < 1/d.
+\]
+This follows from Neumann series expansion of $F^{-1}$ with
+$F = F^{\mathrm{diag}} + F^{\mathrm{off}}$ where
+$\| (F^{\mathrm{diag}})^{-1} F^{\mathrm{off}} \|_2 \leq \rho d$.
+
+\section{Explicit Fisher Metric for the Univariate Gaussian}
+\label{app:gaussian_fisher}
+
+We derive the Fisher--Rao metric for
+$P_\theta = \mathcal{N}(\mu,\sigma^2)$ with
+$\theta=(\mu,\sigma)$, $\sigma>0$, from first principles.
+
+\textbf{Score functions.}
+The log-likelihood is
+\[
+  \ell(x,\theta) = -\tfrac12\log(2\pi) - \log\sigma
+  - \frac{(x-\mu)^2}{2\sigma^2}.
+\]
+The score vector is
+\[
+  \partial_\mu \ell = \frac{x-\mu}{\sigma^2}, \qquad
+  \partial_\sigma \ell = -\frac{1}{\sigma} + \frac{(x-\mu)^2}{\sigma^3}.
+\]
+
+\textbf{Fisher information matrix.}
+Using $\E[x-\mu]=0$, $\E[(x-\mu)^2]=\sigma^2$, and
+$\E[(x-\mu)^4]=3\sigma^4$:
+\begin{align*}
+  g_{11}
+  &=
+  \E\!\left[(\partial_\mu \ell)^2\right]
+  =
+  \E\!\left[
+    \left(\frac{x-\mu}{\sigma^2}\right)^2
+  \right]
+  =
+  \frac{1}{\sigma^2}, \\[0.4em]
+  g_{22}
+  &=
+  \E\!\left[(\partial_\sigma \ell)^2\right]
+  =
+  \E\!\left[
+    \left(
+      -\frac{1}{\sigma}
+      +
+      \frac{(x-\mu)^2}{\sigma^3}
+    \right)^2
+  \right] \\
+  &=
+  \E\!\left[
+    \frac{1}{\sigma^2}
+    -
+    \frac{2(x-\mu)^2}{\sigma^4}
+    +
+    \frac{(x-\mu)^4}{\sigma^6}
+  \right]\\
+  &=
+  \frac{1}{\sigma^2}
+  -
+  \frac{2\sigma^2}{\sigma^4}
+  +
+  \frac{3\sigma^4}{\sigma^6}
+  =
+  \frac{2}{\sigma^2}, \\[0.4em]
+  g_{12}
+  &=
+  g_{21}
+  =
+  \E\!\left[
+    \partial_\mu \ell\,\partial_\sigma \ell
+  \right] \\
+  &=
+  \E\!\left[
+    \frac{x-\mu}{\sigma^2}
+    \left(
+      -\frac{1}{\sigma}
+      +
+      \frac{(x-\mu)^2}{\sigma^3}
+    \right)
+  \right] \\
+  &=
+  -\frac{1}{\sigma^3}\E[x-\mu]
+  +
+  \frac{1}{\sigma^5}\E[(x-\mu)^3]
+  =
+  0.
+\end{align*}
+Hence the Fisher--Rao metric tensor is
+\begin{equation}
+  g \;=\; \frac{1}{\sigma^2}\,\mathrm{d}\mu\otimes\mathrm{d}\mu
+       + \frac{2}{\sigma^2}\,\mathrm{d}\sigma\otimes\mathrm{d}\sigma.
+  \label{eq:gauss_fim_explicit}
+\end{equation}
+
+\textbf{Isometry to the Poincar\'e half-plane.}
+Under the change of variable $y = \sigma\sqrt{2}$ (so $\sigma = y/\sqrt{2}$):
+\[
+  g = \frac{2(\mathrm{d}\mu^2 + \mathrm{d}y^2)}{y^2},
+\]
+which is \emph{2 times} the standard Poincar\'e metric on
+$\mathbb{H}^2 = \{(\mu,y):y>0\}$.
+Under a constant rescaling $g \to \lambda g$, sectional curvature
+transforms as $K \to K/\lambda$.  The standard Poincar\'e metric has
+$K=-1$; with scale factor $\lambda=2$, the sectional curvature of our
+metric is $\kappa = -1/2$ everywhere (constant, independent of $\sigma$).
+The scalar curvature in dimension $d=2$ is $R = 2K = 2\cdot(-1/2) = -1$,
+a \emph{constant} independent of the parameters $(\mu, \sigma)$.
+
+\textbf{Christoffel symbols.}
+From \eqref{eq:gauss_fim_explicit} with $g_{11}=\sigma^{-2}$,
+$g_{22}=2\sigma^{-2}$, $g_{12}=0$, one computes:
+\begin{equation}
+\begin{aligned}
+  \Gamma^1_{12} = \Gamma^1_{21} &= -\sigma^{-1}, &
+  \Gamma^1_{11} = \Gamma^1_{22} &= 0, \\
+  \Gamma^2_{11} &= \tfrac{1}{2}\sigma^{-1}, &
+  \Gamma^2_{22} &= -\sigma^{-1}, &
+  \Gamma^2_{12} = \Gamma^2_{21} &= 0.
+\end{aligned}
+  \label{eq:gauss_christoffel_app}
+\end{equation}
+These agree with Appendix~\ref{app:christoffel_gaussian}.
+The geodesic equations are
+$\ddot\mu - 2\dot\mu\dot\sigma/\sigma = 0$ and
+$\ddot\sigma + \dot\mu^2/(2\sigma) - \dot\sigma^2/\sigma = 0$,
+whose solutions are vertical lines ($\mu=\mathrm{const}$) and
+semicircles centred on the $\sigma=0$ axis
+(do Carmo~\cite{do2002riemannian}, Boothby~\cite{boothby1986differentiable}).
+
+
+\newpage
+%\section*{Biography Section}
+
+% Author biographies removed for double-anonymized peer review.
+\end{document}
+
