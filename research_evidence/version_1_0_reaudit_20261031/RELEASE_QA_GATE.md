@@ -11,15 +11,15 @@
 ## Additional scientific consistency
 - Curvature Jacobi remainder relaxed to **O(t^4)** for variable curvature; the Stein exponent uses `log beta_n=-n D_KL+o(n)` at a fixed distribution pair before a local Fisher expansion, not a finite-n performance bound.
 - S6 includes a supplementary table of probability-domain MSE and recorded optimizer time per codeword, checked against `pareto_algorithm2_summary_earlystop.csv`.
-- The three corrected deliverable PDFs have **31 pages (article), 8 (reviewer response), 1 (cover)** and identify **Version 1.0**. Bibliography: 52 cited entries, no dangling LaTeX labels or unresolved citations.
-- **42 machine checks passed, 0 failed**; 7 targeted S4/S6 scientific tests passed. The full model-training and steganalysis campaigns were NOT freshly regenerated in this release.
+- The three corrected deliverable PDFs have **31 pages (article), 8 (reviewer response), 1 (cover)**; article footer total corrected to **Page 31 of 31** and identify **Version 1.0**. Bibliography: 52 cited entries, no dangling LaTeX labels or unresolved citations.
+- **43 machine checks passed, 0 failed**; 7 targeted S4/S6 scientific tests passed. The full model-training and steganalysis campaigns were NOT freshly regenerated in this release.
 - The published external anonymized data URL could not be verified reachable; the corrected article references only the reproducibility data delivered as editorial supplements.
 - The LaTeX build still emits 11 overfull warnings, including those associated with the CAS title, even though a visual check found no obvious text clipping.
 
 ## Version 1.0 artifact hashes — current corrected authoritative local ZIP
-- Editorial three-document source+PDF ZIP: SHA-256 `493c919fff2cb603d49567e343720dbd1923f631aeaacc6f822e17fc66226e8a`.
-- Complete submission/reproducibility ZIP: SHA-256 `83ebe802ce30ce467fcf52d26ba0b6116e3607f2edb51ad2715efa2ef46e7dde`.
-- Internal deep-audit PDF: SHA-256 `fd98219d99b4d2d96f2bc5768b285a75af56c01f4645141cca2eaf951a59c46a`.
+- Editorial three-document source+PDF ZIP: SHA-256 `f1ac49d67f0d50568cfb174460ec3c01792ef7b7e42df5194d19b326616f88b2`.
+- Complete submission/reproducibility ZIP: SHA-256 `9c41d3197fac29a7872ad2c84fba053f1f228d858db9c3ad1c116b5b632c549a`.
+- Internal deep-audit PDF: SHA-256 `4f1895301272d198532b3b7b697bc700c0f26b4b00252725316decc3f3ccee25`.
 - Corrected local article LaTeX: SHA-256 `ca033d56965be41e9023a976534c4f3b207e2fb8c791c18cc3f7905bb80a157e`.
 - Corrected local reviewer-response LaTeX: SHA-256 `1c780cb49db26d4be942524c7a50a6cf5e1f418b5e72312fc9501b9f04c43096`.
 - Corrected local cover-letter LaTeX: SHA-256 `2452e60ad94dbb5c46057cfb4effd6600d7fe59e0c1b2ff0d891eeba10c27b63`.
