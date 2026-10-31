@@ -1,0 +1,73 @@
+method,codebook,message,sampled_activation_changes,sampled_segments_with_changes
+Algorithm 2: MC Fisher,0,0,26,22
+Algorithm 2: MC Fisher,0,1,22,21
+Algorithm 2: MC Fisher,0,2,54,41
+Algorithm 2: MC Fisher,0,3,23,22
+Algorithm 2: MC Fisher,1,0,16,15
+Algorithm 2: MC Fisher,1,1,43,32
+Algorithm 2: MC Fisher,1,2,20,19
+Algorithm 2: MC Fisher,1,3,41,34
+Algorithm 2: MC Fisher,2,0,49,40
+Algorithm 2: MC Fisher,2,1,25,21
+Algorithm 2: MC Fisher,2,2,22,21
+Algorithm 2: MC Fisher,2,3,40,34
+Algorithm 2: MC Fisher,3,0,17,17
+Algorithm 2: MC Fisher,3,1,16,16
+Algorithm 2: MC Fisher,3,2,43,32
+Algorithm 2: MC Fisher,3,3,17,16
+Algorithm 2: MC Fisher,4,0,7,7
+Algorithm 2: MC Fisher,4,1,28,25
+Algorithm 2: MC Fisher,4,2,19,19
+Algorithm 2: MC Fisher,4,3,50,37
+Algorithm 2: MC Fisher,5,0,27,23
+Algorithm 2: MC Fisher,5,1,27,26
+Algorithm 2: MC Fisher,5,2,46,38
+Algorithm 2: MC Fisher,5,3,25,22
+Natural gradient: exact Fisher,0,0,26,22
+Natural gradient: exact Fisher,0,1,22,21
+Natural gradient: exact Fisher,0,2,54,41
+Natural gradient: exact Fisher,0,3,23,22
+Natural gradient: exact Fisher,1,0,16,15
+Natural gradient: exact Fisher,1,1,43,32
+Natural gradient: exact Fisher,1,2,20,19
+Natural gradient: exact Fisher,1,3,41,34
+Natural gradient: exact Fisher,2,0,49,40
+Natural gradient: exact Fisher,2,1,25,21
+Natural gradient: exact Fisher,2,2,22,21
+Natural gradient: exact Fisher,2,3,40,34
+Natural gradient: exact Fisher,3,0,18,17
+Natural gradient: exact Fisher,3,1,16,16
+Natural gradient: exact Fisher,3,2,43,32
+Natural gradient: exact Fisher,3,3,16,15
+Natural gradient: exact Fisher,4,0,6,6
+Natural gradient: exact Fisher,4,1,28,25
+Natural gradient: exact Fisher,4,2,19,19
+Natural gradient: exact Fisher,4,3,50,37
+Natural gradient: exact Fisher,5,0,27,23
+Natural gradient: exact Fisher,5,1,27,26
+Natural gradient: exact Fisher,5,2,46,38
+Natural gradient: exact Fisher,5,3,25,22
+Euclidean gradient descent,0,0,26,22
+Euclidean gradient descent,0,1,22,21
+Euclidean gradient descent,0,2,54,41
+Euclidean gradient descent,0,3,23,22
+Euclidean gradient descent,1,0,83,15
+Euclidean gradient descent,1,1,43,32
+Euclidean gradient descent,1,2,20,19
+Euclidean gradient descent,1,3,41,34
+Euclidean gradient descent,2,0,49,40
+Euclidean gradient descent,2,1,25,21
+Euclidean gradient descent,2,2,94,13
+Euclidean gradient descent,2,3,40,34
+Euclidean gradient descent,3,0,46,37
+Euclidean gradient descent,3,1,16,16
+Euclidean gradient descent,3,2,43,33
+Euclidean gradient descent,3,3,34,28
+Euclidean gradient descent,4,0,39,31
+Euclidean gradient descent,4,1,28,25
+Euclidean gradient descent,4,2,19,19
+Euclidean gradient descent,4,3,50,37
+Euclidean gradient descent,5,0,27,23
+Euclidean gradient descent,5,1,27,26
+Euclidean gradient descent,5,2,46,38
+Euclidean gradient descent,5,3,25,22
