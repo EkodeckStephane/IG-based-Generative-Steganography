@@ -1,0 +1,226 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{parskip}
+\usepackage{graphicx}
+\setlength{\emergencystretch}{2em}
+
+\newcommand{\revcomment}[1]{\par\medskip\noindent\colorbox{gray!15}{\parbox{\dimexpr\linewidth-2\fboxsep}{\itshape #1}}\par\medskip}
+\newcommand{\ourresponse}{\noindent\textbf{Response:}\ }
+\newcommand{\manuscriptchange}[1]{\par\smallskip\noindent\textcolor{blue!70!black}{\textbf{Manuscript change:} #1}\par\smallskip}
+
+\begin{document}
+% Updated mathematical scope: second-order KL distance only; unit step special case.
+
+
+\begin{center}
+{\Large\bfseries Response to Reviewers}\\[0.5em]
+{\large Digital Signal Processing --- Manuscript DSP-D-26-02810}\\[0.3em]
+{\large Fisher--Rao-Guided Generative Steganography: Geodesic Embedding and Detection Analysis}\\[1em]
+{\normalsize 31 October 2026}
+\end{center}
+
+\hrule
+\vspace{1em}
+
+\noindent We thank the Editor and both Reviewers for their detailed comments. We revised the manuscript to emphasize Fisher--Rao geometry as a mathematical methodology for designing, analyzing, and diagnosing embedding trajectories, delimit the theoretical assumptions and threat model, and correct the interpretation of the exploratory MNIST experiment. We respond to every requested change below. Section and experiment identifiers refer to the accompanying revised
+manuscript; we prefer stable section names where revisions change pagination.
+
+The experimental interpretation maintains three separate tracks: the
+matched MNIST-VAE S5 benchmark, native upstream coding studies, and the
+independent controlled Discop detector assessment. Detection AUCs are
+reported within their individual protocols and are neither pooled nor used
+to rank different carrier models.
+
+\paragraph{Additional mathematical and numerical consistency checks.}
+We refined the local KL--Fisher distance statement to its coordinate-invariant
+second-order form and gave the oriented third-order expansion separately in
+natural coordinates. We also clarified that a unit natural-gradient step is
+an exact one-step result only in the constant-Fisher quadratic special case;
+a condition-number-dependent step bound used in numerical routines is not a
+universal convergence guarantee. The S1 energy results are now distinguished
+from path-length improvements, including the constant-length TC2 case.
+Finally, we replaced the previous S4 ratio comparison with an
+independent, corrected-metric convergence experiment for the
+$\mathcal{N}(\mu,\sigma^2I_2)$ family. The revised experiment uses
+$F=\mathrm{diag}(1,1,4)/\sigma^2$, exact hyperbolic geodesics,
+50 fixed-seed endpoint pairs, and seven resolutions $L=16$--$1024$.
+At $L=1024$, the measured mean relative discrepancies between
+$2L\,\mathrm{KL}_{\mathrm{seq}}$ and the independent Fisher energy
+are 0.0403\% (geodesics) and 0.0489\% (straight paths).
+These are results of the revised S4 calculation, not merely an editorial
+reinterpretation of the previous simulation. In S3, we no longer use
+unverified finite-radius GMM ball-volume estimates to infer a capacity
+effect; we retain local curvature estimates and the mathematically
+standard small-ball asymptotic expansion.
+
+\paragraph{Overview of changes.}
+The revision (i) positions the paper as a signal-processing methodology rather than a complete operational steganographic system; (ii) removes the duplicated Fisher-information equation and consolidates short subsections and the discussion; (iii) clarifies what softplus smoothing and finite-sample Fisher concentration do and do not guarantee; (iv) labels $C_{geo}$ as a geometric packing proxy, not a payload rate; (v) limits detection duality to a fixed Neyman--Pearson test; and (vi) adds a balanced held-out operational diagnostic using ResNet-18, the full SRM feature set with the reference FLD ensemble, iMEC's public encoder/decoder classes, and Discop's coding recursion on one shared MNIST-VAE pixel channel. The path diagnostic does not establish a security advantage: its Fisher-preconditioned trajectory has 3.9\% higher discrete Fisher energy than the Euclidean segment, and both path codebooks are detected above chance. The iMEC and Discop adapters decode all 50 messages at each tested payload, while their matched-channel detector AUC intervals include chance. The native pretrained image pipelines are documented separately because the iMEC ImageTransformer checkpoint is absent and the two original image models do not operate on the submitted MNIST-VAE channel.
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Held-out diagnostic} & \textbf{Euclidean path} & \textbf{Fisher-preconditioned path} \\
+\midrule
+Discrete Fisher energy & $7.777\times10^3$ & $8.077\times10^3$ \\
+ResNet-18 ROC-AUC & 0.885 & 0.880 \\
+Rich-Model FLD ROC-AUC & 0.889 & 0.864 \\
+Exact 4-bit path-code recovery & 0.74 & 0.80 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The revised article retains the version 1.0 designation. The updated orientation of the Stein divergence matches the stated cover-null testing convention; the local cubic KL term is written using natural-coordinate orientation conventions. The S4 experiment was recomputed with a dimension-consistent Fisher metric; the independently recorded S5 outcomes were not altered, and cross-protocol conclusions remain separate.
+
+\vspace{1em}\hrule\vspace{1em}
+
+\section*{Response to the Handling Editor}
+
+\revcomment{The organization can be improved; Eqs. (2) and (7) are identical; several subsections contain one paragraph; Sections 1.4 and 1.5 both state contributions; the roadmap counts 10 sections although there are 11; Section 10 may be combined with Section 9; figure fonts could be larger.}
+
+\ourresponse We distinguish the score-covariance definition from the equivalent expected-Hessian identity and refer back to the original definition to avoid competing conventions. Most isolated short subsections were consolidated where possible, while essential numbered technical subsections were retained for navigation. The contribution and signal-processing positioning text was consolidated, the discussion was consolidated within Section 9 and the conclusion was kept separate to preserve a conventional closing section; the organization roadmap was updated accordingly. We reviewed figure readability; the previously supplied core plots are vector PDF exports, whereas the new S4 convergence diagnostic is a raster image. Not all plotting sources were included in the staged submission package, so we did not claim a comprehensive increase in figure font sizes in this revision. The manuscript therefore does not claim that figure typography was enlarged.
+
+\manuscriptchange{Introduction, regularity analysis, geometric embedding, NG-Stego optimization, and Discussion sections.}
+
+\section*{Response to Reviewer \#1}
+
+\revcomment{The abstract and introduction should more clearly position the work as a new methodology for designing and analyzing steganographic systems, rather than as a new algorithm to compete with state-of-the-art.}
+
+\ourresponse We agree. The abstract now identifies the central contribution as a Fisher--Rao mathematical methodology for designing, analyzing, and diagnosing steganographic embedding trajectories, with NG-Stego as an algorithmic instantiation rather than a claim of universal performance superiority. It states that the MNIST diagnostics are limited to one fixed Bernoulli VAE channel and do not establish general payload, decoding reliability across channels, or security against trained steganalyzers. The Introduction similarly distinguishes the path-optimization framework from a complete image-steganography system and avoids claiming state-of-the-art operational performance.
+
+We also sharpened the novelty attribution: Pavlichin and Weissman
+(ISIT 2016, doi:10.1109/ISIT.2016.7541365) already study chained KL
+divergences and their Fisher-geodesic continuum limit. The revised
+manuscript cites this prior work in the Introduction, variational
+section, positioning table and bibliography. Our specific contribution
+is the steganographic formulation and conditional analysis, not a new
+general chained-KL theorem.
+
+\manuscriptchange{Abstract, Introduction and prior-art positioning; see revised manuscript Sections 1 and 7.}
+
+\revcomment{The manuscript should explicitly discuss and position itself relative to recent work in generative steganalysis and geometry-based methods: [A] latent-space steganalysis, [B] geometry-based steganography in LLMs, and [C] enhanced prefix-based steganography.}
+
+\ourresponse We added all three references and positioned their scope relative to this work. The pooled latent-space detector targets diffusion-based generative steganography and is a relevant passive-adversary method. The LLM embedding-space work uses a text carrier, and prefix-based methods address token coding and efficiency; both are adjacent but do not evaluate image-generator Fisher paths. We now state that these methods motivate future matched-carrier comparisons but do not constitute direct baselines for the current path-energy theory.
+
+\manuscriptchange{Introduction and Related Work, including prior-art positioning.}
+
+\revcomment{The paper should include a more detailed discussion of the practical challenges and potential solutions for scaling the framework to deep generators.}
+
+\ourresponse We expanded the scalability discussion. It describes diagonal Fisher approximations, K-FAC, and online natural-gradient estimates, with their computational costs and structural assumptions. We also explain that intractable diffusion and GAN likelihoods require approximate scores or surrogate Fisher estimates. Their bias must be measured, and the exact results do not carry over without uniform control of the Fisher spectrum and its derivatives along the path. None of these approximations has yet been validated for this steganographic objective.
+
+\manuscriptchange{Discussion and Limitations, subsection ``Path to Scalability for Deep Generators.}
+
+\section*{Response to Reviewer \#2}
+
+\revcomment{1. The core theorems rely on smoothness and positive-definite Fisher information. Softplus is proposed for ReLU networks, but approximation error bounds and convergence coefficients are not derived. Empirical Fisher estimates for diffusion and GAN models are biased, and the effect on geodesic optimality and NG-Stego convergence is not quantified.}
+
+\ourresponse We strengthened the analysis in two specifically delimited ways. First, Proposition (Section 6.4) in the revised manuscript establishes, for a constant-Fisher quadratic objective and an approximate positive-definite preconditioner with relative spectral error $\delta<1$, the one-step inequality $\|e^+\|_F\le\delta(1-\delta)^{-1}\|e\|_F$; $\delta<1/2$ is a sufficient uniform contraction condition. This is distinct from the existing resolvent-based inverse-Fisher error bound. Second, the softplus lemma (Section 3) proves an expected activation-derivative smoothing bound $2M\log 2/\beta$ when random preactivations have density bounded by $M$. The latter is not a bound on score error or Fisher bias. No global convergence, propagated geodesic-optimality, or end-to-end Fisher error guarantee is claimed for diffusion/GAN generators; these remain open under the necessary additional regularity assumptions. A reproducible eight-dimensional constant-Fisher quadratic experiment (nine perturbation levels, 100 trials each) is now described in the manuscript and documented in supplementary Python/CSV files. A deterministic worst-case construction attains the analytical factor $\delta/(1-\delta)$ up to numerical precision. These results check only the stated quadratic model and do not prove global convergence or geodesic stability.
+
+In addition, the revised convergence analysis now explicitly separates an
+ideal exponential-map Riemannian-gradient rate from the sampled-Fisher
+coordinate update used by Algorithm~2. We corrected the one-step statement:
+constant Fisher information alone is not sufficient; the fixed-covariance
+Gaussian experiment is exact because its KL objective is quadratic. For
+the Bernoulli VAE, a separate identity
+$\nabla_z D_{\rm KL}(P_z\|P_{z^*})=F(z)(z-z^*)$
+is established only when both parameters lie in the same affine ReLU cell,
+with a corresponding damped/inexact-Fisher \emph{single-step} bound.
+Neither result establishes multi-step convergence across activation
+boundaries or stability of geodesics for nonsmooth models.
+
+\manuscriptchange{Regularity and softplus analysis; natural-gradient convergence and ReLU-cell propositions; see revised manuscript Sections 3 and 6.}
+
+\revcomment{2. $C_{geo}$ is only a proxy for logarithmic Fisher-ball volume and omits encoding, decoding, noise, and estimation errors. No decoding-error simulations are given, and no mapping to effective payload is established.}
+
+\ourresponse We agree that $C_{geo}$ cannot be equated with transmissible payload. The revision defines it as a local geometric packing proxy. S5 adds a bounded coding diagnostic: path codebooks and matched-channel iMEC/Discop coding are tested at 1--4 bits with 50 round trips per payload and no channel noise. At four bits, exact path-code recovery is 74\% (Euclidean) and 80\% (Fisher-preconditioned); iMEC and Discop recover all tested messages exactly. These results do not establish a general decoding-error curve, robustness under noise or estimation error, or a mapping from $C_{geo}$ to effective payload. We state those limits explicitly and identify channel perturbation, codebook scaling, and decoder calibration as the work required to establish such a mapping.
+
+We also corrected the curvature-to-KL comparison: it now uses matching
+Fisher and Euclidean norms with explicit local eigenvalue bounds. We
+removed a curvature-dependent lower bound that did not follow from
+Jacobi separation. Geometric packing remains a conditional decoding
+certificate, not an established secure effective-bit capacity.
+
+\manuscriptchange{Matched-channel coding and decoding study, geometric packing and curvature/KL comparison; see revised manuscript Sections 7--8.}
+
+\revcomment{3. Detection duality targets fixed Neyman--Pearson detectors and does not study adversarial geometric steganalysis. NG-Stego has no adversarial training pipeline and may be vulnerable to path-aware detection.}
+
+\ourresponse We clarify the precise optimality and the limits of the stated detection result. For fully specified simple cover-versus-stego hypotheses, the Neyman--Pearson likelihood-ratio test is most powerful at a fixed size among tests that observe the same object. Thus no geometry-aware test can exceed that ideal benchmark \emph{within this simple-hypothesis information model}. This does not establish robustness to learned, composite, misspecified or adaptive adversaries, nor imply that the practical S5 detectors implement the ideal likelihood-ratio test. A trajectory-feature detector would instead require additional private path observations not available in the standard final-object threat model, and fixed path/codebook characteristics may be degenerate. We do not claim to have performed an adversarial geometry-aware experiment or minimax training. These extensions remain explicitly outside this revision; their threat model and validation would require a separate study.
+
+\manuscriptchange{Detection-Theoretic Interpretation and Discussion sections.}
+
+\revcomment{4. Add the two recommended papers on proactive orthogonal-moment watermarking to enrich discussion of adversarial detection.}
+
+\ourresponse We added both references. We distinguish their active provenance-tracing mechanism from the passive Neyman--Pearson detection setting in this paper. We describe them as complementary approaches and do not treat watermark detection as a steganalysis baseline because the threat model and observable signal differ.
+
+\manuscriptchange{Discussion and Limitations, paragraph on active provenance.}
+
+\revcomment{5. Add the recommended complex-scene feature-extraction studies to enrich discussion of the CNN steganalyzer and future high-dimensional experiments.}
+
+\ourresponse We added the human-parsing and visible/infrared vehicle-detection references as adjacent feature-extraction work that may inform scene-aware detector design. We clarify that those methods are not steganalyzers and do not validate performance on generated images. The MNIST detector results are not presented as evidence about complex-scene detection.
+
+\manuscriptchange{Discussion and Limitations, paragraph on scene-aware features.}
+
+\revcomment{6. Add the two recommended references on chaotic video encryption and discuss the relationship to generative steganography.}
+
+\ourresponse We added both references and clarified that encryption and steganographic undetectability are separate properties. Chaotic encryption can be composed with a hiding system to protect message confidentiality, but it does not establish cover indistinguishability, a decoding protocol, or reliability. We do not claim it as a directly comparable embedding method.
+
+\manuscriptchange{Discussion and Limitations, paragraph on auxiliary encryption.}
+
+\revcomment{7. Replace the simple CNN with state-of-the-art RichModel and ResNet steganalyzers; implement iMEC and Discop under the same MNIST generator; compare detection accuracy, distortion, and runtime.}
+
+\ourresponse We implemented the requested matched-channel benchmark on the MNIST VAE, with 100 independently generated training and 100 held-out stego samples per method, balanced against 400 generated covers in each split. The detector comparison uses a ResNet-18 residual network trained from scratch and all 34,671 SRM features with SealWatch's reference FLD ensemble (200 base learners, subspace dimension 200). ResNet-18 is reported as a residual-network detector, not as a pretrained state-of-the-art steganalyzer. Pooled held-out ROC-AUC is 0.693 for ResNet-18 and 0.698 for the FLD ensemble. By method, path-code AUCs are 0.885/0.889 (Euclidean) and 0.880/0.864 (Fisher-preconditioned); exact four-bit decoding rates are 0.74 and 0.80. The complete public iMEC encoder/decoder classes and MEC routine, and a Python implementation of Discop's published Huffman/distribution-copy recursion, were run over the same 784-symbol Bernoulli VAE channel. Each achieved exact decoding in all 50 trials at each payload from 1 to 4 bits. The iMEC/Discop FLD AUC intervals include 0.5. Distortion is reported as MSE to the expected cover image, explicitly a proxy rather than paired-cover distortion. The Fisher-preconditioned path did not outperform the Euclidean segment in discrete Fisher energy, and both path-code detectors remain above chance; we make no security or state-of-the-art claim for NG-Stego.
+
+These are complete coding algorithms under a common VAE channel adapter, not native pretrained image-pipeline runs. Reported runtimes use the public Python iMEC MEC implementation and a Python port of Discop's recursion; the optimized C++ iMEC backend used in its paper and Discop's Cython extension are not timed here. The original iMEC image loader expects a CIFAR-10 ImageTransformer checkpoint absent from the public source tree and local workspace; Discop's native image pipeline uses ImageGPT and its own 32-by-32 color-token representation. Those model-specific results cannot be presented as runs under the same MNIST VAE. The separate native campaign now provides GPT-2/WikiText-103 iMEC text tests (100/100 exact decodes) and upstream Discop text/image rate statistics on Transformer-XL/IMDb and ImageGPT/CelebA, respectively. A separate controlled Discop campaign obtained 100/100 exact text decodes and 500/500 exact image decodes on its defined quantized-token protocol. These experiments are not a same-carrier comparison against NG-Stego. The native iMEC image arm could not be completed because its required checkpoint was unavailable. The earlier controlled neural-detector analysis failed its predefined
+positive-control health criterion, and its detection estimates have
+therefore been excluded from the manuscript's validated evidence.
+A separate, independent \emph{ResidualCNN v1} evaluation uses the
+same 500 source pairs with grouped five-fold testing, fixed
+high-pass preprocessing and inner-validation model selection.
+This distinct detector passes its positive control (macro AUC
+0.99028; pair-bootstrap 95\% CI [0.98360, 0.99602]) and obtains
+macro AUC 0.50477 (95\% CI [0.47088, 0.53817])
+for controlled Discop cover--stego pairs.
+ResidualCNN v1 is not ResNet-18; its result neither repairs the
+historical detector nor establishes undetectability or security of
+NG-Stego. The superseded experiment remains in the provenance
+records for transparency, not as validated scientific evidence.
+
+\manuscriptchange{Simulation S5 methods, detection/coding tables and interpretation, and Discussion and Limitations.}
+
+\vspace{1em}\hrule\vspace{1em}
+
+\section*{Summary of Manuscript Changes}
+\begin{enumerate}[leftmargin=2em]
+  \item Abstract and Introduction reposition the contribution as a methodology and limit the MNIST conclusions.
+  \item Duplicate Fisher-information equation removed; short subsections and discussion consolidated.
+  \item Smoothness, softplus, finite-sample Fisher estimation, and limits of error propagation clarified.
+  \item Corrected the convergence theorem, local KL--Fisher comparison, and one-step ReLU-cell bounds; credited earlier chained-KL/geodesic literature.
+  \item $C_{geo}$ explicitly separated from operational bit capacity and payload.
+  \item Fixed Neyman--Pearson assumptions and lack of adversarial training stated.
+  \item Recommended related work added and categorized by its distinct carrier and threat model.
+  \item S5 adds balanced held-out ResNet-18 and Rich-Model FLD detection, plus decoding, distortion, and runtime diagnostics for matched-channel iMEC and Discop coding.
+  \item The additional native and controlled campaign is distinguished from matched-channel S5; the exclusion of the failed historical detector evidence, a separately validated ResidualCNN positive-control addendum, and missing native iMEC image checkpoint are disclosed.
+\end{enumerate}
+
+\bigskip
+\par\noindent\textbf{Mathematical consistency and prior art.}
+We replaced the overly broad constant-Fisher one-step claim with a
+conditional ideal Riemannian rate and a cell-local analysis appropriate
+for the VAE. We also corrected the metric factors in the local KL
+distance comparison and explicitly credited the chained-KL continuum
+limit to Pavlichin and Weissman (ISIT 2016). These changes narrow the
+mathematical claims while preserving the reported experimental outcomes.
+
+\bigskip
+\par\noindent\textbf{S4 reproducibility and convergence.} We refined the Gaussian-family simulation to use the Fisher metric consistently in the path-energy and sequential-KL calculations, and provided an independent exact-geodesic convergence check on 50 seeded endpoint pairs at seven resolutions ($L=16$--$1024$). At $L=1024$, the mean relative discrepancies are 0.0403\% (geodesics) and 0.0489\% (straight paths), with mean geodesic-to-straight ratios of 0.865107 for energy and 0.865108 for KL. These tests support the stated small-step asymptotic relationship within the studied Gaussian family, not a general security superiority claim. The S5 detector and decoding experiments use different, explicitly specified codebooks (four states for the detector comparison, and $2^k$ states for $k=1,2,3,4$ in decoding).\par
+
+\noindent Sincerely,\\
+The Authors
+
+\end{document}
