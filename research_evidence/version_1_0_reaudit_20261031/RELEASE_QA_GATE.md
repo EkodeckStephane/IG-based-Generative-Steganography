@@ -1,33 +1,28 @@
-# DSP-D-26-02810 — Version 1.0 — independent re-audit gate (2026-10-31)
+# DSP-D-26-02810 — Version 1.0 — Corrected source-data reconciliation (31 October 2026)
 
-**Status: corrective work required before resubmission.** This file records verifiable manuscript/supplement consistency findings. It is not a new experimental result; the three submission documents remain unchanged by this audit.
+**Pre-submission research audit:** Four P0 numerical/documentary issues were corrected in the supplied Version 1.0 LaTeX/PDF release. The corrective ZIP files are the authoritative deliverables for this iteration. **Important sync warning:** the current GitHub `Version_1.0/*.tex` paths still contain the older 4-priorities manuscript (no S6 section); their byte-for-byte synchronization with the corrected 31/8/1-page release is NOT yet confirmed. Do not treat the older GitHub manuscript source as the latest submission version until that sync is resolved.
 
-## Confirmed checks
+## P0 correction matrix — independently verified
+1. **S2 statistical dispersion:** 50 raw Euclidean iteration counts; mean **586.3**, population standard deviation **41.63376033941685**, published as **41.6** rather than erroneous 0.0. NG iteration count remains 1 for all 50 cases.
+2. **S1 RK4:** `data/s1_geodesic_data.csv` has `rk4_error_bound=inf` for each of four tests. A finite a priori RK4 error bound was not established. The submission table removes that column and reports **observed endpoint shooting residuals** only (maximum **4.96e-13**); the numerical residual is not a global RK4 truncation-error certificate.
+3. **S5 source provenance:** Archive-level older `data/s5_vae_results.csv` and `data/s5_vae_summary.json` are incompatible with current S5 and were segregated into a distinct INTERNAL_ONLY forensic archive. Editorial S5 evidence is exclusively `Version_1.0/results/benchmark_s5/full_benchmark.json` (Euclidean path energy **7777.395**, Fisher-preconditioned path energy **8077.127**, a **3.85%** increase in that protocol). Earlier numbers are not used as manuscript evidence.
+4. **S2-EXT convergence censoring:** at final KL < 1e-5, Euclidean **19/30** successes, natural-gradient **28/30**; capped at 200 steps **11/30** and **2/30**; Euclidean final KL >1 in **9/30** trials and NG in **0/30**. The paired mean **2.0871** is a ratio of recorded, **censored** iteration counts, not a measured success-conditioned convergence-time speedup. The S2-EXT vector figure was redrawn from all 30 raw paired trials and marks censored trials separately.
 
-- Independently recompiled the three latest LaTeX sources twice: article 30 pages, reviewer response 8, cover letter 1. The extracted text of all three recompilations matches their delivered PDFs.
-- Verified that Version 1.0 is indicated, that 155 TeX labels have no duplicates or dangling references, that 52 bibliography entries are cited, and that four embedded figure files exist.
-- Confirmed S4 Gaussian exact-path convergence (L=1024 geometric relative error 0.0403053%), S5 current benchmark energy (Euclidean 7777.395, Fisher-preconditioned 8077.127), S6a 251/300 public decodes and 233/300 packing certificates, and S6b/S6c aggregate counts against CSV/JSON sources.
-- Re-ran 7 existing S6 invariant tests successfully, plus S4's standalone randomized 200-path numerical test. These checks are not a fresh end-to-end rerun of all S6 training/detection runs.
+## Additional scientific consistency
+- Curvature Jacobi remainder relaxed to **O(t^4)** for variable curvature; the Stein exponent uses `log beta_n=-n D_KL+o(n)` at a fixed distribution pair before a local Fisher expansion, not a finite-n performance bound.
+- S6 includes a supplementary table of probability-domain MSE and recorded optimizer time per codeword, checked against `pareto_algorithm2_summary_earlystop.csv`.
+- The three corrected deliverable PDFs have **31 pages (article), 8 (reviewer response), 1 (cover)** and identify **Version 1.0**. Bibliography: 52 cited entries, no dangling LaTeX labels or unresolved citations.
+- **42 machine checks passed, 0 failed**; 7 targeted S4/S6 scientific tests passed. The full model-training and steganalysis campaigns were NOT freshly regenerated in this release.
+- The published external anonymized data URL could not be verified reachable; the corrected article references only the reproducibility data delivered as editorial supplements.
+- The LaTeX build still emits 11 overfull warnings, including those associated with the CAS title, even though a visual check found no obvious text clipping.
 
-## P0 items directly evidenced by bundled CSV files
+## Version 1.0 artifact hashes — current corrected authoritative local ZIP
+- Editorial three-document source+PDF ZIP: SHA-256 `493c919fff2cb603d49567e343720dbd1923f631aeaacc6f822e17fc66226e8a`.
+- Complete submission/reproducibility ZIP: SHA-256 `83ebe802ce30ce467fcf52d26ba0b6116e3607f2edb51ad2715efa2ef46e7dde`.
+- Internal deep-audit PDF: SHA-256 `fd98219d99b4d2d96f2bc5768b285a75af56c01f4645141cca2eaf951a59c46a`.
+- Corrected local article LaTeX: SHA-256 `ca033d56965be41e9023a976534c4f3b207e2fb8c791c18cc3f7905bb80a157e`.
+- Corrected local reviewer-response LaTeX: SHA-256 `1c780cb49db26d4be942524c7a50a6cf5e1f418b5e72312fc9501b9f04c43096`.
+- Corrected local cover-letter LaTeX: SHA-256 `2452e60ad94dbb5c46057cfb4effd6600d7fe59e0c1b2ff0d891eeba10c27b63`.
 
-1. **S2 standard deviation:** Manuscript `tab:s2` gives Euclidean iteration standard deviation 0.0. Source `data/s2_gradient_data.csv` has 50 Euclidean counts with mean 586.3 and population SD **41.6337603** (sample SD 42.0564489). Correct the table.
-2. **S1 RK4 bound:** Manuscript `tab:s1` lists finite RK4 a-priori error bounds (1e-9 to 1e-8), but all four `rk4_error_bound` values in `data/s1_geodesic_data.csv` are **inf**. Recompute provable constants or present the *observed endpoint errors only*.
-3. **S5 historical data ambiguity:** Bundled `data/s5_vae_results.csv` / `data/s5_vae_summary.json` report a 99.98%-style Fisher energy reduction (mean E_E=3071.9569, E_NG=1.1711), whereas the current manuscript and `results/benchmark_s5/full_benchmark.json` report energy E_E=7777.395, E_NG=8077.127 (Fisher energy 3.9% higher). These are potentially *distinct experiments*, but legacy files must be identified as such or excluded from submission supplements.
-4. **S2-EXT capped convergence:** `data/s2_nondiagonal_data.csv`: successful final KL<1e-5 in **19/30 Euclidean** vs **28/30 natural-gradient** runs; **9/30 Euclidean** end with KL>1, up to 3.5e127. The table's mean capped iteration ratio is not a success-conditioned convergence speed. Report reliability and censoring.
-
-## P1 manuscript/release issues
-
-- Variable sectional-curvature Jacobi expansion in `thm:curvature_instability`: the remainder is normally **O(t^4)** when the curvature derivative along the path may be nonzero; O(t^5) needs further assumptions.
-- Chernoff–Stein `eq:beta_exponent`: clarify the asymptotic o(n) term and do not imply an unproved finite-n bound.
-- The S6 multiobjective table omits reported probability MSE and wall/CPU-time dimensions, even though these are present in `pareto_algorithm2_summary_earlystop.csv`. The supplementary S6 security–decoder figure is packaged but not included in the paper.
-- The 17-entry submission archive omits the S6 checkpoint and data and includes an internal audit PDF. A 286-entry full archive carries S6 evidence; prepare a dedicated, clean supplementary submission package.
-- The S6 README inside the project still states that results are *not incorporated into the three submission documents*, contrary to the current article's S6 section.
-- Manuscript data-availability link `anonymous.4open.science/r/IG-based-Generative-Steganography-D255` could not be confirmed reachable by the auditor; check independently. Verify whether the journal requires a separate title page (not present in the short archive).
-- 11 LaTeX overfull-box warnings remain, maximal logged 123.627pt at CAS maketitle, but visual inspection did not identify obvious text clipping. Metadata for all 52 bibliography records was not externally audited.
-
-## Scope of review responses
-
-The manuscript and the response/cover letter are materially aligned on core S4–S6 figures and state the conditional character of the R2.1/R2.2 guarantees and R2.3/R2.7 operational results. Neither the audit nor this note certifies editorial acceptance or full satisfaction of the initial reviewer requests.
-
-**Reconciliation order:** S2 table → S1 RK4 claim → S5 supplement provenance → S2-EXT reliability/censoring → Jacobi/Stein mathematical wording → S6 cost/distortion and submission-supplement completeness → recompile and re-audit all three documents. 
+## Pre-submission gate
+The four P0 issues are closed **in the corrected release**. Remaining checks: verify journal-specific title-page/anonymization workflow, editorial platform supplements, and reconcile the public GitHub manuscript files with the authoritative ZIP. Do not claim universal security superiority or that all 52 external reference metadata have been independently validated.
