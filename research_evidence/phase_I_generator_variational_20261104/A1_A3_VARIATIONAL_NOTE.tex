@@ -1,0 +1,152 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,booktabs,graphicx,xcolor,geometry,hyperref,microtype}
+\geometry{margin=2.05cm}
+\hypersetup{colorlinks=true,linkcolor=blue!55!black,urlcolor=blue!55!black}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\MM}{\mathcal M_G}
+\newcommand{\DD}{d_{\MM}}
+\title{Generator-Constrained Chained KL: Variational Limit and Geometry-Restriction Diagnostics\\\large Independent Phase-I Research Note (A1--A3)}
+\author{Research evidence supporting DSP-D-26-02810, \textbf{Version 1.0}\\\small Research draft; not an amendment to the submitted manuscript}
+\date{4 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+This note distinguishes a standard fixed-path KL expansion from a discrete variational minimization over a generator-restricted family. Under explicitly strong finite-alphabet, compact, smooth, identifiable-model assumptions, we prove convergence of the rescaled minimum chained KL to one half of the squared intrinsic Fisher--Rao distance and subsequential convergence of discrete minimizers. We derive a three-term energy-excess identity. An exactly solvable Bernoulli-product circle verifies the limit and exhibits a positive generator-restriction gap. In the existing MNIST Bernoulli-VAE, independent feasible-path computations give numerical distance intervals, \emph{not} certified global geodesics. These results are mathematical and diagnostic; no operational advantage or theorem novelty relative to the broader literature is claimed yet.
+\end{abstract}
+
+\section{A1. Literature boundary and provenance}
+\begin{table}[h!]
+\centering\small
+\begin{tabular}{p{3.1cm}p{6.15cm}p{4.0cm}}
+\toprule
+Prior source & Verified contribution & What this Phase I must not claim \\
+\midrule
+Papangelou (2000) \cite{papangelou} & Wright--Fisher LDP; Fisher-action minimization and conditional concentration on the constant-speed spherical great-circle arc. & General Fisher action principle; application of its LDP to an arbitrary generator.\\
+Pavlichin--Weissman (2016) \cite{pavlichin} & Minimum finite-step chained KL on the full finite-alphabet simplex; continuum optimal-path great-circle limit. & Invention of optimal chained-KL/Fisher geodesic link.\\
+Rumpf--Wirth (2015) \cite{rumpf} & General variational discretization of Riemannian geodesic calculus; convergence using $\Gamma$-convergence. & Novelty of the generic discrete-to-continuum proof strategy.\\
+Maas et al. (2015) \cite{maas} & Variational time-discrete image-path energies and discrete image geodesics, for a different metric. & Novelty of minimizing a sum of successive pairwise image costs.\\
+Nielsen (2024) \cite{nielsen} & Numerical Fisher--Rao distance approximations, rigorous/numerical bounds, and embeddings of statistical submodels. & Novelty of the ambient-vs-model distance inequality.\\
+\bottomrule
+\end{tabular}
+\caption{Selected, verified prior-art map (not a claim of exhaustive literature coverage).}\label{tab:prior}
+\end{table}
+
+The manuscript's earlier fixed-path identity, for a smooth $\gamma$,
+\begin{equation}\label{eq:fixed}
+\sum_{j=0}^{N-1}\KL(P_{\gamma((j+1)/N)}\Vert P_{\gamma(j/N)})
+=\frac{E_F[\gamma]}{2N}+O(N^{-2}),
+\end{equation}
+is a uniform second-order KL Taylor expansion plus a Riemann sum. It does \emph{not} minimize over paths. Papangelou and Pavlichin--Weissman study variation and/or stochastic transitions under different explicit models; neither guarantees a generative steganographic detector bound. The mathematical novelty of the constraint-specialized result below remains to be established against broader variational-discretization prior art.
+
+\section{A2. A generator-constrained variational theorem}
+Let $\Delta_{K}^{\circ}$ be the strictly positive finite-alphabet probability simplex, endowed with $g_p(u,v)=\sum_{x=1}^K u_xv_x/p_x$. Assume the \emph{distribution image} $\MM\subset\Delta_K^{\circ}$ is a connected compact $C^3$ embedded submanifold without boundary, with the induced Fisher--Rao Riemannian metric. In particular, the metric is positive definite in intrinsic coordinates, and $\MM$ is a compact length space. These assumptions exclude singular, non-identifiable parametrizations unless one first takes a suitable distribution-space quotient.
+
+For $a,b\in\MM$, let $a=P_0,P_1,\ldots,P_N=b$ be admissible intermediate distributions. Define
+\begin{equation}\label{eq:chain}
+C_N^{G}(a,b)=\min_{P_1,\ldots,P_{N-1}\in\MM}
+\sum_{j=0}^{N-1}\KL(P_{j+1}\Vert P_j),
+\quad d_G(a,b)=\inf_{\gamma\subset\MM}\ell_F(\gamma).
+\end{equation}
+\begin{theorem}[Restricted chained-KL variational limit]\label{thm:main}
+Under the assumptions above, the discrete minimum exists for every $N\ge1$ and
+\begin{equation}\label{eq:main}
+\boxed{\displaystyle\lim_{N\to\infty}N C_N^G(a,b)=\frac12d_G(a,b)^2.}
+\end{equation}
+Choose for each $N$ any minimising chain and join consecutive entries by shortest intrinsic geodesic arcs on each time cell $[j/N,(j+1)/N]$, with constant speed. Every sequence of these interpolations has a uniformly convergent subsequence; each limiting path is a constant-speed $d_G$-minimizing geodesic from $a$ to $b$. If the constant-speed minimizing path is unique, the full sequence converges uniformly. For fixed endpoints, constants depending on $\MM,a,b$ give the conservative value estimate
+\begin{equation}\label{eq:rate}
+\frac{d_G(a,b)^2}{2}-O(N^{-1/2})\ \le\ N C_N^G(a,b)\ \le\ \frac{d_G(a,b)^2}{2}+O(N^{-1}).
+\end{equation}
+No general $O(N^{-1})$ \emph{lower} rate is asserted.
+\end{theorem}
+\begin{proof}
+Compactness makes the continuous discrete-chain objective attain a minimum. A compact Riemannian manifold is geodesic, so a minimizing constant-speed geodesic $\gamma_*$ exists, with $E_F[\gamma_*]=d_G(a,b)^2$. Sampling it uniformly and applying the uniform local KL expansion yields
+$C_N^G\le d_G(a,b)^2/(2N)+O(N^{-2})$; hence $C_N^G=O(1/N)$.
+
+For minimizing nodes, every segment has $\KL(P_{j+1}\Vert P_j)\le C/N$. Since KL vanishes only on the diagonal and $\MM$ is compact, the ambient probabilities of adjacent nodes approach each other uniformly. Embeddedness and compactness then force $d_G(P_j,P_{j+1})\to0$ uniformly. In a uniform collection of geodesic normal neighborhoods, Taylor expansion of KL and of the Riemannian squared distance gives, for some constants $r_0,A>0$,
+\[
+\left|2\KL(y\Vert x)-d_G(x,y)^2\right|\le A\,d_G(x,y)^3
+\qquad(d_G(x,y)<r_0).
+\]
+Local comparison yields $\max_j d_G(P_j,P_{j+1})=O(N^{-1/2})$, and thus
+\[
+N C_N^G\ge \frac{N}{2}\Big(1-O(N^{-1/2})\Big)\sum_jd_G(P_j,P_{j+1})^2
+\ge\frac12\Big(1-O(N^{-1/2})\Big)d_G(a,b)^2,
+\]
+using Cauchy--Schwarz and the triangle inequality. This proves the value limit and the stated conservative rate.
+
+For the interpolated paths $\gamma_N$, the preceding inequalities bound $\int_0^1|\dot\gamma_N|_g^2\,dt=N\sum_jd_G(P_j,P_{j+1})^2$, so $\gamma_N$ are equi-$1/2$-H\"older by Cauchy--Schwarz. Compactness of $\MM$ and Arzel\`a--Ascoli give a uniformly convergent subsequence. Riemannian energy is lower semicontinuous under uniform convergence with bounded energy (equivalently, under weak $H^1$ convergence in a smooth embedding). The limit $\gamma$ therefore has $E_F[\gamma]\le d_G(a,b)^2$, while $E_F[\gamma]\ge d_G(a,b)^2$ for every endpoint-joining curve. Equality forces a minimizing path parametrized at constant speed. Uniqueness gives convergence without extracting a subsequence.
+\end{proof}
+\begin{remark}[Limits of this theorem]
+The theorem concerns the \emph{global} minima of the discrete variation problem in the \emph{distribution image}; it does not prove a numerical solver reaches them. In particular it is not a global convergence theorem for NG-Stego's sampled-Fisher gradient optimizer, which minimizes a \emph{single endpoint KL} and crosses ReLU cells. Compactness, global embeddedness, and differentiability are not established for the empirical VAE image.
+\end{remark}
+
+\section{A3. An exact three-term decomposition}
+Let $d_A(a,b)$ be the ambient Fisher--Rao distance in $\Delta_K^\circ$, $\ell_F(\gamma)$ the length of a feasible curve, and $E_F[\gamma]=\int_0^1\|\dot\gamma\|_g^2dt$ its energy.
+\begin{proposition}[Exact decomposition; a classical geometric identity]
+For every absolutely continuous feasible path $\gamma:a\to b$ with finite energy,
+\begin{align}\label{eq:gap}
+E_F[\gamma]-d_A(a,b)^2
+={}&\underbrace{E_F[\gamma]-\ell_F(\gamma)^2}_{\Delta_{\rm speed}\ge0}
++\underbrace{\ell_F(\gamma)^2-d_G(a,b)^2}_{\Delta_{\rm route}\ge0}
++\underbrace{d_G(a,b)^2-d_A(a,b)^2}_{\Delta_{\rm model}\ge0}.
+\end{align}
+\end{proposition}
+\begin{proof}
+The equality telescopes. The first inequality is Cauchy--Schwarz on an interval of length one; the second is the definition of intrinsic distance; the third follows because the admissible curves in the generator are a subset of ambient simplex paths. This identity itself is not novel; its computational and predictive use must be tested separately.
+\end{proof}
+For finite-alphabet distributions $a,b$ the exact ambient distance is $d_A(a,b)=2\arccos\sum_x\sqrt{a(x)b(x)}$. For independent Bernoulli pixels, with success probabilities $p_i$ and $q_i$,
+\begin{equation}\label{eq:bhat}
+\log B(a,b)=\sum_{i=1}^{784}\log\big(\sqrt{p_iq_i}+\sqrt{(1-p_i)(1-q_i)}\big).
+\end{equation}
+This yields a machine-computable \emph{lower bound} $d_A\le d_G$. The length of an actual feasible path yields an upper bound $d_G\le\ell_F(\gamma_{\rm candidate})$. Unless $d_G$ is independently certified, $\Delta_{\rm model}$ can only be bracketed, not isolated exactly.
+
+\section{Numerical evidence: exact circle, bounded ReLU VAE}
+\paragraph{Exactly solvable generator circle.}
+Consider two independent Bernoulli variables with $p_1(u)=0.5+0.22\cos u$ and $p_2(u)=0.5+0.23\sin u$, $u\in\mathbb R/(2\pi\mathbb Z)$. This is a compact smooth identifiable one-dimensional embedded submanifold of the four-outcome simplex, with metric
+$F(u)=\sum_{i=1}^2[p_i'(u)]^2/[p_i(u)(1-p_i(u))]$. The intrinsic distance equals the shorter of the two Fisher arc integrals. For $u_a=-0.65$, $u_b=2.35$:
+\[
+d_A=0.90348577,\qquad d_G=1.38583917,\qquad d_G^2-d_A^2=1.10426367.
+\]
+Uniform intrinsic-arclength sampling gives $N\sum\KL=0.96026003$ at $N=256$, approaching $d_G^2/2=0.96027510$. This is a \emph{feasible-chain value}, not independently verified as the globally optimal finite-$N$ chain. A longer, nonuniform path yields the decomposition $(\Delta_{speed},\Delta_{route},\Delta_{model})=(0.785560,0.391334,1.104264)$, residual below $10^{-14}$.
+\begin{figure}[h!]
+\centering\includegraphics[width=.79\linewidth]{../figures/toy_variational_limit.png}
+\caption{Rescaled KL of a sampled feasible intrinsic geodesic versus the exact intrinsic and ambient limits.}
+\end{figure}
+
+\paragraph{ReLU Bernoulli VAE.}
+The associated checkpoint (SHA-256 begins \texttt{e94d57b36d960921}; full digest in the machine-readable audit) supplies a 2D latent decoder with 784 independent Bernoulli pixels. We compute the Fisher metric exactly from the decoder Jacobian, split every line segment at first- and second-layer ReLU activation thresholds, and integrate speed by 12-point Gauss--Legendre quadrature on each smooth segment. Candidate polylines are optimized numerically, with the untouched straight path as a fallback. The upper estimates below are feasible-path \emph{numerical values}, not computer-assisted certified bounds.
+\begin{table}[h!]
+\centering\small
+\begin{tabular}{lrrrr}
+\toprule
+Pair & exact $d_A$ & feasible $d_G$ upper est. & $\Delta_{model}$ upper est. & ReLU crossings\\
+\midrule
+Local, no kink & 0.786793 & 0.797413 & 0.016824 & 0\\
+Local, two kinks & 1.143427 & 1.180495 & 0.086143 & 2\\
+Second two-kink pair & 1.071958 & 1.101029 & 0.063171 & 2\\
+Moderate separation & 2.999096 & 5.409763 & 20.270959 & 17\\
+\bottomrule
+\end{tabular}
+\caption{The mathematically valid bracket is $d_A\le d_G\le L_{\rm feasible}$. The displayed numerical integration and optimization are not globally certified. The generator gap therefore lies between zero and the listed \emph{estimated upper} values.}
+\end{table}
+\begin{figure}[h!]
+\centering\includegraphics[width=.76\linewidth]{../figures/vae_length_bounds.png}
+\caption{Exact ambient metric lower bound and lengths of actual feasible paths in the learned VAE.}
+\end{figure}
+
+\section{Scope, falsification and next steps}
+Nine local numerical checks pass: analytic Fisher-vs-KL expansion, metric positivity, exact arc gap/decomposition, late-$N$ KL scaling, checkpoint hash, VAE KL-vs-FIM, kink splitting, quadrature agreement and feasible-path distance ordering. These are mathematical/numerical consistency checks, not a complete independent check of the variational proof or operational steganographic behavior. A decisive new contribution requires (i) certified or tighter $d_G$ estimates for the VAE, (ii) explicit study of ReLU singularities and nonidentifiability, (iii) \emph{held-out} prediction of convergence or decoding beyond standard endpoint KL, Euclidean and numerical conditioning baselines, and (iv) a clear model distinguishing endpoint-only and trajectory-observing attackers. The official manuscript, reviewer response and letter were \emph{not edited} in this phase.
+
+\begin{thebibliography}{99}
+\bibitem{papangelou} F. Papangelou, ``The Large Deviations of a Multi-Allele Wright--Fisher Process Mapped on the Sphere,'' \emph{Ann. Appl. Probab.} 10(4), 1259--1273 (2000). \url{https://doi.org/10.1214/aoap/1019487616}.
+\bibitem{pavlichin} D. S. Pavlichin and T. Weissman, ``Chained Kullback--Leibler Divergences,'' IEEE ISIT, 580--584 (2016). \url{https://doi.org/10.1109/ISIT.2016.7541365}.
+\bibitem{rumpf} M. Rumpf and B. Wirth, ``Variational Time Discretization of Geodesic Calculus,'' \emph{IMA J. Numer. Anal.} 35(3), 1011--1046 (2015). \url{https://doi.org/10.1093/imanum/dru027}.
+\bibitem{maas} J. Maas, M. Rumpf, C. Sch\"onlieb, and S. Simon, ``A Generalized Model for Optimal Transport of Images Including Dissipation and Density Modulation,'' \emph{ESAIM:M2AN} 49, 1745--1769 (2015). \url{https://doi.org/10.1051/m2an/2015043}.
+\bibitem{nielsen} F. Nielsen, ``Approximation and Bounding Techniques for the Fisher--Rao Distances Between Parametric Statistical Models,'' \emph{Handbook of Statistics} 51, 67--116 (2024). \url{https://doi.org/10.1016/bs.host.2024.06.003}.
+\end{thebibliography}
+\end{document}
