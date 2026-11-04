@@ -1,0 +1,333 @@
+{
+  "study": "DSP-D-26-02810 Phase I A1-A3, 2026-11-04",
+  "seed": 20261104,
+  "toy": {
+    "theta_a": -0.65,
+    "theta_b": 2.35,
+    "d_ambient_exact": 0.9034857661122062,
+    "d_generator_exact": 1.3858391690026743,
+    "generator_excess_squared_exact": 1.1042636727746626,
+    "arc_lengths": {
+      "direct": 1.3858391690026743,
+      "other": 1.5204882266543376
+    },
+    "finite_N": [
+      {
+        "N": 4,
+        "N_times_short_path_KL": 0.9155151069080816,
+        "N_times_other_path_KL": 1.0929441342656838,
+        "best_of_two_curve_candidates": 0.9155151069080816,
+        "target_half_dg2": 0.9602751011710114,
+        "ratio_short_to_limit": 0.953388363180148
+      },
+      {
+        "N": 8,
+        "N_times_short_path_KL": 0.9487529128412748,
+        "N_times_other_path_KL": 1.1397170779544459,
+        "best_of_two_curve_candidates": 0.9487529128412748,
+        "target_half_dg2": 0.9602751011710114,
+        "ratio_short_to_limit": 0.9880011589223903
+      },
+      {
+        "N": 16,
+        "N_times_short_path_KL": 0.9573526080036613,
+        "N_times_other_path_KL": 1.1518284466625375,
+        "best_of_two_curve_candidates": 0.9573526080036613,
+        "target_half_dg2": 0.9602751011710114,
+        "ratio_short_to_limit": 0.9969566084096252
+      },
+      {
+        "N": 32,
+        "N_times_short_path_KL": 0.9595283040200558,
+        "N_times_other_path_KL": 1.1548938532716329,
+        "best_of_two_curve_candidates": 0.9595283040200558,
+        "target_half_dg2": 0.9602751011710114,
+        "ratio_short_to_limit": 0.9992223091590682
+      },
+      {
+        "N": 64,
+        "N_times_short_path_KL": 0.9600806033135171,
+        "N_times_other_path_KL": 1.155670715909487,
+        "best_of_two_curve_candidates": 0.9600806033135171,
+        "target_half_dg2": 0.9602751011710114,
+        "ratio_short_to_limit": 0.9997974561068415
+      },
+      {
+        "N": 128,
+        "N_times_short_path_KL": 0.960222594001502,
+        "N_times_other_path_KL": 1.1558696714752579,
+        "best_of_two_curve_candidates": 0.960222594001502,
+        "target_half_dg2": 0.9602751011710114,
+        "ratio_short_to_limit": 0.9999453207008644
+      },
+      {
+        "N": 256,
+        "N_times_short_path_KL": 0.9602600338414152,
+        "N_times_other_path_KL": 1.1559217498038594,
+        "best_of_two_curve_candidates": 0.9602600338414152,
+        "target_half_dg2": 0.9602751011710114,
+        "ratio_short_to_limit": 0.9999843093613717
+      }
+    ],
+    "decomposition": {
+      "energy": 3.0974447084327865,
+      "length": 1.5204882260419927,
+      "total_excess": 2.2811581788654265,
+      "speed_excess": 0.7855602629004603,
+      "route_excess": 0.3913342431903033,
+      "generator_excess": 1.1042636727746626,
+      "reconstruction_error": 4.440892098500626e-16
+    }
+  },
+  "vae": {
+    "checkpoint_sha256": "e94d57b36d960921768ce8ccc889796d5cd4ce69ce794a90ed1b669ed1d1ed61",
+    "scope": "ReLU VAE: feasible length upper bounds, NOT certified intrinsic distance",
+    "pairs": [
+      {
+        "name": "local_no_kink",
+        "a": [
+          -0.15,
+          -0.1
+        ],
+        "b": [
+          -0.13,
+          -0.08
+        ],
+        "ambient_FR_exact": 0.7867933043836184,
+        "straight_feasible_length": 0.7974132386801966,
+        "optimized_feasible_length": 0.7974132367136808,
+        "validated_feasible_upper_length": 0.7974132367136808,
+        "intrinsic_distance_interval": [
+          0.7867933043836184,
+          0.7974132367136808
+        ],
+        "generator_excess_squared_interval": [
+          0,
+          0.016824166263295526
+        ],
+        "straight_length_excess_over_optimized_candidate": 1.9665158390580473e-09,
+        "selected_candidate": {
+          "length": 0.7974132367136808,
+          "nodes": [
+            [
+              -0.15,
+              -0.1
+            ],
+            [
+              -0.14499948526931247,
+              -0.0950005252443972
+            ],
+            [
+              -0.1400002698948137,
+              -0.08999974049506064
+            ],
+            [
+              -0.13500093244069325,
+              -0.08499907775444156
+            ],
+            [
+              -0.13,
+              -0.08
+            ]
+          ],
+          "status": true,
+          "iterations": 2,
+          "function_evals": 35
+        },
+        "F_eigenvalues_at_a": [
+          174.9958197877745,
+          769.4495086325343
+        ],
+        "F_eigenvalues_at_b": [
+          173.5391338069965,
+          823.1494748005898
+        ],
+        "num_relu_jumps_on_straight": 0
+      },
+      {
+        "name": "local_two_kinks",
+        "a": [
+          -0.3,
+          0.2
+        ],
+        "b": [
+          -0.28,
+          0.23
+        ],
+        "ambient_FR_exact": 1.1434273852713224,
+        "straight_feasible_length": 1.1807981105850396,
+        "optimized_feasible_length": 1.180495476504085,
+        "validated_feasible_upper_length": 1.180495476504085,
+        "intrinsic_distance_interval": [
+          1.1434273852713224,
+          1.180495476504085
+        ],
+        "generator_excess_squared_interval": [
+          0,
+          0.08614338465819338
+        ],
+        "straight_length_excess_over_optimized_candidate": 0.0003026340809546557,
+        "selected_candidate": {
+          "length": 1.180495476504085,
+          "nodes": [
+            [
+              -0.3,
+              0.2
+            ],
+            [
+              -0.29481374578788655,
+              0.20738741620636536
+            ],
+            [
+              -0.290149619188671,
+              0.21373601999186134
+            ],
+            [
+              -0.28475977798622626,
+              0.22234919467814132
+            ],
+            [
+              -0.28,
+              0.23
+            ]
+          ],
+          "status": true,
+          "iterations": 12,
+          "function_evals": 455
+        },
+        "F_eigenvalues_at_a": [
+          532.5900852930372,
+          1410.417678532805
+        ],
+        "F_eigenvalues_at_b": [
+          483.28505580372513,
+          1160.1000650837204
+        ],
+        "num_relu_jumps_on_straight": 2
+      },
+      {
+        "name": "second_two_kinks",
+        "a": [
+          0.1,
+          -0.4
+        ],
+        "b": [
+          0.13,
+          -0.37
+        ],
+        "ambient_FR_exact": 1.0719581220505479,
+        "straight_feasible_length": 1.1010648743735547,
+        "optimized_feasible_length": 1.1010293020189603,
+        "validated_feasible_upper_length": 1.1010293020189603,
+        "intrinsic_distance_interval": [
+          1.0719581220505479,
+          1.1010293020189603
+        ],
+        "generator_excess_squared_interval": [
+          0,
+          0.06317130847422159
+        ],
+        "straight_length_excess_over_optimized_candidate": 3.557235459439312e-05,
+        "selected_candidate": {
+          "length": 1.1010293020189603,
+          "nodes": [
+            [
+              0.1,
+              -0.4
+            ],
+            [
+              0.10744168255146476,
+              -0.39244392157001723
+            ],
+            [
+              0.11497123953083836,
+              -0.3846738448542946
+            ],
+            [
+              0.12241276386443022,
+              -0.3774113797416874
+            ],
+            [
+              0.13,
+              -0.37
+            ]
+          ],
+          "status": true,
+          "iterations": 13,
+          "function_evals": 364
+        },
+        "F_eigenvalues_at_a": [
+          295.9719113750711,
+          700.5354264657681
+        ],
+        "F_eigenvalues_at_b": [
+          270.4718507844896,
+          706.2279248865682
+        ],
+        "num_relu_jumps_on_straight": 2
+      },
+      {
+        "name": "moderate_many_kinks",
+        "a": [
+          -0.6,
+          0.6
+        ],
+        "b": [
+          -0.35,
+          0.65
+        ],
+        "ambient_FR_exact": 2.9990962451492598,
+        "straight_feasible_length": 5.439590975292874,
+        "optimized_feasible_length": 5.409763119365978,
+        "validated_feasible_upper_length": 5.409763119365978,
+        "intrinsic_distance_interval": [
+          2.9990962451492598,
+          5.409763119365978
+        ],
+        "generator_excess_squared_interval": [
+          0,
+          20.27095871998393
+        ],
+        "straight_length_excess_over_optimized_candidate": 0.02982785592689563,
+        "selected_candidate": {
+          "length": 5.409763119365978,
+          "nodes": [
+            [
+              -0.6,
+              0.6
+            ],
+            [
+              -0.5350325501815631,
+              0.6059245312021027
+            ],
+            [
+              -0.45060290280408577,
+              0.6160613318167368
+            ],
+            [
+              -0.4152610906121606,
+              0.6287176288119205
+            ],
+            [
+              -0.35,
+              0.65
+            ]
+          ],
+          "status": false,
+          "iterations": 20,
+          "function_evals": 315
+        },
+        "F_eigenvalues_at_a": [
+          448.4916633848591,
+          877.2786706736666
+        ],
+        "F_eigenvalues_at_b": [
+          310.60654603390424,
+          925.559945844084
+        ],
+        "num_relu_jumps_on_straight": 17
+      }
+    ]
+  },
+  "status": "numerical exploration; theorem treated separately; no global certificate for VAE optimizer"
+}
