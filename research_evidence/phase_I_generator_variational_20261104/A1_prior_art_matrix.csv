@@ -1,0 +1,6 @@
+reference,year,doi,verified_scope,not_a_new_claim,candidate_specific_contribution
+Papangelou,2000,10.1214/aoap/1019487616,"Wright-Fisher large deviations rate and conditional great-circle path concentration","general variational Fisher principle and Wright-Fisher rate","generator model/application and decoding-performance implications"
+Pavlichin_Weissman,2016,10.1109/ISIT.2016.7541365,"minimized finite-alphabet chained KL and continuous geodesic limit","chained KL minimization in simplex","explicit generator image constraint and validated stego consequences"
+Rumpf_Wirth,2015,10.1093/imanum/dru027,"general Riemannian variational time discretization and Gamma convergence","general discrete to continuous geodesic convergence","specific KL constraints and validated generator diagnostics"
+Maas_et_al,2015,10.1051/m2an/2015043,"discrete image path energies under different metric","general staged pairwise image path minimization","steganographic codebook constraints and endpoint observations"
+Nielsen,2024,10.1016/bs.host.2024.06.003,"statistical submodel Fisher Rao distance bounds and numerical approximation","ambient lower bound for Fisher distances","predictive value of geometric restriction cost in a stego generator"
