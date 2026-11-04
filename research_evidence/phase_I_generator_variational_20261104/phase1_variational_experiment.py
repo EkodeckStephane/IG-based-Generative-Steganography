@@ -19,7 +19,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-ROOT = Path(__file__).resolve().parents[1]
+SCRIPT_DIR = Path(__file__).resolve().parent
+ROOT = SCRIPT_DIR.parent if (SCRIPT_DIR/'sim_s5_vae_mnist.py').exists() else SCRIPT_DIR
 OUT = ROOT/'results'; FIG = ROOT/'figures'
 OUT.mkdir(exist_ok=True, parents=True); FIG.mkdir(exist_ok=True,parents=True)
 SEED=20261104
@@ -95,8 +96,20 @@ def toy_ring():
 class VAEModel:
     def __init__(self):
         import torch
+        here=Path(__file__).resolve().parent
+        local_src=here/'sim_s5_vae_mnist.py';local_ck=here/'s5_vae_mnist.pt'
+        if local_src.exists() and local_ck.exists():
+            model_src,ck=local_src,local_ck
+        else:
+            # Checked public repository tree: the source and checkpoint already exist
+            # in Supplementary_Data/ and data/ (same Git blobs as the archived copies).
+            repo=here.parents[1]
+            model_src=repo/'Supplementary_Data'/'sim_s5_vae_mnist.py'
+            ck=repo/'data'/'s5_vae_mnist.pt'
+        if not model_src.exists() or not ck.exists():
+            raise FileNotFoundError('Original S5 VAE/checkpoint missing; use archive or public repo root')
+        sys.path.insert(0,str(model_src.parent))
         from sim_s5_vae_mnist import VAE
-        ck=Path(__file__).with_name('s5_vae_mnist.pt')
         actual=hashlib.sha256(ck.read_bytes()).hexdigest()
         if actual!=CHECKSUM:raise RuntimeError('Checkpoint mismatch: '+actual)
         torch.set_num_threads(1)
