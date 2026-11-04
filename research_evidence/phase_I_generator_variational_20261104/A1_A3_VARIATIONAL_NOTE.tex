@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern,amsmath,amssymb,amsthm,booktabs,graphicx,xcolor,geometry,hyperref,microtype}
 \geometry{margin=2.05cm}
+\graphicspath{{../figures/}{figures/}}
 \hypersetup{colorlinks=true,linkcolor=blue!55!black,urlcolor=blue!55!black}
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
@@ -114,7 +115,7 @@ d_A=0.90348577,\qquad d_G=1.38583917,\qquad d_G^2-d_A^2=1.10426367.
 \]
 Uniform intrinsic-arclength sampling gives $N\sum\KL=0.96026003$ at $N=256$, approaching $d_G^2/2=0.96027510$. This is a \emph{feasible-chain value}, not independently verified as the globally optimal finite-$N$ chain. A longer, nonuniform path yields the decomposition $(\Delta_{speed},\Delta_{route},\Delta_{model})=(0.785560,0.391334,1.104264)$, residual below $10^{-14}$.
 \begin{figure}[h!]
-\centering\includegraphics[width=.79\linewidth]{../figures/toy_variational_limit.png}
+\centering\includegraphics[width=.79\linewidth]{toy_variational_limit.png}
 \caption{Rescaled KL of a sampled feasible intrinsic geodesic versus the exact intrinsic and ambient limits.}
 \end{figure}
 
@@ -135,7 +136,7 @@ Moderate separation & 2.999096 & 5.409763 & 20.270959 & 17\\
 \caption{The mathematically valid bracket is $d_A\le d_G\le L_{\rm feasible}$. The displayed numerical integration and optimization are not globally certified. The generator gap therefore lies between zero and the listed \emph{estimated upper} values.}
 \end{table}
 \begin{figure}[h!]
-\centering\includegraphics[width=.76\linewidth]{../figures/vae_length_bounds.png}
+\centering\includegraphics[width=.76\linewidth]{vae_length_bounds.png}
 \caption{Exact ambient metric lower bound and lengths of actual feasible paths in the learned VAE.}
 \end{figure}
 
