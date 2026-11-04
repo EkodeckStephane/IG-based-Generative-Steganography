@@ -34,6 +34,16 @@ pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../results A1
 pdflatex -interaction=nonstopmode -halt-on-error -output-directory ../results A1_A3_VARIATIONAL_NOTE.tex
 ```
 
+From the public GitHub repository root, the exact original source and checkpoint already exist under `Supplementary_Data/sim_s5_vae_mnist.py` and `data/s5_vae_mnist.pt` (Git blob SHA-1 of the checkpoint: `60123547a1e2ab1594b4d7c8ffac13f9adfa19ea`). The new reproductor detects that layout automatically:
+
+```bash
+cd research_evidence/phase_I_generator_variational_20261104
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python phase1_variational_experiment.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m unittest test_phase1.py -v
+```
+
+The `source/` layout in this ZIP and the GitHub repository layout were tested separately. To recompile the English note directly on GitHub, generate `figures/` by running the experiment first; the LaTeX source searches both `figures/` and `../figures/`.
+
 The checkpoint SHA-256 must equal `e94d57b36d960921768ce8ccc889796d5cd4ce69ce794a90ed1b669ed1d1ed61`; the loader rejects mismatches. With CPU and pinned versions, all 9 automated tests passed. The VAE solver is a **numerical feasible-path search**, not a provably globally convergent algorithm. Reruns on different package versions can show small floating-point or optimization differences.
 
 ## Mathematical status / audit restrictions
